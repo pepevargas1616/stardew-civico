@@ -841,6 +841,26 @@ const cropSVEInfo = {
 
 
 /* =========================
+   CALCULADORA DE CULTIVOS
+========================= */
+.calculator-tab.active{background:#765f91;color:white;}
+.calculator-note,.calculator-help{background:#f7f5f0;border-radius:12px;padding:12px 14px;color:#666;font-size:13px;line-height:1.5;margin-bottom:14px;}
+.calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.calc-grid label,.calc-add-row label{display:flex;flex-direction:column;gap:6px;color:#5c554d;font-size:13px;font-weight:bold;}
+.calc-grid input,.calc-grid select,.calc-add-row input,.calc-add-row select{width:100%;box-sizing:border-box;border:1px solid #d8d3ca;background:white;border-radius:10px;padding:10px 11px;color:#40382f;font-size:14px;}
+.calc-add-row{display:grid;grid-template-columns:minmax(220px,1fr) 130px auto;gap:10px;align-items:end;}
+.calc-primary-btn{border:0;border-radius:11px;padding:11px 15px;background:#668f53;color:white;font-weight:bold;cursor:pointer;white-space:nowrap;}
+.calc-plan-card{background:white;border:1px solid #ddd;border-radius:15px;margin-bottom:10px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.04);}
+.calc-plan-top{display:flex;align-items:center;gap:10px;}
+.calc-plan-icon{font-size:28px;}.calc-plan-name{flex:1;min-width:0;}.calc-plan-name strong{display:block;font-size:16px;}.calc-plan-name span{color:#777;font-size:12px;}
+.calc-remove-btn{border:0;background:#f2e9e4;color:#9b4d39;border-radius:9px;padding:8px 10px;cursor:pointer;}
+.calc-plan-details{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px;}
+.calc-detail{background:#f7f5f0;border-radius:10px;padding:9px 10px;}.calc-detail span{display:block;font-size:11px;color:#777;margin-bottom:3px;}.calc-detail strong{font-size:13px;}
+.calc-warning{margin-top:10px;padding:9px 11px;border-radius:10px;background:#fff3df;color:#8a611c;font-size:12px;}
+.calc-summary-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;}.calc-summary-item{background:#f7f5f0;border-radius:12px;padding:12px;}.calc-summary-item span{display:block;color:#777;font-size:12px;margin-bottom:5px;}.calc-summary-item strong{font-size:17px;}.calc-profit-item{background:#eef5e9;}
+.calc-harvest-summary{margin-top:12px;color:#5f584f;font-size:13px;line-height:1.6;}.calc-empty{text-align:center;padding:20px;color:#777;background:white;border:1px dashed #d5d0c8;border-radius:15px;margin-bottom:15px;}
+
+/* =========================
    RESPONSIVE
 ========================= */
 
@@ -1046,6 +1066,13 @@ const cropSVEInfo = {
       🌱 Cultivos
     </button>
 
+    <button
+      id="btnCalculadora"
+      class="main-tab calculator-tab"
+    >
+      🧮 Calculadora
+    </button>
+
   </div>
 
 
@@ -1232,6 +1259,39 @@ const cropSVEInfo = {
 
 
 
+
+<!-- CALCULADORA DE CULTIVOS -->
+<div id="calculadoraContainer" class="hidden">
+  <div class="card crop-calculator-card">
+    <h3>🧮 Planificador de cultivos</h3>
+    <div class="calculator-note">🌱 Agrega uno o varios cultivos y calcula la inversión en semillas, primera cosecha, número de cosechas, ingresos y ganancia estimada. Los cálculos se hacen para una temporada de 28 días.</div>
+    <div class="calc-grid">
+      <label>Temporada<select id="calcSeason"><option value="Primavera">🌸 Primavera</option><option value="Verano">☀️ Verano</option><option value="Otoño">🍂 Otoño</option></select></label>
+      <label>Día de plantación<input id="calcStartDay" type="number" min="1" max="28" value="1"></label>
+      <label>Acelerador<select id="calcSpeed"><option value="0">Ninguno</option><option value="0.10">Speed-Gro · 10%</option><option value="0.25">Deluxe Speed-Gro · 25%</option><option value="0.33">Hyper Speed-Gro · 33%</option></select></label>
+      <label>Fertilizante<select id="calcFertilizer"><option value="0">Ninguno · 0g</option><option value="100">Básico · 100g</option><option value="150">De calidad · 150g</option><option value="250">Deluxe · 250g</option></select></label>
+    </div>
+    <div class="calculator-help">⚡ El acelerador modifica el tiempo de crecimiento. 🧪 El fertilizante se considera como costo de entrada, pero esta versión no estima todavía el valor adicional de la calidad de las cosechas.</div>
+    <div class="calc-add-row">
+      <label class="calc-crop-select">Cultivo<select id="calcCrop"></select></label>
+      <label>Cantidad<input id="calcQuantity" type="number" min="1" step="1" value="1"></label>
+      <button id="btnAgregarCultivo" class="calc-primary-btn" type="button">➕ Agregar cultivo</button>
+    </div>
+  </div>
+  <div id="calcPlanList"></div>
+  <div class="card" id="calcSummaryCard">
+    <h3>📊 Resumen del plan</h3>
+    <div class="calc-summary-grid">
+      <div class="calc-summary-item"><span>🌱 Semillas</span><strong id="calcTotalSeeds">0g</strong></div>
+      <div class="calc-summary-item"><span>🧪 Fertilizante</span><strong id="calcTotalFertilizer">0g</strong></div>
+      <div class="calc-summary-item"><span>💰 Inversión total</span><strong id="calcTotalInvestment">0g</strong></div>
+      <div class="calc-summary-item"><span>💵 Ingreso estimado</span><strong id="calcTotalRevenue">0g</strong></div>
+      <div class="calc-summary-item calc-profit-item"><span>📈 Ganancia neta</span><strong id="calcTotalProfit">0g</strong></div>
+    </div>
+    <div id="calcHarvestSummary" class="calc-harvest-summary"></div>
+  </div>
+</div>
+
 <script>
 
 
@@ -1267,6 +1327,9 @@ let realtimeChannel = null;
 let seccionActual = "centro";
 
 let filtroCultivos = "all";
+
+let planCultivos = [];
+let contadorPlanCultivos = 0;
 
 
 /* =========================================================
@@ -5512,99 +5575,125 @@ function mostrarCultivos(){
 
 
 /* =========================================================
+   CALCULADORA DE CULTIVOS
+========================================================= */
+function obtenerCropCalculadora(id){ return crops.find(crop=>crop.id===id)||null; }
+function calcularCrecimientoConAcelerador(growth,speed){
+  growth=Number(growth)||0; speed=Number(speed)||0;
+  return speed>0 ? Math.max(1,Math.floor(growth*(1-speed))) : growth;
+}
+function calcularPlanCultivo(crop,quantity,startDay,speed,fertilizerCost){
+  const growth=calcularCrecimientoConAcelerador(crop.growth,speed);
+  const firstHarvestDay=startDay+growth;
+  let harvestCount=0;
+  if(firstHarvestDay<=28){
+    harvestCount=1;
+    if(crop.regrow>0) harvestCount+=Math.floor((28-firstHarvestDay)/crop.regrow);
+  }
+  let unitsPerHarvest=crop.harvests||1;
+  if(crop.id==="sve_shrub_seed") unitsPerHarvest=3;
+  if(crop.id==="sve_slime_seed") unitsPerHarvest=2;
+  if(crop.id==="sve_cucumber") unitsPerHarvest=1;
+  const totalUnits=quantity*unitsPerHarvest*harvestCount;
+  const totalRevenue=(Number(crop.sellPrice)||0)*totalUnits;
+  const seedKnown=typeof crop.seedCost==="number";
+  const seedInvestment=seedKnown?crop.seedCost*quantity:null;
+  const fertilizerInvestment=fertilizerCost*quantity;
+  const totalInvestment=seedKnown?seedInvestment+fertilizerInvestment:null;
+  const profit=seedKnown?totalRevenue-totalInvestment:null;
+  return {growth,firstHarvestDay,harvestCount,unitsPerHarvest,totalUnits,totalRevenue,seedInvestment,fertilizerInvestment,totalInvestment,profit,seedKnown};
+}
+function llenarSelectorCultivosCalculadora(){
+  const select=document.getElementById("calcCrop"); if(!select)return;
+  const season=document.getElementById("calcSeason").value;
+  select.innerHTML=crops.filter(c=>c.season.includes(season)).sort((a,b)=>a.name.localeCompare(b.name,"es")).map(c=>`<option value="${c.id}">${c.emoji} ${c.name}</option>`).join("");
+}
+function formatoCostoCalc(v){ return v===null||v===undefined?"—":dinero(v); }
+function renderizarPlanCultivos(){
+  const container=document.getElementById("calcPlanList"); if(!container)return;
+  const season=document.getElementById("calcSeason").value;
+  const startDay=Math.min(28,Math.max(1,Number(document.getElementById("calcStartDay").value)||1));
+  const speed=Number(document.getElementById("calcSpeed").value)||0;
+  const fertilizerCost=Number(document.getElementById("calcFertilizer").value)||0;
+  if(planCultivos.length===0){
+    container.innerHTML=`<div class="calc-empty">🌱 Todavía no hay cultivos en el plan.<br>Selecciona un cultivo y una cantidad para comenzar.</div>`;
+  }else{
+    container.innerHTML=planCultivos.map((item,index)=>{
+      const crop=obtenerCropCalculadora(item.cropId); if(!crop)return "";
+      const calc=calcularPlanCultivo(crop,item.quantity,startDay,speed,fertilizerCost);
+      const seedText=crop.seedCost===null?(crop.seedCostText||"Costo no monetario"):dinero(crop.seedCost)+" / semilla";
+      const harvestText=calc.harvestCount>0?`Día ${calc.firstHarvestDay}`:"No madura esta temporada";
+      const production=calc.harvestCount>0?`${calc.harvestCount} × ${calc.unitsPerHarvest} u. = ${calc.totalUnits.toLocaleString("es-ES")} u.`:"0 unidades";
+      return `<div class="calc-plan-card"><div class="calc-plan-top"><div class="calc-plan-icon">${crop.emoji}</div><div class="calc-plan-name"><strong>${crop.name} × ${item.quantity.toLocaleString("es-ES")}</strong><span>${season} · plantación día ${startDay} · ${seedText}</span></div><button class="calc-remove-btn" type="button" onclick="eliminarCultivoPlan(${index})">🗑️ Quitar</button></div><div class="calc-plan-details"><div class="calc-detail"><span>⏱️ Crecimiento</span><strong>${calc.growth} días</strong></div><div class="calc-detail"><span>🌾 Primera cosecha</span><strong>${harvestText}</strong></div><div class="calc-detail"><span>🔄 Cosechas</span><strong>${calc.harvestCount}</strong></div><div class="calc-detail"><span>📦 Producción</span><strong>${production}</strong></div><div class="calc-detail"><span>💵 Ingreso</span><strong>${formatoCostoCalc(calc.totalRevenue)}</strong></div></div><div class="calc-plan-details"><div class="calc-detail"><span>🌱 Semillas</span><strong>${formatoCostoCalc(calc.seedInvestment)}</strong></div><div class="calc-detail"><span>🧪 Fertilizante</span><strong>${formatoCostoCalc(calc.fertilizerInvestment)}</strong></div><div class="calc-detail"><span>💰 Inversión</span><strong>${formatoCostoCalc(calc.totalInvestment)}</strong></div><div class="calc-detail"><span>📈 Ganancia</span><strong>${formatoCostoCalc(calc.profit)}</strong></div></div>${calc.harvestCount===0?`<div class="calc-warning">⚠️ Este cultivo no alcanza su primera cosecha dentro de los 28 días con la configuración seleccionada.</div>`:""}${!calc.seedKnown?`<div class="calc-warning">ℹ️ El costo de la semilla no está expresado en oro, por lo que la inversión y ganancia neta se muestran como «—».</div>`:""}</div>`;
+    }).join("");
+  }
+  actualizarResumenPlan();
+}
+function actualizarResumenPlan(){
+  const startDay=Math.min(28,Math.max(1,Number(document.getElementById("calcStartDay").value)||1));
+  const speed=Number(document.getElementById("calcSpeed").value)||0;
+  const fertilizerCost=Number(document.getElementById("calcFertilizer").value)||0;
+  let seeds=0,fertilizer=0,investment=0,revenue=0,profit=0,known=true;
+  const harvests=[];
+  planCultivos.forEach(item=>{
+    const crop=obtenerCropCalculadora(item.cropId); if(!crop)return;
+    const calc=calcularPlanCultivo(crop,item.quantity,startDay,speed,fertilizerCost);
+    revenue+=calc.totalRevenue; fertilizer+=calc.fertilizerInvestment;
+    if(calc.seedKnown){seeds+=calc.seedInvestment;investment+=calc.totalInvestment;profit+=calc.profit;}else known=false;
+    if(calc.harvestCount>0) harvests.push({name:crop.name,emoji:crop.emoji,day:calc.firstHarvestDay,units:calc.totalUnits});
+  });
+  document.getElementById("calcTotalSeeds").textContent=known?dinero(seeds):"—";
+  document.getElementById("calcTotalFertilizer").textContent=dinero(fertilizer);
+  document.getElementById("calcTotalInvestment").textContent=known?dinero(investment):"—";
+  document.getElementById("calcTotalRevenue").textContent=dinero(revenue);
+  document.getElementById("calcTotalProfit").textContent=known?dinero(profit):"—";
+  const summary=document.getElementById("calcHarvestSummary");
+  if(!harvests.length){summary.innerHTML="🌾 Ningún cultivo del plan llega a cosechar durante esta temporada.";return;}
+  harvests.sort((a,b)=>a.day-b.day);
+  const groups={}; harvests.forEach(x=>(groups[x.day]??=[]).push(x));
+  summary.innerHTML=`<strong>📅 Calendario de primeras cosechas:</strong> ${Object.keys(groups).map(day=>`<div><strong>Día ${day}:</strong> ${groups[day].map(x=>`${x.emoji} ${x.name} (${x.units.toLocaleString("es-ES")} u. en la temporada)`).join(" · ")}</div>`).join("")}`;
+}
+function agregarCultivoPlan(){
+  const cropId=document.getElementById("calcCrop").value;
+  const quantity=Math.max(1,Math.floor(Number(document.getElementById("calcQuantity").value)||1));
+  if(!cropId)return;
+  const existing=planCultivos.find(x=>x.cropId===cropId);
+  if(existing) existing.quantity+=quantity; else planCultivos.push({id:++contadorPlanCultivos,cropId,quantity});
+  document.getElementById("calcQuantity").value=1; renderizarPlanCultivos();
+}
+function eliminarCultivoPlan(index){planCultivos.splice(index,1);renderizarPlanCultivos();}
+function inicializarCalculadora(){
+  llenarSelectorCultivosCalculadora();
+  document.getElementById("btnAgregarCultivo").addEventListener("click",agregarCultivoPlan);
+  document.getElementById("calcSeason").addEventListener("change",()=>{llenarSelectorCultivosCalculadora();planCultivos=planCultivos.filter(x=>{const c=obtenerCropCalculadora(x.cropId);return c&&c.season.includes(document.getElementById("calcSeason").value);});renderizarPlanCultivos();});
+  ["calcStartDay","calcSpeed","calcFertilizer"].forEach(id=>{document.getElementById(id).addEventListener("input",renderizarPlanCultivos);document.getElementById(id).addEventListener("change",renderizarPlanCultivos);});
+  renderizarPlanCultivos();
+}
+
+/* =========================================================
    CAMBIAR SECCIÓN PRINCIPAL
 ========================================================= */
 
 function mostrarSeccion(nombre){
+  seccionActual=nombre;
+  const centro=document.getElementById("centroContainer");
+  const cultivos=document.getElementById("cultivosContainer");
+  const calculadora=document.getElementById("calculadoraContainer");
+  const btnCentro=document.getElementById("btnCentro");
+  const btnCultivos=document.getElementById("btnCultivos");
+  const btnCalculadora=document.getElementById("btnCalculadora");
 
-  seccionActual =
-    nombre;
+  centro.classList.toggle("hidden",nombre!=="centro");
+  cultivos.classList.toggle("hidden",nombre!=="cultivos");
+  calculadora.classList.toggle("hidden",nombre!=="calculadora");
+  btnCentro.classList.toggle("active",nombre==="centro");
+  btnCultivos.classList.toggle("active",nombre==="cultivos");
+  btnCalculadora.classList.toggle("active",nombre==="calculadora");
 
-
-  const centro =
-    document.getElementById(
-      "centroContainer"
-    );
-
-
-  const cultivos =
-    document.getElementById(
-      "cultivosContainer"
-    );
-
-
-  const btnCentro =
-    document.getElementById(
-      "btnCentro"
-    );
-
-
-  const btnCultivos =
-    document.getElementById(
-      "btnCultivos"
-    );
-
-
-  if(nombre === "centro"){
-
-    centro.classList.remove(
-      "hidden"
-    );
-
-    cultivos.classList.add(
-      "hidden"
-    );
-
-    btnCentro.classList.add(
-      "active"
-    );
-
-    btnCultivos.classList.remove(
-      "active"
-    );
-
-
-    document
-      .getElementById(
-        "tituloPrincipal"
-      )
-      .textContent =
-        "🏛️ Centro Cívico SVE";
-
-
-    return;
-
-  }
-
-
-  centro.classList.add(
-    "hidden"
-  );
-
-  cultivos.classList.remove(
-    "hidden"
-  );
-
-
-  btnCentro.classList.remove(
-    "active"
-  );
-
-  btnCultivos.classList.add(
-    "active"
-  );
-
-
-  document
-    .getElementById(
-      "tituloPrincipal"
-    )
-    .textContent =
-      "🌱 Cultivos SVE";
-
-
-  mostrarCultivos();
-
+  const titulo=document.getElementById("tituloPrincipal");
+  titulo.textContent=nombre==="centro"?"🏛️ Centro Cívico SVE":nombre==="cultivos"?"🌱 Cultivos SVE":"🧮 Calculadora de Cultivos";
+  if(nombre==="cultivos") mostrarCultivos();
+  if(nombre==="calculadora") renderizarPlanCultivos();
 }
 
 
@@ -5916,6 +6005,8 @@ async function conectar(){
 
   showBundles();
 
+  inicializarCalculadora();
+
 
   iniciarRealtime();
 
@@ -6012,6 +6103,12 @@ document
 
     }
   );
+
+
+/* =========================================================
+   BOTÓN CALCULADORA
+========================================================= */
+document.getElementById("btnCalculadora").addEventListener("click",()=>mostrarSeccion("calculadora"));
 
 
 /* =========================================================
