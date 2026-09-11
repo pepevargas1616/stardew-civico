@@ -479,6 +479,18 @@ header h1{
   margin-bottom:5px;
 }
 
+.info-detail{
+  line-height:1.55;
+  color:#4f4a43;
+}
+
+.info-detail b{
+  display:inline;
+  margin:0;
+  color:#3f392f;
+}
+
+
 
 /* =========================
    ESTACIONES
@@ -1233,7 +1245,7 @@ const rooms = [
         ["Wild Plum","Ciruela silvestre","Otoño","Recolección"],
         ["Hazelnut","Avellana","Otoño","Recolección"],
         ["Blackberry","Mora","Otoño","Recolección"],
-        ["Mushroom Colony","Colonia de setas","Otoño","Recolección"]
+        ["Mushroom Colony","Colonia de setas","Otoño","Forest West / Highlands / Junimo Woods / Bosque Secreto"]
       ]
     },
 
@@ -1250,7 +1262,7 @@ const rooms = [
         ["Crystal Fruit","Fruta de cristal","Invierno","Recolección"],
         ["Snow Yam","Ñame de nieve","Invierno","Recolección"],
         ["Crocus","Azafrán","Invierno","Recolección"],
-        ["Bearberry","Baya de oso","Invierno","Recolección"]
+        ["Bearberry","Baya de oso","Invierno","Bosque Secreto"]
       ]
     },
 
@@ -1655,7 +1667,7 @@ const rooms = [
         ["Wine","Vino","Todo el año","Barril"],
         ["Rabbit’s Foot","Pata de conejo","Todo el año","Conejo"],
         ["Pomegranate","Granada","Otoño","Árbol frutal"],
-        ["Four Leaf Clover","Trébol de cuatro hojas","Todo el año","Recolección"]
+        ["Four Leaf Clover","Trébol de cuatro hojas","Primavera / Verano","Forest West / Bosque Secreto"]
       ]
     },
 
@@ -1948,38 +1960,447 @@ const emojis = {
 /* =========================================================
    INFORMACIÓN EXTRA
 ========================================================= */
+/*
+  Esta sección fue revisada para evitar fichas vacías o genéricas.
+  Los datos SVE se contrastan con la wiki de Stardew Valley Expanded
+  y los datos vanilla con la wiki de Stardew Valley cuando aplica.
+  Cuando una versión/configuración de SVE puede cambiar la obtención,
+  se evita afirmar un método específico como universal.
+*/
 
 const infoExtra = {
 
-  "Sunfish":
-    "Se pesca en los ríos durante primavera y verano. Aparece de 6:00 a 19:00 cuando hace sol.",
+  "Wild Horseradish":
+    "<div class='info-detail'><b>Obtención:</b> aparece como objeto de recolección en primavera. <b>Uso:</b> sirve para recetas y para fabricar Semillas de primavera.</div>",
 
-  "Goldfish":
-    "Se encuentra en los ríos durante primavera. Horario aproximado: 10:00 a 17:00 cuando hace sol.",
+  "Daffodil":
+    "<div class='info-detail'><b>Obtención:</b> se recolecta durante primavera en distintas zonas del valle. <b>Uso:</b> regalo, recetas y Semillas de primavera.</div>",
 
-  "King Salmon":
-    "Pez de SVE. Requiere nivel 8 de pesca y aparece de 6:00 a 20:00.",
+  "Leek":
+    "<div class='info-detail'><b>Obtención:</b> recolección silvestre de primavera. <b>Uso:</b> cocina, regalos y Semillas de primavera.</div>",
+
+  "Dandelion":
+    "<div class='info-detail'><b>Obtención:</b> recolección silvestre de primavera. <b>Uso:</b> puede comerse, regalarse y utilizarse en Semillas de primavera.</div>",
 
   "Grape":
-    "Se puede recolectar durante verano. También puede obtenerse mediante cultivo.",
+    "<div class='info-detail'><b>Obtención:</b> en SVE puede encontrarse mediante recolección; también existe como cultivo. <b>Uso:</b> ingrediente, regalo y elaboración de vino.</div>",
+
+  "Spice Berry":
+    "<div class='info-detail'><b>Obtención:</b> recolección durante verano. <b>Uso:</b> alimento, regalo y Semillas de verano.</div>",
+
+  "Sweet Pea":
+    "<div class='info-detail'><b>Obtención:</b> recolección durante verano. <b>Uso:</b> regalo y Semillas de verano.</div>",
+
+  "Red Baneberry":
+    "<div class='info-detail'><b>Obtención:</b> recolección en el Bosque Secreto; en los lotes difíciles de SVE se solicitan 10 unidades. <b>Uso:</b> alimento, cocina y recolección.</div>",
+
+  "Common Mushroom":
+    "<div class='info-detail'><b>Obtención:</b> aparece como hongo recolectable, especialmente en otoño. <b>Uso:</b> comida, recetas y elaboración de algunos productos.</div>",
+
+  "Wild Plum":
+    "<div class='info-detail'><b>Obtención:</b> recolección silvestre en otoño. <b>Uso:</b> alimento, regalos, cocina y Semillas de otoño.</div>",
+
+  "Hazelnut":
+    "<div class='info-detail'><b>Obtención:</b> recolección de otoño. <b>Uso:</b> alimento, recetas y Semillas de otoño.</div>",
+
+  "Blackberry":
+    "<div class='info-detail'><b>Obtención:</b> recolección durante otoño; también puede recogerse de arbustos en la temporada de moras. <b>Uso:</b> alimento y cocina.</div>",
+
+  "Mushroom Colony":
+    "<div class='info-detail'><b>Obtención:</b> SVE la coloca como forraje en Forest West, Highlands, Junimo Woods y Bosque Secreto; su temporada principal es otoño. <b>Uso:</b> puede convertirse en setas secas o encurtidos.</div>",
+
+  "Winter Root":
+    "<div class='info-detail'><b>Obtención:</b> recolección de invierno y también mediante puntos de artefacto al labrar. <b>Uso:</b> Semillas de invierno y cocina.</div>",
+
+  "Crystal Fruit":
+    "<div class='info-detail'><b>Obtención:</b> recolección durante invierno. <b>Uso:</b> comida, vino/mermelada y Semillas de invierno.</div>",
+
+  "Snow Yam":
+    "<div class='info-detail'><b>Obtención:</b> se obtiene en invierno, especialmente al cavar puntos de artefacto. <b>Uso:</b> cocina y Semillas de invierno.</div>",
+
+  "Crocus":
+    "<div class='info-detail'><b>Obtención:</b> flor recolectable durante invierno. <b>Uso:</b> regalo y Semillas de invierno.</div>",
+
+  "Bearberry":
+    "<div class='info-detail'><b>Obtención:</b> SVE: Bosque Secreto durante invierno; se obtiene al desenterrar un punto de artefacto. <b>Usos:</b> tarta de frutos rojos, jalea, vino y fruta deshidratada.</div>",
+
+  "Wood":
+    "<div class='info-detail'><b>Obtención:</b> talando árboles y ramas; también puede comprarse en la Carpintería. <b>Uso:</b> construcciones, máquinas, cofres y recetas de fabricación.</div>",
+
+  "Clay":
+    "<div class='info-detail'><b>Obtención:</b> cavando tierra, puntos de artefacto y geodas. <b>Uso:</b> construcciones y fabricación; el lote de Construcción requiere 10.</div>",
+
+  "Stone":
+    "<div class='info-detail'><b>Obtención:</b> rompiendo rocas, especialmente en las Minas; también puede comprarse. <b>Uso:</b> construcciones, caminos y fabricación.</div>",
+
+  "Hardwood":
+    "<div class='info-detail'><b>Obtención:</b> grandes tocones y troncos, árboles de caoba y algunas cajas de las Minas. <b>Uso:</b> construcciones y fabricación avanzada.</div>",
+
+  "Coconut":
+    "<div class='info-detail'><b>Obtención:</b> se recoge de palmeras en el Desierto de Calico. <b>Uso:</b> alimento, recetas y regalos.</div>",
+
+  "Cactus Fruit":
+    "<div class='info-detail'><b>Obtención:</b> se recolecta en el Desierto de Calico y también puede encontrarse en la cueva de murciélagos frugívoros. <b>Uso:</b> alimento, cocina y regalos.</div>",
+
+  "Cave Carrot":
+    "<div class='info-detail'><b>Obtención:</b> se encuentra cavando en las Minas y otros lugares subterráneos. <b>Uso:</b> comida, recetas y fabricación de fertilizante.</div>",
+
+  "Red Mushroom":
+    "<div class='info-detail'><b>Obtención:</b> puede encontrarse en las Minas, Bosque Secreto y otras zonas según la configuración. <b>Uso:</b> recetas, elixir de vida y Semillas de otoño.</div>",
+
+  "Purple Mushroom":
+    "<div class='info-detail'><b>Obtención:</b> aparece en zonas profundas de las Minas y en algunas áreas de SVE. <b>Uso:</b> alimento, elixir de vida y lotes.</div>",
+
+  "Fir Wax":
+    "<div class='info-detail'><b>Obtención:</b> recurso añadido por SVE asociado a árboles de abeto. <b>Uso:</b> es un recurso de contenido SVE; consulta la receta correspondiente en tu versión del mod.</div>",
+
+  "Birch Water":
+    "<div class='info-detail'><b>Obtención:</b> recurso añadido por SVE asociado a árboles de abedul. <b>Uso:</b> material de contenido SVE; su disponibilidad depende de la versión/configuración instalada.</div>",
+
+  "Pine Tar":
+    "<div class='info-detail'><b>Obtención:</b> se obtiene colocando un extractor en un pino. <b>Uso:</b> recetas de fabricación y producción de algunas máquinas.</div>",
+
+  "Poison Mushroom":
+    "<div class='info-detail'><b>Obtención:</b> recurso de SVE que puede encontrarse en zonas de Minas y áreas especiales. <b>Precaución:</b> no es un alimento normal; puede tener efectos negativos al consumirse.</div>",
+
+  "Parsnip":
+    "<div class='info-detail'><b>Obtención:</b> cultivo de primavera a partir de semillas. <b>Uso:</b> comida, regalos, recetas y lotes.</div>",
+
+  "Green Bean":
+    "<div class='info-detail'><b>Obtención:</b> cultivo de primavera. <b>Característica:</b> vuelve a producir después de la primera cosecha.</div>",
+
+  "Cauliflower":
+    "<div class='info-detail'><b>Obtención:</b> cultivo de primavera. <b>Uso:</b> cocina, regalos y lotes; también puede convertirse en coliflor encurtida o jugo.</div>",
+
+  "Potato":
+    "<div class='info-detail'><b>Obtención:</b> cultivo de primavera. <b>Característica:</b> al cosechar existe posibilidad de obtener más de una patata.</div>",
+
+  "Cucumber":
+    "<div class='info-detail'><b>Obtención:</b> cultivo incluido por SVE en los lotes de cultivos. <b>Uso:</b> cosecha agrícola y requisito de los lotes de SVE.</div>",
+
+  "Tomato":
+    "<div class='info-detail'><b>Obtención:</b> cultivo de verano. <b>Característica:</b> vuelve a producir después de la primera cosecha.</div>",
+
+  "Hot Pepper":
+    "<div class='info-detail'><b>Obtención:</b> cultivo de verano. <b>Característica:</b> vuelve a producir; se usa en varias recetas.</div>",
+
+  "Blueberry":
+    "<div class='info-detail'><b>Obtención:</b> cultivo de verano. <b>Característica:</b> produce varias bayas por cosecha y vuelve a producir.</div>",
+
+  "Melon":
+    "<div class='info-detail'><b>Obtención:</b> cultivo de verano. <b>Uso:</b> cocina, regalos, lotes y posibilidad de convertirse en cultivo gigante.</div>",
+
+  "Butternut Squash":
+    "<div class='info-detail'><b>Obtención:</b> cultivo de verano añadido por SVE. <b>Uso:</b> forma parte del Lote de cultivos de verano y del Lote de cultivos de calidad.</div>",
+
+  "Corn":
+    "<div class='info-detail'><b>Obtención:</b> cultivo de verano y otoño. <b>Característica:</b> continúa produciendo al cambiar de verano a otoño.</div>",
+
+  "Eggplant":
+    "<div class='info-detail'><b>Obtención:</b> cultivo de otoño. <b>Característica:</b> vuelve a producir después de la primera cosecha.</div>",
+
+  "Pumpkin":
+    "<div class='info-detail'><b>Obtención:</b> cultivo de otoño. <b>Uso:</b> lotes, cocina y posibilidad de obtener un cultivo gigante.</div>",
+
+  "Yam":
+    "<div class='info-detail'><b>Obtención:</b> cultivo de otoño. <b>Uso:</b> comida, recetas y lotes.</div>",
+
+  "Sweet Potato":
+    "<div class='info-detail'><b>Obtención:</b> cultivo de otoño añadido por SVE. <b>Uso:</b> forma parte del Lote de cultivos de otoño.</div>",
+
+  "Gold Parsnip":
+    "<div class='info-detail'><b>Obtención:</b> no es un objeto distinto: corresponde a chirivías de calidad oro. <b>Requisito:</b> el lote exige 5 unidades de esta calidad.</div>",
+
+  "Gold Melon":
+    "<div class='info-detail'><b>Obtención:</b> melones de calidad oro obtenidos mediante agricultura. <b>Requisito:</b> se utilizan como opción del lote de cultivos de calidad.</div>",
+
+  "Gold Pumpkin":
+    "<div class='info-detail'><b>Obtención:</b> calabazas de calidad oro. <b>Requisito:</b> forman parte del lote de cultivos de calidad.</div>",
+
+  "Gold Corn":
+    "<div class='info-detail'><b>Obtención:</b> maíz de calidad oro cultivado en verano u otoño. <b>Requisito:</b> forma parte del lote de calidad de SVE.</div>",
+
+  "Gold Cucumber":
+    "<div class='info-detail'><b>Obtención:</b> pepinos de calidad oro cultivados en primavera. <b>Requisito:</b> se solicitan como parte del lote de cultivos de calidad de SVE.</div>",
+
+  "Gold Butternut Squash":
+    "<div class='info-detail'><b>Obtención:</b> calabaza moscada de calidad oro. <b>Requisito:</b> forma parte del lote de calidad de SVE.</div>",
+
+  "Gold Sweet Potato":
+    "<div class='info-detail'><b>Obtención:</b> batatas de calidad oro. <b>Requisito:</b> forman parte del lote de calidad de SVE.</div>",
+
+  "Large Milk":
+    "<div class='info-detail'><b>Obtención:</b> vacas con suficiente amistad y cuidado pueden producir leche grande. <b>Uso:</b> queso y lotes.</div>",
+
+  "Large Goat Milk":
+    "<div class='info-detail'><b>Obtención:</b> cabras bien cuidadas pueden producir leche de cabra grande. <b>Uso:</b> queso de cabra y lotes.</div>",
+
+  "Wool":
+    "<div class='info-detail'><b>Obtención:</b> ovejas y conejos pueden producir lana. <b>Uso:</b> telar, regalos y lotes.</div>",
+
+  "Duck Egg":
+    "<div class='info-detail'><b>Obtención:</b> producido por patos. <b>Uso:</b> mayonesa de pato y lotes.</div>",
+
+  "Large Egg White":
+    "<div class='info-detail'><b>Obtención:</b> gallinas blancas con suficiente amistad producen huevos grandes. <b>Uso:</b> mayonesa y lotes.</div>",
+
+  "Large Egg Brown":
+    "<div class='info-detail'><b>Obtención:</b> gallinas marrones con suficiente amistad producen huevos grandes. <b>Uso:</b> mayonesa y lotes.</div>",
+
+  "Truffle Oil":
+    "<div class='info-detail'><b>Obtención:</b> procesa una trufa en una Prensa de aceite. <b>Uso:</b> producto artesanal y requisito del lote de artesanía.</div>",
+
+  "Cloth":
+    "<div class='info-detail'><b>Obtención:</b> se produce en un telar usando lana, y también puede obtenerse de algunas fuentes secundarias. <b>Uso:</b> ropa, máquinas y lote de artesanía.</div>",
+
+  "Goat Cheese":
+    "<div class='info-detail'><b>Obtención:</b> procesa leche de cabra en una Prensa de queso. <b>Uso:</b> alimento, regalos y lote de artesanía.</div>",
+
+  "Cheese":
+    "<div class='info-detail'><b>Obtención:</b> procesa leche en una Prensa de queso. <b>Uso:</b> alimento, regalos y lote de artesanía.</div>",
+
+  "Honey":
+    "<div class='info-detail'><b>Obtención:</b> una colmena produce miel; el tipo puede variar según las flores cercanas. <b>Uso:</b> venta, recetas, regalos y lote de artesanía.</div>",
+
+  "Jelly":
+    "<div class='info-detail'><b>Obtención:</b> coloca una fruta en un Tarro de conservas. <b>Uso:</b> producto artesanal y lote de artesanía.</div>",
+
+  "Apricot":
+    "<div class='info-detail'><b>Obtención:</b> árbol frutal durante primavera; también puede encontrarse en la cueva de murciélagos frugívoros. <b>Uso:</b> alimento, regalos y lote de artesanía.</div>",
+
+  "Orange":
+    "<div class='info-detail'><b>Obtención:</b> árbol frutal durante verano; también puede aparecer en la cueva de murciélagos frugívoros. <b>Uso:</b> alimento, cocina, regalos y lote de artesanía.</div>",
 
   "Pear":
-    "Puede obtenerse de un árbol frutal o mediante la cueva de fruta. Su cosecha principal es en primavera.",
+    "<div class='info-detail'><b>Obtención:</b> fruta de árbol frutal de SVE; también puede aparecer en la cueva de fruta. <b>Uso:</b> alimento, cocina, regalos y lote de artesanía.</div>",
+
+  "Nectarine":
+    "<div class='info-detail'><b>Obtención:</b> árbol frutal de SVE durante verano. <b>Uso:</b> alimento, regalos y lote de artesanía.</div>",
+
+  "Butter":
+    "<div class='info-detail'><b>Obtención:</b> producto de la Máquina de mantequilla. <b>Uso:</b> producto artesanal y requisito del lote de artesanía de SVE.</div>",
+
+  "Catfish":
+    "<div class='info-detail'><b>Obtención:</b> pesca en ríos; aparece en primavera y otoño y requiere lluvia. <b>Uso:</b> cocina, regalos y lotes.</div>",
+
+  "Shad":
+    "<div class='info-detail'><b>Obtención:</b> pesca en río durante primavera, verano y otoño con lluvia. <b>Horario:</b> 9:00–2:00 aproximadamente.</div>",
+
+  "Tiger Trout":
+    "<div class='info-detail'><b>Obtención:</b> pesca en ríos durante otoño e invierno. <b>Uso:</b> lotes y cocina.</div>",
+
+  "Minnow":
+    "<div class='info-detail'><b>Obtención:</b> pez común de agua dulce; la disponibilidad exacta depende de la zona de pesca. <b>Uso:</b> pesca y recetas que aceptan pescado.</div>",
+
+  "Largemouth Bass":
+    "<div class='info-detail'><b>Obtención:</b> pesca en el lago de montaña durante todo el año. <b>Uso:</b> cocina, regalos y recetas de pescado.</div>",
+
+  "Carp":
+    "<div class='info-detail'><b>Obtención:</b> pesca en el lago de montaña, Bosque Secreto y otras aguas dulces. <b>Uso:</b> cocina, regalos y lotes.</div>",
+
+  "Bullhead":
+    "<div class='info-detail'><b>Obtención:</b> pesca en el lago de montaña durante todo el año. <b>Uso:</b> cocina, regalos y recetas que aceptan cualquier pescado.</div>",
+
+  "Sturgeon":
+    "<div class='info-detail'><b>Obtención:</b> pesca en el lago de montaña durante verano e invierno. <b>Uso:</b> estanque de peces, caviar y lotes.</div>",
+
+  "Tadpole":
+    "<div class='info-detail'><b>Obtención:</b> pez de SVE asociado al lago de montaña durante primavera. <b>Uso:</b> pesca y contenido de SVE.</div>",
+
+  "Sardine":
+    "<div class='info-detail'><b>Obtención:</b> pesca en el océano durante primavera, otoño e invierno. <b>Uso:</b> cocina y lotes.</div>",
+
+  "Tuna":
+    "<div class='info-detail'><b>Obtención:</b> pesca en el océano durante verano e invierno. <b>Uso:</b> cocina y lotes.</div>",
+
+  "Red Snapper":
+    "<div class='info-detail'><b>Obtención:</b> pesca en el océano durante verano y otoño cuando llueve. <b>Uso:</b> cocina y lotes.</div>",
+
+  "Tilapia":
+    "<div class='info-detail'><b>Obtención:</b> pesca oceánica durante verano y otoño. <b>Uso:</b> cocina y lotes.</div>",
+
+  "Starfish":
+    "<div class='info-detail'><b>Obtención:</b> se encuentra en la playa como objeto recolectable. <b>Uso:</b> recolección, regalos y contenido del Centro Cívico.</div>",
 
   "Walleye":
-    "Pez asociado principalmente al otoño y la lluvia.",
+    "<div class='info-detail'><b>Obtención:</b> pesca en río, lago y Bosque Secreto durante otoño cuando llueve. <b>Horario:</b> 12:00–2:00.</div>",
+
+  "Bream":
+    "<div class='info-detail'><b>Obtención:</b> pesca en ríos durante todo el año, especialmente por la noche. <b>Uso:</b> cocina y lotes.</div>",
+
+  "Eel":
+    "<div class='info-detail'><b>Obtención:</b> pesca en el océano durante primavera y otoño con lluvia. <b>Horario:</b> principalmente por la tarde y noche.</div>",
+
+  "Frog":
+    "<div class='info-detail'><b>Obtención:</b> pez de SVE asociado a aguas dulces durante primavera y verano. <b>Uso:</b> pesca y contenido de SVE.</div>",
+
+  "Lobster":
+    "<div class='info-detail'><b>Obtención:</b> trampa para cangrejos colocada en el océano. <b>Uso:</b> cocina, estanque de peces y lotes.</div>",
+
+  "Crayfish":
+    "<div class='info-detail'><b>Obtención:</b> trampa para cangrejos colocada en agua dulce. <b>Uso:</b> cocina y lotes.</div>",
+
+  "Crab":
+    "<div class='info-detail'><b>Obtención:</b> trampa para cangrejos en el océano; también puede aparecer por otras fuentes. <b>Uso:</b> recetas y lote de pesca.</div>",
+
+  "Cockle":
+    "<div class='info-detail'><b>Obtención:</b> trampa para cangrejos en el océano y recolección en la playa. <b>Uso:</b> cocina y lotes.</div>",
+
+  "Mussel":
+    "<div class='info-detail'><b>Obtención:</b> trampa para cangrejos en el océano y recolección en la playa. <b>Uso:</b> cocina y lotes.</div>",
+
+  "Shrimp":
+    "<div class='info-detail'><b>Obtención:</b> trampa para cangrejos en el océano. <b>Uso:</b> cocina y lotes.</div>",
+
+  "Snail":
+    "<div class='info-detail'><b>Obtención:</b> trampa para cangrejos en agua dulce. <b>Uso:</b> cocina y lotes.</div>",
+
+  "Periwinkle":
+    "<div class='info-detail'><b>Obtención:</b> trampa para cangrejos en agua dulce. <b>Uso:</b> cocina y lotes.</div>",
+
+  "Oyster":
+    "<div class='info-detail'><b>Obtención:</b> trampa para cangrejos en el océano y recolección de playa. <b>Uso:</b> cocina y lotes.</div>",
+
+  "Clam":
+    "<div class='info-detail'><b>Obtención:</b> puede encontrarse en la playa y mediante trampa para cangrejos. <b>Uso:</b> cocina, lotes y recolección.</div>",
+
+  "Pufferfish":
+    "<div class='info-detail'><b>Obtención:</b> pesca oceánica en verano. <b>Condición:</b> aparece con tiempo soleado y en horario diurno.</div>",
 
   "Ghostfish":
-    "Puede obtenerse en las Minas, especialmente en los pisos donde aparecen peces fantasma.",
+    "<div class='info-detail'><b>Obtención:</b> pesca en los lagos subterráneos de las Minas. <b>Uso:</b> pesca, recetas y lotes.</div>",
 
   "Sandfish":
-    "Se pesca en el desierto.",
+    "<div class='info-detail'><b>Obtención:</b> pesca en el estanque del Desierto de Calico. <b>Uso:</b> lote de pesca y recetas.</div>",
 
   "Woodskip":
-    "Se pesca en el Bosque Secreto.",
+    "<div class='info-detail'><b>Obtención:</b> pesca en el Bosque Secreto. SVE también amplía las zonas de pesca asociadas a esta especie. <b>Uso:</b> pesca y recetas.</div>",
+
+  "King Salmon":
+    "<div class='info-detail'><b>Obtención:</b> pez de SVE. En la configuración de tu app se registra en Forest West y con nivel 8 de pesca. <b>Uso:</b> pesca, cocina y regalos.</div>",
 
   "Butterfish":
-    "Pez de SVE asociado a zonas como Shearwater Bridge y Forest West."
+    "<div class='info-detail'><b>Obtención:</b> pez de SVE asociado a Shearwater Bridge y Forest West. <b>Uso:</b> pesca y platos que aceptan pescado.</div>",
+
+  "Copper Bar":
+    "<div class='info-detail'><b>Obtención:</b> funde 5 minerales de cobre en un horno usando carbón. <b>Uso:</b> herramientas, máquinas, edificios y fabricación.</div>",
+
+  "Iron Bar":
+    "<div class='info-detail'><b>Obtención:</b> funde 5 minerales de hierro en un horno usando carbón. <b>Uso:</b> mejoras de herramientas, máquinas y construcciones.</div>",
+
+  "Gold Bar":
+    "<div class='info-detail'><b>Obtención:</b> funde 5 minerales de oro en un horno usando carbón. <b>Uso:</b> mejoras, máquinas, aspersores y fabricación.</div>",
+
+  "Quartz":
+    "<div class='info-detail'><b>Obtención:</b> se encuentra principalmente en las Minas. <b>Uso:</b> cuarzo refinado, fabricación y regalos.</div>",
+
+  "Earth Crystal":
+    "<div class='info-detail'><b>Obtención:</b> aparece en las Minas, especialmente en niveles inferiores. <b>Uso:</b> fabricación y algunos objetos artesanales.</div>",
+
+  "Frozen Tear":
+    "<div class='info-detail'><b>Obtención:</b> se encuentra en las Minas, especialmente en los niveles helados. <b>Uso:</b> fabricación y regalos.</div>",
+
+  "Fire Quartz":
+    "<div class='info-detail'><b>Obtención:</b> aparece en niveles profundos de las Minas y puede obtenerse de geodas. <b>Uso:</b> fabricación de cuarzo refinado y recetas.</div>",
+
+  "Slime":
+    "<div class='info-detail'><b>Obtención:</b> lo dejan los limos al derrotarlos. <b>Uso:</b> máquinas, huevos de limo y fabricación.</div>",
+
+  "Bat Wing":
+    "<div class='info-detail'><b>Obtención:</b> lo dejan los murciélagos al ser derrotados. <b>Uso:</b> fabricación y objetos del Centro Cívico.</div>",
+
+  "Solar Essence":
+    "<div class='info-detail'><b>Obtención:</b> la dejan varios monstruos, especialmente enemigos asociados a las Minas. <b>Uso:</b> fabricación, regalos y objetos avanzados.</div>",
+
+  "Void Essence":
+    "<div class='info-detail'><b>Obtención:</b> la dejan monstruos de energía sombría, especialmente en niveles profundos de las Minas. <b>Uso:</b> fabricación y objetos de combate.</div>",
+
+  "Maple Syrup":
+    "<div class='info-detail'><b>Obtención:</b> coloca un extractor en un arce y espera a que produzca. <b>Uso:</b> recetas, regalos y lote de artesanía.</div>",
+
+  "Fiddlehead Fern":
+    "<div class='info-detail'><b>Obtención:</b> se recolecta en verano, especialmente en el Bosque Secreto; también aparece en zonas específicas de las Minas. <b>Uso:</b> cocina y lotes.</div>",
+
+  "Truffle":
+    "<div class='info-detail'><b>Obtención:</b> los cerdos encuentran trufas cuando pueden salir al exterior. <b>Uso:</b> alimento, aceite de trufa y lote de artesanía.</div>",
+
+  "Poppy":
+    "<div class='info-detail'><b>Obtención:</b> cultivo de verano. <b>Uso:</b> regalos, cocina, aceite y lote de artesanía.</div>",
+
+  "Maki Roll":
+    "<div class='info-detail'><b>Obtención:</b> comida preparada mediante cocina. <b>Uso:</b> alimento y requisito del lote del Cocinero.</div>",
+
+  "Fried Egg":
+    "<div class='info-detail'><b>Obtención:</b> se prepara en la cocina usando un huevo. <b>Uso:</b> comida y requisito del lote del Cocinero.</div>",
+
+  "Candy":
+    "<div class='info-detail'><b>Obtención:</b> comida que puede obtenerse mediante las fuentes comerciales/culinarias contempladas por SVE. <b>Uso:</b> requisito del lote del Cocinero.</div>",
+
+  "Wheat":
+    "<div class='info-detail'><b>Obtención:</b> cultivo de verano u otoño. <b>Uso:</b> harina, cerveza, heno y lote de Forraje.</div>",
+
+  "Hay":
+    "<div class='info-detail'><b>Obtención:</b> se produce cortando hierba con una guadaña cuando se dispone de silo. <b>Uso:</b> alimentar animales y lote de Forraje.</div>",
+
+  "Apple":
+    "<div class='info-detail'><b>Obtención:</b> árbol de manzana en otoño; también puede aparecer en la cueva de fruta. <b>Uso:</b> comida, cocina y lote de Forraje.</div>",
+
+  "Oak Resin":
+    "<div class='info-detail'><b>Obtención:</b> coloca un extractor en un roble. <b>Uso:</b> fabricación, barriles y lote del Encantador.</div>",
+
+  "Wine":
+    "<div class='info-detail'><b>Obtención:</b> coloca una fruta en un barril. <b>Uso:</b> producto artesanal, venta, regalos y lote del Encantador.</div>",
+
+  "Rabbit’s Foot":
+    "<div class='info-detail'><b>Obtención:</b> puede producirla un conejo con suficiente amistad y suerte. <b>Uso:</b> regalo, recetas/colecciones y lote del Encantador.</div>",
+
+  "Pomegranate":
+    "<div class='info-detail'><b>Obtención:</b> árbol frutal en otoño; también puede aparecer en la cueva de fruta. <b>Uso:</b> alimento, regalos y lote del Encantador.</div>",
+
+  "Four Leaf Clover":
+    "<div class='info-detail'><b>Obtención:</b> SVE: se recolecta en <b>Forest West</b> y el <b>Bosque Secreto</b> durante <b>primavera y verano</b>. <b>Valor base:</b> 400g. <b>Usos:</b> es un regalo universalmente querido, puede teñir de verde y participa en los lotes de SVE según la configuración.</div>",
+
+  "Nautilus Shell":
+    "<div class='info-detail'><b>Obtención:</b> se recolecta en la playa durante invierno. <b>Uso:</b> lote de Investigación de campo y algunas recetas/regalos.</div>",
+
+  "Chub":
+    "<div class='info-detail'><b>Obtención:</b> pesca en lagos y ríos durante todo el año. <b>Uso:</b> lote de Investigación de campo y cocina.</div>",
+
+  "Frozen Geode":
+    "<div class='info-detail'><b>Obtención:</b> aparece en las Minas, especialmente entre los pisos 41 y 79, y puede abrirse en un geólogo. <b>Uso:</b> minerales, artefactos y lote.</div>",
+
+  "Amber":
+    "<div class='info-detail'><b>Obtención:</b> puede aparecer en puntos de artefacto y fuentes de geodas/artefactos. <b>Uso:</b> museo, colección y lote de Investigación de campo.</div>",
+
+  "Sea Urchin":
+    "<div class='info-detail'><b>Obtención:</b> se recolecta en la playa. <b>Uso:</b> recolección, regalos y lote de Teñido.</div>",
+
+  "Sunflower":
+    "<div class='info-detail'><b>Obtención:</b> cultivo de verano u otoño. <b>Uso:</b> aceite de girasol, regalos y lote de Teñido.</div>",
+
+  "Duck Feather":
+    "<div class='info-detail'><b>Obtención:</b> puede producirla un pato con suficiente amistad y buena suerte. <b>Uso:</b> regalo y lote de Teñido.</div>",
+
+  "Aquamarine":
+    "<div class='info-detail'><b>Obtención:</b> mineral encontrado principalmente en las Minas y en algunas fuentes de gemas. <b>Uso:</b> regalos, fabricación y lote de Teñido.</div>",
+
+  "Red Cabbage":
+    "<div class='info-detail'><b>Obtención:</b> cultivo de verano. <b>Uso:</b> cocina, regalos y colecciones.</div>",
+
+  "Persimmon":
+    "<div class='info-detail'><b>Obtención:</b> fruto de árbol frutal de otoño. <b>Uso:</b> alimento, regalos y contenido de SVE.</div>",
+
+  "2500g":
+    "<div class='info-detail'><b>Objetivo:</b> entregar 2.500g para completar el lote de la Caja fuerte. <b>Consejo:</b> no es un objeto físico; se registra como una cantidad de dinero.</div>",
+
+  "5000g":
+    "<div class='info-detail'><b>Objetivo:</b> entregar 5.000g para completar el lote de la Caja fuerte. <b>Consejo:</b> se registra como dinero, no como objeto del inventario.</div>",
+
+  "10000g":
+    "<div class='info-detail'><b>Objetivo:</b> entregar 10.000g para completar el lote de la Caja fuerte. <b>Consejo:</b> se registra como dinero, no como objeto del inventario.</div>",
+
+  "25000g":
+    "<div class='info-detail'><b>Objetivo:</b> entregar 25.000g para completar el lote de la Caja fuerte. <b>Consejo:</b> se registra como dinero, no como objeto del inventario.</div>"
 
 };
 
@@ -3287,7 +3708,7 @@ function crearItem(item){
         `<br><br>
 
         <strong>
-          💡 Información
+          💡 Información ampliada
         </strong>
 
         ${infoExtra[item.id]}`
