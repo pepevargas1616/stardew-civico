@@ -329,6 +329,9 @@ header h1{
 }
 
 
+.room.collapsed .room-content{display:none;}
+.room-title .room-toggle{font-size:16px; opacity:.9; margin-left:6px;}
+
 /* =========================
    LOTES
 ========================= */
@@ -2648,7 +2651,7 @@ const crops = [
     seed:"Semilla de zanahoria dorada",
     season:["Primavera","Verano","Otoño"],
     seedCost:null,
-    seedCostText:"3 lingotes de oro",
+    seedCostText:"3 lingotes de oro (costo de obtención)",
     sellPrice:1000,
     growth:6,
     regrow:0,
@@ -2694,12 +2697,12 @@ const crops = [
     name:"Pepino",
     seed:"Semilla de pepino",
     season:["Primavera"],
-    seedCost:null,
-    seedCostText:"Semilla de SVE",
+    seedCost:35,
+    seedCostText:"35g",
     sellPrice:100,
     growth:12,
-    regrow:2,
-    harvests:2,
+    regrow:0,
+    harvests:1,
     emoji:"🥒",
     source:"${getCropSVEExtra(crop.name)}",
     note:"Puede producir varias unidades por cosecha."
@@ -2868,11 +2871,11 @@ const crops = [
     seed:"Semillas de helecho antiguo",
     season:["Verano"],
     seedCost:null,
-    seedCostText:"Semilla de SVE",
+    seedCostText:"No se venden; Bosque Secreto / Seed Maker",
     sellPrice:145,
     growth:12,
     regrow:0,
-    harvests:2,
+    harvests:3,
     emoji:"🌿",
     source:"${getCropSVEExtra(crop.name)}",
     note:"SVE define 12 días de crecimiento y una producción que puede variar."
@@ -2883,9 +2886,9 @@ const crops = [
     name:"Calabaza moscada",
     seed:"Semilla de calabaza moscada",
     season:["Verano"],
-    seedCost:null,
-    seedCostText:"Semilla de SVE",
-    sellPrice:250,
+    seedCost:60,
+    seedCostText:"60g en Pierre",
+    sellPrice:200,
     growth:12,
     regrow:0,
     emoji:"🎃",
@@ -2897,8 +2900,8 @@ const crops = [
     name:"Verdura Joja",
     seed:"Semillas de verdura Joja",
     season:["Primavera","Verano","Otoño"],
-    seedCost:null,
-    seedCostText:"Adquisición especial SVE / ruta Joja",
+    seedCost:600,
+    seedCostText:"600g en Joja Emporium",
     sellPrice:1140,
     growth:13,
     regrow:0,
@@ -3866,6 +3869,7 @@ function showBundles(){
 
       <span>
         ${room.name}
+        <span class="room-toggle" aria-hidden="true">▼</span>
       </span>
 
       <span
@@ -3877,10 +3881,20 @@ function showBundles(){
 
     `;
 
+    roomTitle.addEventListener("click", ()=>{
+      roomDiv.classList.toggle("collapsed");
+      const toggle = roomTitle.querySelector(".room-toggle");
+      if(toggle){
+        toggle.textContent = roomDiv.classList.contains("collapsed") ? "▶" : "▼";
+      }
+    });
 
     roomDiv.appendChild(
       roomTitle
     );
+
+    const roomContent = document.createElement("div");
+    roomContent.className = "room-content";
 
 
     room.bundles.forEach(bundle=>{
@@ -3994,12 +4008,13 @@ function showBundles(){
       );
 
 
-      roomDiv.appendChild(
+      roomContent.appendChild(
         bundleDiv
       );
 
     });
 
+    roomDiv.appendChild(roomContent);
 
     contenido.appendChild(
       roomDiv
@@ -4801,7 +4816,7 @@ function calcularCultivo(crop){
   const seedCost =
     typeof crop.seedCost === "number"
       ? crop.seedCost
-      : 0;
+      : null;
 
   /*
      Primera cosecha.
@@ -4866,7 +4881,7 @@ function calcularCultivo(crop){
   }
 
   if(crop.id === "sve_cucumber"){
-    unitsPerHarvest = 2.5;
+    unitsPerHarvest = 1;
   }
 
 
@@ -4876,18 +4891,17 @@ function calcularCultivo(crop){
     harvestCount;
 
 
-  const totalSeedCost =
-    seedCost;
-
+  const totalSeedCost = seedCost;
 
   const profit =
-    totalRevenue -
-    totalSeedCost;
-
+    typeof seedCost === "number"
+      ? totalRevenue - seedCost
+      : null;
 
   const profitPerDay =
-    profit /
-    seasonDays;
+    typeof profit === "number"
+      ? profit / seasonDays
+      : null;
 
 
   return {
@@ -5256,8 +5270,8 @@ function mostrarCultivos(){
       [...disponibles]
         .sort(
           (a,b)=>
-            b.profitPerDay -
-            a.profitPerDay
+            (b.profitPerDay ?? -Infinity) -
+            (a.profitPerDay ?? -Infinity)
         )[0];
 
 
@@ -5274,8 +5288,8 @@ function mostrarCultivos(){
 
   datos.sort(
     (a,b)=>
-      b.profitPerDay -
-      a.profitPerDay
+      (b.profitPerDay ?? -Infinity) -
+      (a.profitPerDay ?? -Infinity)
   );
 
 
@@ -5430,8 +5444,8 @@ function mostrarCultivos(){
       [...seasonCrops]
         .sort(
           (a,b)=>
-            b.profitPerDay -
-            a.profitPerDay
+            (b.profitPerDay ?? -Infinity) -
+            (a.profitPerDay ?? -Infinity)
         )[0];
 
 
@@ -6154,6 +6168,7 @@ function getCropSVEExtra(cropName){
     </div>
   `;
 }
+
 
 </script>
 
