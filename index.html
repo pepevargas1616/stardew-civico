@@ -1,563 +1,758 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Centro Cívico SVE</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Centro Cívico SVE</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f5f1e8;
-            color: #3b3025;
-        }
+<style>
+*{box-sizing:border-box}
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f5f1e8;
+    color:#3b3025;
+}
+header{
+    background:#6b4f35;
+    color:white;
+    padding:18px;
+    text-align:center;
+}
+header h1{margin:0;font-size:24px}
+header p{margin:6px 0 0;font-size:14px}
 
-        header {
-            background: #6b4f35;
-            color: white;
-            padding: 18px;
-            text-align: center;
-        }
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:15px;
+}
 
-        header h1 {
-            margin: 0;
-            font-size: 24px;
-        }
+.card{
+    background:white;
+    border-radius:12px;
+    padding:15px;
+    margin-bottom:15px;
+    box-shadow:0 2px 6px rgba(0,0,0,.12);
+}
 
-        header p {
-            margin: 6px 0 0;
-            font-size: 14px;
-        }
+input[type=text]{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+    margin:8px 0;
+}
 
-        .container {
-            max-width: 900px;
-            margin: auto;
-            padding: 15px;
-        }
+button{
+    border:0;
+    border-radius:9px;
+    padding:11px 15px;
+    background:#6b4f35;
+    color:white;
+    cursor:pointer;
+    font-size:15px;
+}
 
-        .progress {
-            background: white;
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 6px rgba(0,0,0,.12);
-        }
+.buttons{
+    display:flex;
+    gap:8px;
+    margin-bottom:15px;
+}
 
-        .progress-bar {
-            width: 100%;
-            height: 14px;
-            background: #ddd;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-top: 8px;
-        }
+.buttons button{flex:1}
+button.active{background:#9a713f}
 
-        .progress-fill {
-            width: 0%;
-            height: 100%;
-            background: #6b9b45;
-        }
+.progress-bar{
+    width:100%;
+    height:14px;
+    background:#ddd;
+    border-radius:10px;
+    overflow:hidden;
+    margin-top:8px;
+}
 
-        .buttons {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
+.progress-fill{
+    width:0%;
+    height:100%;
+    background:#6b9b45;
+}
 
-        button {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            border-radius: 10px;
-            background: #6b4f35;
-            color: white;
-            font-size: 15px;
-            cursor: pointer;
-        }
+.section{
+    background:white;
+    border-radius:12px;
+    margin-bottom:12px;
+    overflow:hidden;
+    box-shadow:0 2px 6px rgba(0,0,0,.1);
+}
 
-        button.active {
-            background: #9a713f;
-        }
+.section-title{
+    padding:15px;
+    font-weight:bold;
+    cursor:pointer;
+    display:flex;
+    justify-content:space-between;
+}
 
-        .section {
-            background: white;
-            border-radius: 12px;
-            margin-bottom: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 6px rgba(0,0,0,.1);
-        }
+.items{
+    display:none;
+    border-top:1px solid #eee;
+}
 
-        .section-title {
-            padding: 15px;
-            font-weight: bold;
-            font-size: 17px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-        }
+.items.open{display:block}
 
-        .items {
-            display: none;
-            border-top: 1px solid #eee;
-        }
+.item{
+    padding:12px 15px;
+    border-bottom:1px solid #eee;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
 
-        .items.open {
-            display: block;
-        }
+.item input{
+    width:20px;
+    height:20px;
+}
 
-        .item {
-            padding: 12px 15px;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+.item.completed{
+    text-decoration:line-through;
+    opacity:.55;
+}
 
-        .item:last-child {
-            border-bottom: none;
-        }
+#status{
+    font-size:14px;
+    margin-top:8px;
+}
 
-        .item input {
-            width: 20px;
-            height: 20px;
-        }
-
-        .item.completed {
-            text-decoration: line-through;
-            opacity: .55;
-        }
-
-        @media (max-width: 600px) {
-            header h1 {
-                font-size: 21px;
-            }
-
-            .buttons {
-                flex-direction: column;
-            }
-        }
-    </style>
+@media(max-width:600px){
+    header h1{font-size:21px}
+    .buttons{flex-direction:column}
+}
+</style>
 </head>
 
 <body>
 
 <header>
-    <h1>🏛️ Centro Cívico SVE</h1>
-    <p>Stardew Valley Expanded · Normal</p>
+<h1>🏛️ Centro Cívico SVE</h1>
+<p>Stardew Valley Expanded · Normal</p>
 </header>
 
 <div class="container">
 
-    <div class="progress">
-        <strong>Progreso general</strong>
-        <div id="progressText">0 / 0</div>
+<div class="card">
+    <strong>Partida compartida</strong>
 
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
-        </div>
-    </div>
+    <input
+        type="text"
+        id="partida"
+        placeholder="Nombre de la partida"
+    >
 
-    <div class="buttons">
-        <button id="byBundle" class="active">
-            📦 Por lotes
-        </button>
+    <button onclick="conectarPartida()">
+        Conectar
+    </button>
 
-        <button id="bySeason">
-            🌱 Por estación
-        </button>
-    </div>
+    <div id="status">Sin conectar</div>
+</div>
 
-    <div id="content"></div>
+<div class="card">
+
+<strong>Progreso general</strong>
+
+<div id="progressText">0 / 0</div>
+
+<div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+</div>
+
+</div>
+
+<div class="buttons">
+
+<button id="byBundle" class="active">
+📦 Por lotes
+</button>
+
+<button id="bySeason">
+🌱 Por estación
+</button>
+
+</div>
+
+<div id="content"></div>
 
 </div>
 
 <script>
 
-const bundles = {
+/* =========================
+   SUPABASE
+========================= */
 
-    "Crafts Room": [
-        {
-            name: "Spring Foraging",
-            items: [
-                "Wild Horseradish",
-                "Daffodil",
-                "Leek",
-                "Dandelion"
-            ]
-        },
-        {
-            name: "Summer Foraging",
-            items: [
-                "Grape",
-                "Spice Berry",
-                "Sweet Pea",
-                "Red Baneberry"
-            ]
-        },
-        {
-            name: "Fall Foraging",
-            items: [
-                "Common Mushroom",
-                "Wild Plum",
-                "Hazelnut",
-                "Blackberry",
-                "Mushroom Colony"
-            ]
-        },
-        {
-            name: "Winter Foraging",
-            items: [
-                "Winter Root",
-                "Crystal Fruit",
-                "Snow Yam",
-                "Crocus",
-                "Bearberry"
-            ]
-        },
-        {
-            name: "Construction",
-            items: [
-                "Wood ×499",
-                "Clay ×10",
-                "Stone ×199",
-                "Hardwood ×30"
-            ]
-        },
-        {
-            name: "Exotic Foraging",
-            items: [
-                "Coconut",
-                "Cactus Fruit",
-                "Cave Carrot",
-                "Red Mushroom",
-                "Purple Mushroom",
-                "Fir Wax",
-                "Birch Water",
-                "Pine Tar",
-                "Poison Mushroom"
-            ]
-        }
-    ],
+const SUPABASE_URL =
+"https://mfjzjbkokmaugdypgrxi.supabase.co";
 
-    "Pantry": [
-        {
-            name: "Spring Crops",
-            items: [
-                "Parsnip",
-                "Green Bean",
-                "Cauliflower",
-                "Potato",
-                "Cucumber"
-            ]
-        },
-        {
-            name: "Summer Crops",
-            items: [
-                "Tomato",
-                "Hot Pepper",
-                "Blueberry",
-                "Melon",
-                "Butternut Squash"
-            ]
-        },
-        {
-            name: "Fall Crops",
-            items: [
-                "Corn",
-                "Eggplant",
-                "Pumpkin",
-                "Yam",
-                "Sweet Potato"
-            ]
-        },
-        {
-            name: "Quality Crops",
-            items: [
-                "Gold Parsnip ×5",
-                "Gold Melon ×5",
-                "Gold Pumpkin ×5",
-                "Gold Corn ×5",
-                "Gold Cucumber ×5",
-                "Gold Butternut Squash ×5",
-                "Gold Sweet Potato ×5"
-            ]
-        },
-        {
-            name: "Animal",
-            items: [
-                "Large Milk",
-                "Large Goat Milk",
-                "Wool",
-                "Duck Egg",
-                "Large Egg (White)",
-                "Large Egg (Brown)"
-            ]
-        },
-        {
-            name: "Artisan",
-            items: [
-                "Truffle Oil",
-                "Cloth",
-                "Goat Cheese",
-                "Cheese",
-                "Honey",
-                "Jelly",
-                "Apricot",
-                "Orange",
-                "Pear",
-                "Nectarine",
-                "Butter"
-            ]
-        }
-    ],
+const SUPABASE_KEY =
+"sb_publishable_hjU3mOzq8-eeGeaqXtg4mA_kHsRKEQu";
 
-    "Fish Tank": [
-        {
-            name: "River Fish",
-            items: [
-                "Sunfish",
-                "Catfish",
-                "Shad",
-                "Tiger Trout",
-                "Minnow",
-                "Goldfish"
-            ]
-        },
-        {
-            name: "Lake Fish",
-            items: [
-                "Largemouth Bass",
-                "Carp",
-                "Bullhead",
-                "Sturgeon",
-                "Tadpole"
-            ]
-        },
-        {
-            name: "Ocean Fish",
-            items: [
-                "Sardine",
-                "Tuna",
-                "Red Snapper",
-                "Tilapia",
-                "Starfish"
-            ]
-        },
-        {
-            name: "Night Fishing",
-            items: [
-                "Walleye",
-                "Bream",
-                "Eel",
-                "Frog"
-            ]
-        },
-        {
-            name: "Crab Pot",
-            items: [
-                "Lobster",
-                "Crayfish",
-                "Crab",
-                "Cockle",
-                "Mussel",
-                "Shrimp",
-                "Snail",
-                "Periwinkle",
-                "Oyster",
-                "Clam"
-            ]
-        },
-        {
-            name: "Specialty Fish",
-            items: [
-                "Pufferfish",
-                "Ghostfish",
-                "Sandfish",
-                "Woodskip",
-                "King Salmon",
-                "Butterfish"
-            ]
-        }
-    ],
-
-    "Boiler Room": [
-        {
-            name: "Blacksmith",
-            items: [
-                "Copper Bar",
-                "Iron Bar",
-                "Gold Bar"
-            ]
-        },
-        {
-            name: "Geologist",
-            items: [
-                "Quartz",
-                "Earth Crystal",
-                "Frozen Tear",
-                "Fire Quartz"
-            ]
-        },
-        {
-            name: "Adventurer",
-            items: [
-                "Slime ×99",
-                "Bat Wing ×10",
-                "Solar Essence",
-                "Void Essence"
-            ]
-        }
-    ],
-
-    "Bulletin Board": [
-        {
-            name: "Chef",
-            items: [
-                "Maple Syrup",
-                "Fiddlehead Fern",
-                "Truffle",
-                "Poppy",
-                "Maki Roll",
-                "Fried Egg",
-                "Candy"
-            ]
-        },
-        {
-            name: "Fodder",
-            items: [
-                "Wheat ×10",
-                "Hay ×10",
-                "Apple ×3"
-            ]
-        },
-        {
-            name: "Enchanter",
-            items: [
-                "Oak Resin",
-                "Wine",
-                "Rabbit's Foot",
-                "Pomegranate",
-                "Four Leaf Clover"
-            ]
-        },
-        {
-            name: "Field Research",
-            items: [
-                "Purple Mushroom",
-                "Nautilus Shell",
-                "Chub",
-                "Frozen Geode",
-                "Amber"
-            ]
-        },
-        {
-            name: "Dye",
-            items: [
-                "Red Mushroom",
-                "Sea Urchin",
-                "Sunflower",
-                "Duck Feather",
-                "Aquamarine",
-                "Red Cabbage",
-                "Persimmon"
-            ]
-        }
-    ],
-
-    "Vault": [
-        {
-            name: "2,500g",
-            items: ["2,500g"]
-        },
-        {
-            name: "5,000g",
-            items: ["5,000g"]
-        },
-        {
-            name: "10,000g",
-            items: ["10,000g"]
-        },
-        {
-            name: "25,000g",
-            items: ["25,000g"]
-        }
-    ]
-};
-
-let checked = JSON.parse(
-    localStorage.getItem("stardew_civico_checked") || "{}"
+const supabaseClient =
+supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
 );
 
-function save() {
-    localStorage.setItem(
-        "stardew_civico_checked",
-        JSON.stringify(checked)
-    );
+let partidaActual = "";
+
+let checked = {};
+
+
+/* =========================
+   DATOS
+========================= */
+
+const bundles = {
+
+"Crafts Room":[
+
+{
+name:"Spring Foraging",
+items:[
+"Wild Horseradish",
+"Daffodil",
+"Leek",
+"Dandelion"
+]
+},
+
+{
+name:"Summer Foraging",
+items:[
+"Grape",
+"Spice Berry",
+"Sweet Pea",
+"Red Baneberry"
+]
+},
+
+{
+name:"Fall Foraging",
+items:[
+"Common Mushroom",
+"Wild Plum",
+"Hazelnut",
+"Blackberry",
+"Mushroom Colony"
+]
+},
+
+{
+name:"Winter Foraging",
+items:[
+"Winter Root",
+"Crystal Fruit",
+"Snow Yam",
+"Crocus",
+"Bearberry"
+]
+},
+
+{
+name:"Construction",
+items:[
+"Wood ×499",
+"Clay ×10",
+"Stone ×199",
+"Hardwood ×30"
+]
+},
+
+{
+name:"Exotic Foraging",
+items:[
+"Coconut",
+"Cactus Fruit",
+"Cave Carrot",
+"Red Mushroom",
+"Purple Mushroom",
+"Fir Wax",
+"Birch Water",
+"Pine Tar",
+"Poison Mushroom"
+]
 }
 
-function updateProgress() {
+],
 
-    let total = 0;
-    let done = 0;
+"Pantry":[
 
-    document.querySelectorAll(".item input").forEach(input => {
-        total++;
+{
+name:"Spring Crops",
+items:[
+"Parsnip",
+"Green Bean",
+"Cauliflower",
+"Potato",
+"Cucumber"
+]
+},
 
-        if (input.checked) {
-            done++;
-        }
+{
+name:"Summer Crops",
+items:[
+"Tomato",
+"Hot Pepper",
+"Blueberry",
+"Melon",
+"Butternut Squash"
+]
+},
+
+{
+name:"Fall Crops",
+items:[
+"Corn",
+"Eggplant",
+"Pumpkin",
+"Yam",
+"Sweet Potato"
+]
+},
+
+{
+name:"Quality Crops",
+items:[
+"Gold Parsnip ×5",
+"Gold Melon ×5",
+"Gold Pumpkin ×5",
+"Gold Corn ×5",
+"Gold Cucumber ×5",
+"Gold Butternut Squash ×5",
+"Gold Sweet Potato ×5"
+]
+},
+
+{
+name:"Animal",
+items:[
+"Large Milk",
+"Large Goat Milk",
+"Wool",
+"Duck Egg",
+"Large Egg (White)",
+"Large Egg (Brown)"
+]
+},
+
+{
+name:"Artisan",
+items:[
+"Truffle Oil",
+"Cloth",
+"Goat Cheese",
+"Cheese",
+"Honey",
+"Jelly",
+"Apricot",
+"Orange",
+"Pear",
+"Nectarine",
+"Butter"
+]
+}
+
+],
+
+"Fish Tank":[
+
+{
+name:"River Fish",
+items:[
+"Sunfish",
+"Catfish",
+"Shad",
+"Tiger Trout",
+"Minnow",
+"Goldfish"
+]
+},
+
+{
+name:"Lake Fish",
+items:[
+"Largemouth Bass",
+"Carp",
+"Bullhead",
+"Sturgeon",
+"Tadpole"
+]
+},
+
+{
+name:"Ocean Fish",
+items:[
+"Sardine",
+"Tuna",
+"Red Snapper",
+"Tilapia",
+"Starfish"
+]
+},
+
+{
+name:"Night Fishing",
+items:[
+"Walleye",
+"Bream",
+"Eel",
+"Frog"
+]
+},
+
+{
+name:"Crab Pot",
+items:[
+"Lobster",
+"Crayfish",
+"Crab",
+"Cockle",
+"Mussel",
+"Shrimp",
+"Snail",
+"Periwinkle",
+"Oyster",
+"Clam"
+]
+},
+
+{
+name:"Specialty Fish",
+items:[
+"Pufferfish",
+"Ghostfish",
+"Sandfish",
+"Woodskip",
+"King Salmon",
+"Butterfish"
+]
+}
+
+],
+
+"Boiler Room":[
+
+{
+name:"Blacksmith",
+items:[
+"Copper Bar",
+"Iron Bar",
+"Gold Bar"
+]
+},
+
+{
+name:"Geologist",
+items:[
+"Quartz",
+"Earth Crystal",
+"Frozen Tear",
+"Fire Quartz"
+]
+},
+
+{
+name:"Adventurer",
+items:[
+"Slime ×99",
+"Bat Wing ×10",
+"Solar Essence",
+"Void Essence"
+]
+}
+
+],
+
+"Bulletin Board":[
+
+{
+name:"Chef",
+items:[
+"Maple Syrup",
+"Fiddlehead Fern",
+"Truffle",
+"Poppy",
+"Maki Roll",
+"Fried Egg",
+"Candy"
+]
+},
+
+{
+name:"Fodder",
+items:[
+"Wheat ×10",
+"Hay ×10",
+"Apple ×3"
+]
+},
+
+{
+name:"Enchanter",
+items:[
+"Oak Resin",
+"Wine",
+"Rabbit's Foot",
+"Pomegranate",
+"Four Leaf Clover"
+]
+},
+
+{
+name:"Field Research",
+items:[
+"Purple Mushroom",
+"Nautilus Shell",
+"Chub",
+"Frozen Geode",
+"Amber"
+]
+},
+
+{
+name:"Dye",
+items:[
+"Red Mushroom",
+"Sea Urchin",
+"Sunflower",
+"Duck Feather",
+"Aquamarine",
+"Red Cabbage",
+"Persimmon"
+]
+}
+
+],
+
+"Vault":[
+
+{
+name:"2,500g",
+items:["2,500g"]
+},
+
+{
+name:"5,000g",
+items:["5,000g"]
+},
+
+{
+name:"10,000g",
+items:["10,000g"]
+},
+
+{
+name:"25,000g",
+items:["25,000g"]
+}
+
+]
+
+};
+
+
+/* =========================
+   CONECTAR PARTIDA
+========================= */
+
+async function conectarPartida(){
+
+    const nombre =
+        document.getElementById("partida").value.trim();
+
+    if(!nombre){
+        alert("Escribe un nombre para la partida.");
+        return;
+    }
+
+    partidaActual = nombre;
+
+    document.getElementById("status").textContent =
+        "Conectando...";
+
+    const { data, error } =
+        await supabaseClient
+        .from("progreso")
+        .select("item_id, conseguido")
+        .eq("partida", partidaActual);
+
+    if(error){
+
+        console.error(error);
+
+        document.getElementById("status").textContent =
+            "Error al conectar.";
+
+        return;
+    }
+
+    checked = {};
+
+    data.forEach(row => {
+        checked[row.item_id] = row.conseguido;
     });
 
-    document.getElementById("progressText").textContent =
-        `${done} / ${total}`;
+    document.getElementById("status").textContent =
+        "🟢 Partida conectada: " + partidaActual;
 
-    const percentage =
-        total === 0 ? 0 : (done / total) * 100;
+    showBundles();
 
-    document.getElementById("progressFill").style.width =
-        percentage + "%";
+    escucharCambios();
 }
 
-function showBundles() {
 
-    const content = document.getElementById("content");
+/* =========================
+   GUARDAR CAMBIO
+========================= */
+
+async function cambiarItem(id, valor){
+
+    if(!partidaActual){
+        alert("Primero conecta una partida.");
+        return;
+    }
+
+    checked[id] = valor;
+
+    const { error } =
+        await supabaseClient
+        .from("progreso")
+        .upsert({
+
+            partida: partidaActual,
+
+            item_id: id,
+
+            conseguido: valor,
+
+            actualizado_en:
+                new Date().toISOString()
+
+        },{
+            onConflict:"partida,item_id"
+        });
+
+    if(error){
+        console.error(error);
+        alert("No se pudo guardar el cambio.");
+    }
+
+    updateProgress();
+}
+
+
+/* =========================
+   ESCUCHAR CAMBIOS
+========================= */
+
+function escucharCambios(){
+
+    supabaseClient
+    .channel("progreso-" + partidaActual)
+
+    .on(
+        "postgres_changes",
+        {
+            event:"*",
+            schema:"public",
+            table:"progreso",
+            filter:"partida=eq." + partidaActual
+        },
+        payload => {
+
+            if(
+                payload.eventType === "INSERT" ||
+                payload.eventType === "UPDATE"
+            ){
+
+                checked[payload.new.item_id] =
+                    payload.new.conseguido;
+
+                showBundles();
+            }
+
+        }
+    )
+
+    .subscribe();
+}
+
+
+/* =========================
+   MOSTRAR LOTES
+========================= */
+
+function showBundles(){
+
+    const content =
+        document.getElementById("content");
+
     content.innerHTML = "";
 
-    for (const room in bundles) {
+    for(const room in bundles){
 
-        const roomSection = document.createElement("div");
+        const roomSection =
+            document.createElement("div");
+
         roomSection.className = "section";
 
-        const roomTitle = document.createElement("div");
-        roomTitle.className = "section-title";
-        roomTitle.innerHTML = `<span>🏛️ ${room}</span><span>▼</span>`;
+        const roomTitle =
+            document.createElement("div");
 
-        const itemsContainer = document.createElement("div");
-        itemsContainer.className = "items";
+        roomTitle.className =
+            "section-title";
+
+        roomTitle.innerHTML =
+            `<span>🏛️ ${room}</span><span>▼</span>`;
+
+        const roomItems =
+            document.createElement("div");
+
+        roomItems.className = "items";
 
         roomTitle.onclick = () => {
-            itemsContainer.classList.toggle("open");
+            roomItems.classList.toggle("open");
         };
+
 
         bundles[room].forEach(bundle => {
 
-            const bundleTitle = document.createElement("div");
-            bundleTitle.className = "section-title";
-            bundleTitle.style.fontSize = "15px";
+            const bundleTitle =
+                document.createElement("div");
+
+            bundleTitle.className =
+                "section-title";
+
+            bundleTitle.style.fontSize =
+                "15px";
+
             bundleTitle.innerHTML =
                 `<span>📦 ${bundle.name}</span><span>▼</span>`;
 
-            const bundleItems = document.createElement("div");
-            bundleItems.className = "items";
+
+            const bundleItems =
+                document.createElement("div");
+
+            bundleItems.className =
+                "items";
+
 
             bundleTitle.onclick = () => {
                 bundleItems.classList.toggle("open");
             };
+
 
             bundle.items.forEach(item => {
 
@@ -566,73 +761,132 @@ function showBundles() {
                     bundle.name + "_" +
                     item;
 
-                const row = document.createElement("label");
+                const row =
+                    document.createElement("label");
+
                 row.className = "item";
+
 
                 const checkbox =
                     document.createElement("input");
 
                 checkbox.type = "checkbox";
-                checkbox.checked = !!checked[id];
+
+                checkbox.checked =
+                    !!checked[id];
+
 
                 const text =
                     document.createElement("span");
 
                 text.textContent = item;
 
-                if (checkbox.checked) {
+
+                if(checkbox.checked){
                     row.classList.add("completed");
                 }
 
+
                 checkbox.onchange = () => {
 
-                    checked[id] = checkbox.checked;
+                    row.classList.toggle(
+                        "completed",
+                        checkbox.checked
+                    );
 
-                    if (checkbox.checked) {
-                        row.classList.add("completed");
-                    } else {
-                        row.classList.remove("completed");
-                    }
+                    cambiarItem(
+                        id,
+                        checkbox.checked
+                    );
 
-                    save();
-                    updateProgress();
                 };
+
 
                 row.appendChild(checkbox);
                 row.appendChild(text);
 
                 bundleItems.appendChild(row);
+
             });
 
-            itemsContainer.appendChild(bundleTitle);
-            itemsContainer.appendChild(bundleItems);
+
+            roomItems.appendChild(bundleTitle);
+            roomItems.appendChild(bundleItems);
 
         });
 
+
         roomSection.appendChild(roomTitle);
-        roomSection.appendChild(itemsContainer);
+        roomSection.appendChild(roomItems);
 
         content.appendChild(roomSection);
+
     }
 
     updateProgress();
 }
 
+
+/* =========================
+   PROGRESO
+========================= */
+
+function updateProgress(){
+
+    let total = 0;
+    let done = 0;
+
+    document
+    .querySelectorAll(".item input")
+    .forEach(input => {
+
+        total++;
+
+        if(input.checked){
+            done++;
+        }
+
+    });
+
+    document.getElementById("progressText")
+        .textContent =
+        `${done} / ${total}`;
+
+    const percentage =
+        total === 0
+        ? 0
+        : (done / total) * 100;
+
+    document.getElementById("progressFill")
+        .style.width =
+        percentage + "%";
+}
+
+
+/* =========================
+   BOTONES
+========================= */
+
 document.getElementById("byBundle").onclick = () => {
 
-    document.getElementById("byBundle").classList.add("active");
-    document.getElementById("bySeason").classList.remove("active");
+    document.getElementById("byBundle")
+        .classList.add("active");
+
+    document.getElementById("bySeason")
+        .classList.remove("active");
 
     showBundles();
 };
 
+
 document.getElementById("bySeason").onclick = () => {
 
-    document.getElementById("bySeason").classList.add("active");
-    document.getElementById("byBundle").classList.remove("active");
+    alert(
+        "La vista por estación la añadiremos después de comprobar que la sincronización funciona."
+    );
 
-    alert("La vista por estación la construiremos en el siguiente paso.");
 };
+
 
 showBundles();
 
