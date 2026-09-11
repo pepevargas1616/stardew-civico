@@ -16,7 +16,8 @@ button,input{font:inherit}
 button{border:0;cursor:pointer}
 .hidden{display:none!important}
 header{background:linear-gradient(135deg,#62472f,#8a6846);color:white;padding:20px 16px;text-align:center}
-header h1{margin:0;font-size:25px} header p{margin:6px 0 0;opacity:.9;font-size:14px}
+header h1{margin:0;font-size:25px}
+header p{margin:6px 0 0;opacity:.9;font-size:14px}
 .container{max-width:980px;margin:auto;padding:14px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px;margin-bottom:14px;box-shadow:0 3px 12px rgba(60,48,37,.08)}
 input[type=text]{width:100%;padding:13px;border:1px solid #cfc5b8;border-radius:10px;background:white;color:var(--ink);outline:none}
@@ -28,32 +29,52 @@ input[type=text]:focus{border-color:var(--brown2);box-shadow:0 0 0 3px rgba(139,
 .login h2{text-align:center;margin:0 0 6px}
 .login p{text-align:center;color:var(--muted);line-height:1.5}
 .status{margin-top:10px;padding:10px;border-radius:10px;background:#f4efe7;font-size:13px}
-.status.ok{background:#e8f3e7;color:#286131}.status.err{background:#fae9e7;color:#8e302a}.status.warn{background:#fff3d8;color:#7a5a18}
+.status.ok{background:#e8f3e7;color:#286131}
+.status.err{background:#fae9e7;color:#8e302a}
+.status.warn{background:#fff3d8;color:#7a5a18}
 .topbar{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .partida-pill{background:#eee6d9;border-radius:999px;padding:7px 11px;font-size:13px}
 .progress-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.metric{font-weight:800;font-size:18px}.metric small{font-size:12px;color:var(--muted);font-weight:600}
-.bar{height:11px;background:#e3ddd3;border-radius:99px;overflow:hidden;margin-top:7px}.fill{height:100%;width:0;background:var(--green);transition:width .25s}
-.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px}.tab{background:#e9e1d5;color:var(--brown);padding:11px;border-radius:10px;font-weight:800}.tab.active{background:var(--brown);color:white}
+.metric{font-weight:800;font-size:18px}
+.metric small{font-size:12px;color:var(--muted);font-weight:600}
+.bar{height:11px;background:#e3ddd3;border-radius:99px;overflow:hidden;margin-top:7px}
+.fill{height:100%;width:0;background:var(--green);transition:width .25s}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tab{background:#e9e1d5;color:var(--brown);padding:11px;border-radius:10px;font-weight:800}
+.tab.active{background:var(--brown);color:white}
 .search{margin-top:10px}
 .room,.bundle{border:1px solid var(--line);border-radius:14px;background:var(--card);overflow:hidden;margin-bottom:10px}
 .room-head,.bundle-head{padding:13px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer}
-.room-head{background:#f4eee4;font-weight:900}.bundle-head{background:#fff}
+.room-head{background:#f4eee4;font-weight:900}
+.bundle-head{background:#fff}
 .room-head small,.bundle-head small{display:block;color:var(--muted);font-weight:600;margin-top:2px}
 .bundle-head.complete{background:#edf6e9}
-.items{display:none;border-top:1px solid var(--line)}.items.open{display:block}
-.item{padding:11px 13px;border-bottom:1px solid #eee8df}.item:last-child{border-bottom:0}
-.item-main{display:flex;gap:10px;align-items:flex-start}.item-main input{width:21px;height:21px;margin-top:1px;accent-color:var(--green)}
-.item-name{font-weight:750;cursor:pointer;flex:1}.qty{color:var(--muted);font-weight:600}
-.item.done{opacity:.56}.item.done .item-name{text-decoration:line-through}
-.info{display:none;margin:9px 0 2px 31px;padding:10px 12px;border-radius:10px;background:#f7f2e9;font-size:13px;line-height:1.55}.info.open{display:block}
-.info b{color:var(--brown)}.tag{display:inline-block;background:#e9e1d5;border-radius:999px;padding:3px 7px;margin:2px 3px 2px 0;font-size:11px}
+.items{display:none;border-top:1px solid var(--line)}
+.items.open{display:block}
+.item{padding:11px 13px;border-bottom:1px solid #eee8df}
+.item:last-child{border-bottom:0}
+.item-main{display:flex;gap:10px;align-items:flex-start}
+.item-main input{width:21px;height:21px;margin-top:1px;accent-color:var(--green)}
+.item-name{font-weight:750;cursor:pointer;flex:1}
+.qty{color:var(--muted);font-weight:600}
+.item.done{opacity:.56}
+.item.done .item-name{text-decoration:line-through}
+.info{display:none;margin:9px 0 2px 31px;padding:10px 12px;border-radius:10px;background:#f7f2e9;font-size:13px;line-height:1.55}
+.info.open{display:block}
+.info b{color:var(--brown)}
+.tag{display:inline-block;background:#e9e1d5;border-radius:999px;padding:3px 7px;margin:2px 3px 2px 0;font-size:11px}
 .season-title{padding:12px 14px;border-radius:12px;color:white;background:var(--brown);font-weight:900;margin:14px 0 9px}
 .empty{text-align:center;color:var(--muted);padding:30px}
 .toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#33281f;color:white;padding:10px 14px;border-radius:10px;display:none;z-index:20}
-@media(max-width:650px){.progress-grid{grid-template-columns:1fr}.login{margin:15px auto}.container{padding:10px}header h1{font-size:22px}}
+@media(max-width:650px){
+  .progress-grid{grid-template-columns:1fr}
+  .login{margin:15px auto}
+  .container{padding:10px}
+  header h1{font-size:22px}
+}
 </style>
 </head>
+
 <body>
 
 <header>
@@ -67,60 +88,105 @@ input[type=text]:focus{border-color:var(--brown2);box-shadow:0 0 0 3px rgba(139,
   <div class="logo">🏛️</div>
   <h2>Partida compartida</h2>
   <p>Los dos jugadores deben escribir exactamente el mismo nombre para ver y modificar el mismo progreso.</p>
+
   <label><b>Nombre de la partida</b></label>
   <input id="partidaInput" type="text" placeholder="Ej.: Corralito">
-  <button id="entrar" class="primary" style="width:100%;margin-top:10px">🎮 Entrar a la partida</button>
-  <div id="loginStatus" class="status">🟡 Escribe el nombre de la partida.</div>
+
+  <button id="entrar" class="primary" style="width:100%;margin-top:10px">
+    🎮 Entrar a la partida
+  </button>
+
+  <div id="loginStatus" class="status">
+    🟡 Escribe el nombre de la partida.
+  </div>
 </section>
 
 <section id="app" class="hidden">
+
   <div class="card">
     <div class="topbar">
-      <div><b>🎮 Partida:</b> <span id="partidaPill" class="partida-pill"></span></div>
-      <button id="salir" class="secondary">↩ Cambiar partida</button>
+      <div>
+        <b>🎮 Partida:</b>
+        <span id="partidaPill" class="partida-pill"></span>
+      </div>
+
+      <button id="salir" class="secondary">
+        ↩ Cambiar partida
+      </button>
     </div>
-    <div id="appStatus" class="status">🟡 Preparando conexión...</div>
+
+    <div id="appStatus" class="status">
+      🟡 Preparando conexión...
+    </div>
   </div>
 
   <div class="card">
     <div class="progress-grid">
+
       <div>
-        <div class="metric" id="bundleProgress">0 / 30 <small>lotes</small></div>
-        <div class="bar"><div id="bundleFill" class="fill"></div></div>
+        <div class="metric" id="bundleProgress">
+          0 / 30 <small>lotes</small>
+        </div>
+        <div class="bar">
+          <div id="bundleFill" class="fill"></div>
+        </div>
       </div>
+
       <div>
-        <div class="metric" id="itemProgress">0 / 148 <small>objetos</small></div>
-        <div class="bar"><div id="itemFill" class="fill"></div></div>
+        <div class="metric" id="itemProgress">
+          0 / 148 <small>objetos</small>
+        </div>
+        <div class="bar">
+          <div id="itemFill" class="fill"></div>
+        </div>
       </div>
+
     </div>
   </div>
 
   <div class="card">
+
     <div class="tabs">
-      <button id="tabBundles" class="tab active">📦 Por lotes</button>
-      <button id="tabSeasons" class="tab">🌱 Por estación</button>
+      <button id="tabBundles" class="tab active">
+        📦 Por lotes
+      </button>
+
+      <button id="tabSeasons" class="tab">
+        🌱 Por estación
+      </button>
     </div>
-    <input id="buscar" class="search" type="text" placeholder="🔎 Buscar objeto: calabaza, pez sol, queso...">
+
+    <input
+      id="buscar"
+      class="search"
+      type="text"
+      placeholder="🔎 Buscar objeto: calabaza, pez sol, queso..."
+    >
+
   </div>
 
   <div id="content"></div>
+
 </section>
+
 </main>
+
 <div id="toast" class="toast"></div>
 
 <script>
+
 /*
-  ============================================================
-  CONFIGURACIÓN SUPABASE
-  ============================================================
-  IMPORTANTE:
-  Si aparece "Invalid API key", la clave publicada aquí ya no
-  es válida en tu proyecto Supabase. Sustituye SOLO SUPABASE_KEY
-  por la Publishable key actual de:
-  Supabase > Project Settings > API.
+============================================================
+CONFIGURACIÓN SUPABASE
+============================================================
 */
-const SUPABASE_URL = "https://mfjzjbkokmaugdypgrxi.supabase.co";
-const SUPABASE_KEY = "sb_publishable_hjU3mOzq8-eeGeAQXtg4mA_kHsRKEQu";
+
+const SUPABASE_URL =
+  "https://mfjzjbkokmaugdypgrxi.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_hjU3mOzq8-eeGeAQXtg4mA_kHsRKEQu";
+
 
 let partida = "";
 let checked = {};
@@ -128,382 +194,2458 @@ let modo = "bundles";
 let supabaseClient = null;
 let realtimeChannel = null;
 
+
 /*
-  Datos: SVE 1.15.11, configuración normal.
-  Son los 30 lotes del Centro Cívico y 148 entradas que
-  corresponden a los lotes principales. El Missing Bundle
-  posterior al Centro Cívico no se cuenta dentro de estos 30.
+============================================================
+DATOS DEL CENTRO CÍVICO
+============================================================
 */
+
 const rooms = [
+
 {
-  id:"crafts", name:"Sala de manualidades", icon:"🛠️", bundles:[
-  {id:"spring_foraging",name:"Recolección de primavera",season:"Primavera",need:4,reward:"30 Semillas de primavera",items:[
-    ["wild_horseradish","Rábano silvestre",1],["daffodil","Narciso",1],["leek","Puerro",1],["dandelion","Diente de león",1]
-  ]},
-  {id:"summer_foraging",name:"Recolección de verano",season:"Verano",need:4,reward:"30 Semillas de verano",items:[
-    ["grape","Uva",1],["spice_berry","Baya especiada",1],["sweet_pea","Guisante de olor",1],["red_baneberry","Baya venenosa roja",1]
-  ]},
-  {id:"fall_foraging",name:"Recolección de otoño",season:"Otoño",need:5,reward:"30 Semillas de otoño",items:[
-    ["common_mushroom","Champiñón común",1],["wild_plum","Ciruela silvestre",1],["hazelnut","Avellana",1],["blackberry","Mora",1],["mushroom_colony","Colonia de hongos",1]
-  ]},
-  {id:"winter_foraging",name:"Recolección de invierno",season:"Invierno",need:5,reward:"30 Semillas de invierno",items:[
-    ["winter_root","Raíz invernal",1],["crystal_fruit","Fruta cristalina",1],["snow_yam","Ñame de nieve",1],["crocus","Azafrán",1],["bearberry","Baya de oso",1]
-  ]},
-  {id:"construction",name:"Construcción",season:"Todas",need:4,reward:"1 Horno de carbón",items:[
-    ["wood","Madera",499],["clay","Arcilla",10],["stone","Piedra",199],["hardwood","Madera noble",30]
-  ]},
-  {id:"exotic_foraging",name:"Recolección exótica",season:"Todas",need:8,reward:"5 Festín de otoño",items:[
-    ["coconut","Coco",1],["cactus_fruit","Fruta de cactus",1],["cave_carrot","Zanahoria cavernaria",1],["red_mushroom","Champiñón rojo",1],["purple_mushroom","Champiñón morado",1],["fir_wax","Cera de abeto",1],["birch_water","Agua de abedul",1],["pine_tar","Brea de pino",1],["poison_mushroom","Champiñón venenoso",1]
-  ]}
-]},
+  id:"crafts",
+  name:"Sala de manualidades",
+  icon:"🛠️",
+
+  bundles:[
+
+    {
+      id:"spring_foraging",
+      name:"Recolección de primavera",
+      season:"Primavera",
+      need:4,
+      reward:"30 Semillas de primavera",
+
+      items:[
+        ["wild_horseradish","Rábano silvestre",1],
+        ["daffodil","Narciso",1],
+        ["leek","Puerro",1],
+        ["dandelion","Diente de león",1]
+      ]
+    },
+
+    {
+      id:"summer_foraging",
+      name:"Recolección de verano",
+      season:"Verano",
+      need:4,
+      reward:"30 Semillas de verano",
+
+      items:[
+        ["grape","Uva",1],
+        ["spice_berry","Baya especiada",1],
+        ["sweet_pea","Guisante de olor",1],
+        ["red_baneberry","Baya venenosa roja",1]
+      ]
+    },
+
+    {
+      id:"fall_foraging",
+      name:"Recolección de otoño",
+      season:"Otoño",
+      need:5,
+      reward:"30 Semillas de otoño",
+
+      items:[
+        ["common_mushroom","Champiñón común",1],
+        ["wild_plum","Ciruela silvestre",1],
+        ["hazelnut","Avellana",1],
+        ["blackberry","Mora",1],
+        ["mushroom_colony","Colonia de hongos",1]
+      ]
+    },
+
+    {
+      id:"winter_foraging",
+      name:"Recolección de invierno",
+      season:"Invierno",
+      need:5,
+      reward:"30 Semillas de invierno",
+
+      items:[
+        ["winter_root","Raíz invernal",1],
+        ["crystal_fruit","Fruta cristalina",1],
+        ["snow_yam","Ñame de nieve",1],
+        ["crocus","Azafrán",1],
+        ["bearberry","Baya de oso",1]
+      ]
+    },
+
+    {
+      id:"construction",
+      name:"Construcción",
+      season:"Todas",
+      need:4,
+      reward:"1 Horno de carbón",
+
+      items:[
+        ["wood","Madera",499],
+        ["clay","Arcilla",10],
+        ["stone","Piedra",199],
+        ["hardwood","Madera noble",30]
+      ]
+    },
+
+    {
+      id:"exotic_foraging",
+      name:"Recolección exótica",
+      season:"Todas",
+      need:8,
+      reward:"5 Festín de otoño",
+
+      items:[
+        ["coconut","Coco",1],
+        ["cactus_fruit","Fruta de cactus",1],
+        ["cave_carrot","Zanahoria cavernaria",1],
+        ["red_mushroom","Champiñón rojo",1],
+        ["purple_mushroom","Champiñón morado",1],
+        ["fir_wax","Cera de abeto",1],
+        ["birch_water","Agua de abedul",1],
+        ["pine_tar","Brea de pino",1],
+        ["poison_mushroom","Champiñón venenoso",1]
+      ]
+    }
+
+  ]
+},
+
+
 {
-  id:"pantry",name:"Despensa",icon:"🌾",bundles:[
-  {id:"spring_crops",name:"Cultivos de primavera",season:"Primavera",need:5,reward:"20 Aceleradores de crecimiento",items:[
-    ["parsnip","Chirivía",1],["green_bean","Judía verde",1],["cauliflower","Coliflor",1],["potato","Patata",1],["cucumber","Pepino",1]
-  ]},
-  {id:"summer_crops",name:"Cultivos de verano",season:"Verano",need:5,reward:"1 Aspersor de calidad",items:[
-    ["tomato","Tomate",1],["hot_pepper","Pimiento picante",1],["blueberry","Arándano",1],["melon","Melón",1],["butternut_squash","Calabaza moscada",1]
-  ]},
-  {id:"fall_crops",name:"Cultivos de otoño",season:"Otoño",need:5,reward:"1 Colmena",items:[
-    ["corn","Maíz",1],["eggplant","Berenjena",1],["pumpkin","Calabaza",1],["yam","Ñame",1],["sweet_potato","Batata",1]
-  ]},
-  {id:"quality_crops",name:"Cultivos de calidad",season:"Todas",need:5,reward:"1 Tarro de conservas",items:[
-    ["gold_parsnip","Chirivía de calidad oro",5],["gold_melon","Melón de calidad oro",5],["gold_pumpkin","Calabaza de calidad oro",5],["gold_corn","Maíz de calidad oro",5],["gold_cucumber","Pepino de calidad oro",5],["gold_butternut_squash","Calabaza moscada de calidad oro",5],["gold_sweet_potato","Batata de calidad oro",5]
-  ]},
-  {id:"animal",name:"Animales",season:"Todas",need:5,reward:"1 Prensa de queso",items:[
-    ["large_milk","Leche grande",1],["large_goat_milk","Leche de cabra grande",1],["wool","Lana",1],["duck_egg","Huevo de pato",1],["large_egg_white","Huevo grande blanco",1],["large_egg_brown","Huevo grande marrón",1]
-  ]},
-  {id:"artisan",name:"Artesano",season:"Todas",need:8,reward:"1 Barril",items:[
-    ["truffle_oil","Aceite de trufa",1],["cloth","Tela",1],["goat_cheese","Queso de cabra",1],["cheese","Queso",1],["honey","Miel",1],["jelly","Gelatina",1],["apricot","Albaricoque",1],["orange","Naranja",1],["pear","Pera",1],["nectarine","Nectarina",1],["butter","Mantequilla",1]
-  ]}
-]},
+  id:"pantry",
+  name:"Despensa",
+  icon:"🌾",
+
+  bundles:[
+
+    {
+      id:"spring_crops",
+      name:"Cultivos de primavera",
+      season:"Primavera",
+      need:5,
+      reward:"20 Aceleradores de crecimiento",
+
+      items:[
+        ["parsnip","Chirivía",1],
+        ["green_bean","Judía verde",1],
+        ["cauliflower","Coliflor",1],
+        ["potato","Patata",1],
+        ["cucumber","Pepino",1]
+      ]
+    },
+
+    {
+      id:"summer_crops",
+      name:"Cultivos de verano",
+      season:"Verano",
+      need:5,
+      reward:"1 Aspersor de calidad",
+
+      items:[
+        ["tomato","Tomate",1],
+        ["hot_pepper","Pimiento picante",1],
+        ["blueberry","Arándano",1],
+        ["melon","Melón",1],
+        ["butternut_squash","Calabaza moscada",1]
+      ]
+    },
+
+    {
+      id:"fall_crops",
+      name:"Cultivos de otoño",
+      season:"Otoño",
+      need:5,
+      reward:"1 Colmena",
+
+      items:[
+        ["corn","Maíz",1],
+        ["eggplant","Berenjena",1],
+        ["pumpkin","Calabaza",1],
+        ["yam","Ñame",1],
+        ["sweet_potato","Batata",1]
+      ]
+    },
+
+    {
+      id:"quality_crops",
+      name:"Cultivos de calidad",
+      season:"Todas",
+      need:5,
+      reward:"1 Tarro de conservas",
+
+      items:[
+        ["gold_parsnip","Chirivía de calidad oro",5],
+        ["gold_melon","Melón de calidad oro",5],
+        ["gold_pumpkin","Calabaza de calidad oro",5],
+        ["gold_corn","Maíz de calidad oro",5],
+        ["gold_cucumber","Pepino de calidad oro",5],
+        ["gold_butternut_squash","Calabaza moscada de calidad oro",5],
+        ["gold_sweet_potato","Batata de calidad oro",5]
+      ]
+    },
+
+    {
+      id:"animal",
+      name:"Productos animales",
+      season:"Todas",
+      need:5,
+      reward:"1 Prensa de queso",
+
+      items:[
+        ["large_milk","Leche grande",1],
+        ["large_goat_milk","Leche de cabra grande",1],
+        ["wool","Lana",1],
+        ["duck_egg","Huevo de pato",1],
+        ["large_egg_white","Huevo grande blanco",1],
+        ["large_egg_brown","Huevo grande marrón",1]
+      ]
+    },
+
+    {
+      id:"artisan",
+      name:"Productos artesanales",
+      season:"Todas",
+      need:6,
+      reward:"1 Barril",
+
+      items:[
+        ["truffle_oil","Aceite de trufa",1],
+        ["cloth","Tela",1],
+        ["goat_cheese","Queso de cabra",1],
+        ["cheese","Queso",1],
+        ["honey","Miel",1],
+        ["jelly","Gelatina",1],
+        ["apricot","Albaricoque",1],
+        ["orange","Naranja",1],
+        ["pear","Pera",1],
+        ["nectarine","Nectarina",1],
+        ["butter","Mantequilla",1]
+      ]
+    }
+
+  ]
+},
+
+
 {
-  id:"fish",name:"Pecera",icon:"🎣",bundles:[
-  {id:"river_fish",name:"Peces de río",season:"Todas",need:6,reward:"30 Cebos deluxe",items:[
-    ["sunfish","Pez sol",1],["catfish","Pez gato",1],["shad","Sábalo",1],["tiger_trout","Trucha tigre",1],["minnow","Pececillo",1],["goldfish","Pez dorado",1]
-  ]},
-  {id:"lake_fish",name:"Peces de lago",season:"Todas",need:5,reward:"1 Señuelo giratorio vestido",items:[
-    ["largemouth_bass","Lubina negra",1],["carp","Carpa",1],["bullhead","Siluro",1],["sturgeon","Esturión",1],["tadpole","Renacuajo",1]
-  ]},
-  {id:"ocean_fish",name:"Peces de océano",season:"Todas",need:5,reward:"5 Tótems de teletransporte: playa",items:[
-    ["sardine","Sardina",1],["tuna","Atún",1],["red_snapper","Pargo rojo",1],["tilapia","Tilapia",1],["starfish","Estrella de mar",1]
-  ]},
-  {id:"night_fishing",name:"Pesca nocturna",season:"Todas",need:4,reward:"1 Anillo luminoso",items:[
-    ["walleye","Lucioperca",1],["bream","Brema",1],["eel","Anguila",1],["frog","Rana",1]
-  ]},
-  {id:"crab_pot",name:"Trampa para cangrejos",season:"Todas",need:5,reward:"3 Nasas para cangrejos",items:[
-    ["lobster","Langosta",1],["crayfish","Cangrejo de río",1],["crab","Cangrejo",1],["cockle","Berberecho",1],["mussel","Mejillón",1],["shrimp","Gamba",1],["snail","Caracol",1],["periwinkle","Bígaro",1],["oyster","Ostra",1],["clam","Almeja",1]
-  ]},
-  {id:"specialty_fish",name:"Peces especiales",season:"Todas",need:6,reward:"5 Platos del mar",items:[
-    ["pufferfish","Pez globo",1],["ghostfish","Pez fantasma",1],["sandfish","Pez de arena",1],["woodskip","Pez de bosque",1],["king_salmon","Salmón rey",1],["butterfish","Pez mantequilla",1]
-  ]}
-]},
+  id:"fish",
+  name:"Pecera",
+  icon:"🐟",
+
+  bundles:[
+
+    {
+      id:"river_fish",
+      name:"Peces de río",
+      season:"Primavera/Verano/Otoño",
+      need:6,
+      reward:"30 Cebos",
+
+      items:[
+        ["sunfish","Pez sol",1],
+        ["catfish","Pez gato",1],
+        ["shad","Sábalo",1],
+        ["tiger_trout","Trucha tigre",1],
+        ["minnow","Pececillo",1],
+        ["goldfish","Pez dorado",1]
+      ]
+    },
+
+    {
+      id:"lake_fish",
+      name:"Peces de lago",
+      season:"Todas",
+      need:5,
+      reward:"1 Girador",
+
+      items:[
+        ["largemouth_bass","Lubina negra",1],
+        ["carp","Carpa",1],
+        ["bullhead","Siluro",1],
+        ["sturgeon","Esturión",1],
+        ["tadpole","Renacuajo",1]
+      ]
+    },
+
+    {
+      id:"ocean_fish",
+      name:"Peces del océano",
+      season:"Primavera/Verano/Otoño/Invierno",
+      need:5,
+      reward:"5 Geodas marinas",
+
+      items:[
+        ["sardine","Sardina",1],
+        ["tuna","Atún",1],
+        ["red_snapper","Pargo rojo",1],
+        ["tilapia","Tilapia",1],
+        ["starfish","Estrella de mar",1]
+      ]
+    },
+
+    {
+      id:"night_fishing",
+      name:"Pesca nocturna",
+      season:"Todas",
+      need:4,
+      reward:"1 Anillo luminoso",
+
+      items:[
+        ["walleye","Lucioperca",1],
+        ["bream","Brema",1],
+        ["eel","Anguila",1],
+        ["frog","Rana",1]
+      ]
+    },
+
+    {
+      id:"crab_pot",
+      name:"Trampas para cangrejos",
+      season:"Todas",
+      need:5,
+      reward:"3 Ollas para cangrejos",
+
+      items:[
+        ["lobster","Langosta",1],
+        ["crayfish","Cangrejo de río",1],
+        ["crab","Cangrejo",1],
+        ["cockle","Berberecho",1],
+        ["mussel","Mejillón",1],
+        ["shrimp","Gamba",1],
+        ["snail","Caracol",1],
+        ["periwinkle","Bígaro",1],
+        ["oyster","Ostra",1],
+        ["clam","Almeja",1]
+      ]
+    },
+
+    {
+      id:"specialty_fish",
+      name:"Peces especiales",
+      season:"Todas",
+      need:6,
+      reward:"5 Cebo salvaje",
+
+      items:[
+        ["pufferfish","Pez globo",1],
+        ["ghostfish","Pez fantasma",1],
+        ["sandfish","Pez de arena",1],
+        ["woodskip","Pez de bosque",1],
+        ["king_salmon","Salmón rey",1],
+        ["butterfish","Pez mantequilla",1]
+      ]
+    }
+
+  ]
+},
+
+
 {
-  id:"boiler",name:"Sala de calderas",icon:"🔥",bundles:[
-  {id:"blacksmith",name:"Herrero",season:"Todas",need:3,reward:"1 Horno",items:[
-    ["copper_bar","Lingote de cobre",1],["iron_bar","Lingote de hierro",1],["gold_bar","Lingote de oro",1]
-  ]},
-  {id:"geologist",name:"Geólogo",season:"Todas",need:4,reward:"5 Geodas omni",items:[
-    ["quartz","Cuarzo",1],["earth_crystal","Cristal de tierra",1],["frozen_tear","Lágrima helada",1],["fire_quartz","Cuarzo de fuego",1]
-  ]},
-  {id:"adventurer",name:"Aventurero",season:"Todas",need:2,reward:"1 Anillo imantado pequeño",items:[
-    ["slime","Baba",99],["bat_wing","Ala de murciélago",10],["solar_essence","Esencia solar",1],["void_essence","Esencia del vacío",1]
-  ]}
-]},
+  id:"boiler",
+  name:"Sala de calderas",
+  icon:"🔥",
+
+  bundles:[
+
+    {
+      id:"blacksmith",
+      name:"Forja",
+      season:"Todas",
+      need:3,
+      reward:"1 Horno",
+
+      items:[
+        ["copper_bar","Lingote de cobre",1],
+        ["iron_bar","Lingote de hierro",1],
+        ["gold_bar","Lingote de oro",1]
+      ]
+    },
+
+    {
+      id:"geologist",
+      name:"Geólogo",
+      season:"Todas",
+      need:4,
+      reward:"5 Geodas omni",
+
+      items:[
+        ["quartz","Cuarzo",1],
+        ["earth_crystal","Cristal de tierra",1],
+        ["frozen_tear","Lágrima helada",1],
+        ["fire_quartz","Cuarzo de fuego",1]
+      ]
+    },
+
+    {
+      id:"adventurer",
+      name:"Aventurero",
+      season:"Todas",
+      need:2,
+      reward:"500 Oro",
+
+      items:[
+        ["slime","Baba",99],
+        ["bat_wing","Ala de murciélago",10],
+        ["solar_essence","Esencia solar",1],
+        ["void_essence","Esencia del vacío",1]
+      ]
+    }
+
+  ]
+},
+
+
 {
-  id:"board",name:"Tablón de anuncios",icon:"📋",bundles:[
-  {id:"chef",name:"Chef",season:"Todas",need:7,reward:"3 Pasteles rosas",items:[
-    ["maple_syrup","Jarabe de arce",1],["fiddlehead_fern","Helecho fiddlehead",1],["truffle","Trufa",1],["poppy","Amapola",1],["maki_roll","Maki",1],["fried_egg","Huevo frito",1],["candy","Caramelo",1]
-  ]},
-  {id:"fodder",name:"Forraje",season:"Todas",need:3,reward:"1 Calentador",items:[
-    ["wheat","Trigo",10],["hay","Heno",10],["apple","Manzana",3]
-  ]},
-  {id:"enchanter",name:"Encantador",season:"Todas",need:5,reward:"5 Lingotes de oro",items:[
-    ["oak_resin","Resina de roble",1],["wine","Vino",1],["rabbit_foot","Pata de conejo",1],["pomegranate","Granada",1],["four_leaf_clover","Trébol de cuatro hojas",1]
-  ]},
-  {id:"field_research",name:"Investigación de campo",season:"Todas",need:5,reward:"1 Máquina recicladora",items:[
-    ["purple_mushroom_2","Champiñón morado",1],["nautilus_shell","Concha de nautilus",1],["chub","Cacho",1],["frozen_geode","Geoda congelada",1],["amber","Ámbar",1]
-  ]},
-  {id:"dye",name:"Tinte",season:"Todas",need:7,reward:"1 Semillero",items:[
-    ["red_mushroom_2","Champiñón rojo",1],["sea_urchin","Erizo de mar",1],["sunflower","Girasol",1],["duck_feather","Pluma de pato",1],["aquamarine","Aguamarina",1],["red_cabbage","Col lombarda",1],["persimmon","Caqui",1]
-  ]}
-]},
+  id:"board",
+  name:"Tablón de anuncios",
+  icon:"📋",
+
+  bundles:[
+
+    {
+      id:"chef",
+      name:"Chef",
+      season:"Todas",
+      need:7,
+      reward:"3 Pasteles de chocolate",
+
+      items:[
+        ["maple_syrup","Jarabe de arce",1],
+        ["fiddlehead_fern","Helecho fiddlehead",1],
+        ["truffle","Trufa",1],
+        ["poppy","Amapola",1],
+        ["maki_roll","Maki",1],
+        ["fried_egg","Huevo frito",1],
+        ["caramel","Caramelo",1]
+      ]
+    },
+
+    {
+      id:"fodder",
+      name:"Forraje",
+      season:"Todas",
+      need:3,
+      reward:"1 Calentador",
+
+      items:[
+        ["wheat","Trigo",10],
+        ["hay","Heno",10],
+        ["apple","Manzana",3]
+      ]
+    },
+
+    {
+      id:"enchanter",
+      name:"Encantador",
+      season:"Todas",
+      need:5,
+      reward:"5 Lingotes de oro",
+
+      items:[
+        ["oak_resin","Resina de roble",1],
+        ["wine","Vino",1],
+        ["rabbit_foot","Pata de conejo",1],
+        ["pomegranate","Granada",1],
+        ["four_leaf_clover","Trébol de cuatro hojas",1]
+      ]
+    },
+
+    {
+      id:"field_research",
+      name:"Investigación de campo",
+      season:"Todas",
+      need:5,
+      reward:"1 Máquina de reciclaje",
+
+      items:[
+        ["purple_mushroom","Champiñón morado",1],
+        ["nautilus_shell","Concha de nautilus",1],
+        ["chub","Cacho",1],
+        ["frozen_geode","Geoda congelada",1],
+        ["amber","Ámbar",1]
+      ]
+    },
+
+    {
+      id:"dye",
+      name:"Tinte",
+      season:"Todas",
+      need:7,
+      reward:"1 Máquina de coser",
+
+      items:[
+        ["red_mushroom","Champiñón rojo",1],
+        ["sea_urchin","Erizo de mar",1],
+        ["sunflower","Girasol",1],
+        ["duck_feather","Pluma de pato",1],
+        ["aquamarine","Aguamarina",1],
+        ["red_cabbage","Col lombarda",1],
+        ["persimmon","Caqui",1]
+      ]
+    }
+
+  ]
+},
+
+
 {
-  id:"vault",name:"Caja fuerte",icon:"💰",bundles:[
-    {id:"vault_2500",name:"2.500g",season:"Todas",need:1,reward:"3 Pasteles de chocolate",items:[["money_2500","2.500g",1]]},
-    {id:"vault_5000",name:"5.000g",season:"Todas",need:1,reward:"30 Fertilizantes de calidad",items:[["money_5000","5.000g",1]]},
-    {id:"vault_10000",name:"10.000g",season:"Todas",need:1,reward:"1 Pararrayos",items:[["money_10000","10.000g",1]]},
-    {id:"vault_25000",name:"25.000g",season:"Todas",need:1,reward:"1 Cristalario",items:[["money_25000","25.000g",1]]}
+  id:"vault",
+  name:"Caja fuerte",
+  icon:"💰",
+
+  bundles:[
+
+    {
+      id:"vault_2500",
+      name:"2.500g",
+      season:"Todas",
+      need:1,
+      reward:"3 Tortas de chocolate",
+
+      items:[
+        ["2500g","2.500g",1]
+      ]
+    },
+
+    {
+      id:"vault_5000",
+      name:"5.000g",
+      season:"Todas",
+      need:1,
+      reward:"30 Bombas",
+
+      items:[
+        ["5000g","5.000g",1]
+      ]
+    },
+
+    {
+      id:"vault_10000",
+      name:"10.000g",
+      season:"Todas",
+      need:1,
+      reward:"1 Rayo de calidad",
+
+      items:[
+        ["10000g","10.000g",1]
+      ]
+    },
+
+    {
+      id:"vault_25000",
+      name:"25.000g",
+      season:"Todas",
+      need:1,
+      reward:"1 Cristalario",
+
+      items:[
+        ["25000g","25.000g",1]
+      ]
+    }
+
   ]
 }
+
 ];
 
+
+/*
+============================================================
+INFORMACIÓN DE PECES
+============================================================
+*/
+
 const fishInfo = {
-sunfish:{source:"Río",season:"Primavera, Verano",weather:"Soleado",time:"6:00–19:00",req:"Caña de pescar"},
-catfish:{source:"Río",season:"Primavera, Otoño",weather:"Lluvia",time:"6:00–24:00",req:"Caña de pescar"},
-shad:{source:"Río",season:"Primavera, Verano, Otoño",weather:"Lluvia",time:"9:00–2:00",req:"Caña de pescar"},
-tiger_trout:{source:"Río",season:"Otoño, Invierno",weather:"Cualquier clima",time:"6:00–19:00",req:"Caña de pescar"},
-minnow:{source:"Ríos de SVE",season:"Todo el año",weather:"Cualquier clima",time:"6:00–2:00",req:"Caña de pescar"},
-goldfish:{source:"Río",season:"Primavera",weather:"Soleado",time:"10:00–17:00",req:"Caña de pescar"},
-largemouth_bass:{source:"Lago de montaña",season:"Todo el año",weather:"Cualquier clima",time:"6:00–19:00",req:"Caña de pescar"},
-carp:{source:"Lago de montaña / Bosque Secreto / Alcantarilla",season:"Primavera, Verano, Otoño",weather:"Cualquier clima",time:"6:00–24:00",req:"Caña de pescar"},
-bullhead:{source:"Lago de montaña",season:"Todo el año",weather:"Cualquier clima",time:"Todo el día",req:"Caña de pescar"},
-sturgeon:{source:"Lago de montaña",season:"Verano, Invierno",weather:"Cualquier clima",time:"6:00–19:00",req:"Caña de pescar"},
-tadpole:{source:"Lago de montaña",season:"Primavera",weather:"Cualquier clima",time:"6:00–19:00",req:"Caña de pescar"},
-sardine:{source:"Océano",season:"Primavera, Otoño, Invierno",weather:"Cualquier clima",time:"6:00–19:00",req:"Caña de pescar"},
-tuna:{source:"Océano",season:"Verano, Invierno",weather:"Cualquier clima",time:"6:00–19:00",req:"Caña de pescar"},
-red_snapper:{source:"Océano",season:"Verano, Otoño",weather:"Lluvia",time:"6:00–19:00",req:"Caña de pescar"},
-tilapia:{source:"Océano",season:"Verano, Otoño",weather:"Cualquier clima",time:"6:00–14:00",req:"Caña de pescar"},
-starfish:{source:"Océano",season:"Primavera, Verano, Invierno",weather:"Cualquier clima",time:"6:00–19:00",req:"Caña de pescar"},
-walleye:{source:"Ríos, lagos y estanque del Bosque Cindersap",season:"Otoño; Invierno con Tótem de lluvia",weather:"Lluvia",time:"12:00–2:00",req:"Caña de pescar"},
-bream:{source:"Ríos",season:"Todo el año",weather:"Cualquier clima",time:"18:00–2:00",req:"Caña de pescar"},
-eel:{source:"Océano",season:"Primavera, Otoño",weather:"Lluvia",time:"16:00–2:00",req:"Caña de pescar"},
-frog:{source:"Lago de montaña",season:"Primavera, Verano",weather:"Cualquier clima",time:"6:00–19:00",req:"Caña de pescar"},
-pufferfish:{source:"Océano",season:"Verano",weather:"Soleado",time:"12:00–16:00",req:"Caña de pescar"},
-ghostfish:{source:"Minas, pisos 20 y 60; también de fantasmas",season:"Todo el año",weather:"N/A",time:"Todo el día",req:"Pesca / combate"},
-sandfish:{source:"Desierto",season:"Todo el año",weather:"Cualquier clima",time:"6:00–20:00",req:"Caña de pescar"},
-woodskip:{source:"Bosque Secreto",season:"Todo el año",weather:"Cualquier clima",time:"6:00–20:00",req:"Caña de pescar"},
-king_salmon:{source:"Bosque Oeste",season:"Primavera, Verano",weather:"Cualquier clima",time:"6:00–20:00",req:"Nivel 8 de pesca"},
-butterfish:{source:"Shearwater Bridge / Bosque Oeste",season:"Primavera, Verano, Otoño",weather:"Cualquier clima",time:"6:00–20:00",req:"Caña de pescar"}
+
+sunfish:{
+  source:"Río",
+  season:"Primavera/Verano",
+  weather:"Soleado",
+  time:"6–19",
+  method:"Pescar con caña"
+},
+
+catfish:{
+  source:"Río",
+  season:"Primavera/Otoño",
+  weather:"Lluvia",
+  time:"6–24",
+  method:"Pescar con caña"
+},
+
+shad:{
+  source:"Río",
+  season:"Primavera/Verano/Otoño",
+  weather:"Lluvia",
+  time:"9–2",
+  method:"Pescar con caña"
+},
+
+tiger_trout:{
+  source:"Río",
+  season:"Otoño/Invierno",
+  weather:"Cualquier clima",
+  time:"6–19",
+  method:"Pescar con caña"
+},
+
+minnow:{
+  source:"Ríos de SVE",
+  season:"Todo el año",
+  weather:"Cualquier clima",
+  time:"6–2",
+  method:"Pescar con caña"
+},
+
+goldfish:{
+  source:"Río",
+  season:"Primavera",
+  weather:"Soleado",
+  time:"10–17",
+  method:"Pescar con caña"
+},
+
+largemouth_bass:{
+  source:"Lago de montaña",
+  season:"Todo el año",
+  weather:"Cualquier clima",
+  time:"6–19",
+  method:"Pescar con caña"
+},
+
+carp:{
+  source:"Lago de montaña / Bosque Secreto / Alcantarilla",
+  season:"Primavera/Verano/Otoño",
+  weather:"Cualquier clima",
+  time:"6–24",
+  method:"Pescar con caña"
+},
+
+bullhead:{
+  source:"Lago de montaña",
+  season:"Todo el año",
+  weather:"Cualquier clima",
+  time:"Todo el día",
+  method:"Pescar con caña"
+},
+
+sturgeon:{
+  source:"Lago de montaña",
+  season:"Verano/Invierno",
+  weather:"Cualquier clima",
+  time:"6–19",
+  method:"Pescar con caña"
+},
+
+tadpole:{
+  source:"Lago de montaña",
+  season:"Primavera",
+  weather:"Cualquier clima",
+  time:"6–19",
+  method:"Pescar con caña"
+},
+
+sardine:{
+  source:"Océano",
+  season:"Primavera/Otoño/Invierno",
+  weather:"Cualquier clima",
+  time:"6–19",
+  method:"Pescar con caña"
+},
+
+tuna:{
+  source:"Océano",
+  season:"Verano/Invierno",
+  weather:"Cualquier clima",
+  time:"6–19",
+  method:"Pescar con caña"
+},
+
+red_snapper:{
+  source:"Océano",
+  season:"Verano/Otoño",
+  weather:"Lluvia",
+  time:"6–19",
+  method:"Pescar con caña"
+},
+
+tilapia:{
+  source:"Océano",
+  season:"Verano/Otoño",
+  weather:"Cualquier clima",
+  time:"6–14",
+  method:"Pescar con caña"
+},
+
+starfish:{
+  source:"Océano",
+  season:"Primavera/Verano/Invierno",
+  weather:"Cualquier clima",
+  time:"6–19",
+  method:"Pescar con caña"
+},
+
+walleye:{
+  source:"Ríos, lagos y estanque Cindersap",
+  season:"Otoño; invierno con tótem de lluvia",
+  weather:"Lluvia",
+  time:"12–2",
+  method:"Pescar con caña"
+},
+
+bream:{
+  source:"Ríos",
+  season:"Todo el año",
+  weather:"Cualquier clima",
+  time:"18–2",
+  method:"Pescar con caña"
+},
+
+eel:{
+  source:"Océano",
+  season:"Primavera/Otoño",
+  weather:"Lluvia",
+  time:"16–2",
+  method:"Pescar con caña"
+},
+
+frog:{
+  source:"Lago de montaña",
+  season:"Primavera/Verano",
+  weather:"Cualquier clima",
+  time:"6–19",
+  method:"Pescar con caña"
+},
+
+pufferfish:{
+  source:"Océano",
+  season:"Verano",
+  weather:"Soleado",
+  time:"12–16",
+  method:"Pescar con caña"
+},
+
+ghostfish:{
+  source:"Minas, pisos 20/60 y fantasmas",
+  season:"Todo el año",
+  weather:"Cualquiera",
+  time:"Todo el día",
+  method:"Pesca o fantasmas"
+},
+
+sandfish:{
+  source:"Desierto",
+  season:"Todo el año",
+  weather:"Cualquier clima",
+  time:"6–20",
+  method:"Pescar con caña"
+},
+
+woodskip:{
+  source:"Bosque Secreto",
+  season:"Todo el año",
+  weather:"Cualquier clima",
+  time:"6–20",
+  method:"Pescar con caña"
+},
+
+king_salmon:{
+  source:"Bosque Oeste",
+  season:"Primavera/Verano",
+  weather:"Cualquier clima",
+  time:"6–20",
+  method:"Pescar con caña",
+  req:"Nivel 8 de pesca"
+},
+
+butterfish:{
+  source:"Shearwater Bridge / Bosque Oeste",
+  season:"Primavera/Verano/Otoño",
+  weather:"Cualquier clima",
+  time:"6–20",
+  method:"Pescar con caña"
+}
+
 };
+
+
+/*
+============================================================
+INFORMACIÓN DE CULTIVOS
+============================================================
+*/
 
 const cropInfo = {
-parsnip:{source:"Granja",season:"Primavera",method:"Cultivo",growth:"4 días",seed:"20g · Pierre/Joja",sell:"35g",regrow:"—"},
-green_bean:{source:"Granja",season:"Primavera",method:"Cultivo",growth:"10 días",seed:"60g · Pierre/Joja",sell:"40g",regrow:"3 días"},
-cauliflower:{source:"Granja",season:"Primavera",method:"Cultivo",growth:"12 días",seed:"80g · Pierre/Joja",sell:"175g",regrow:"—"},
-potato:{source:"Granja",season:"Primavera",method:"Cultivo",growth:"6 días",seed:"50g · Pierre/Joja",sell:"80g",regrow:"—"},
-cucumber:{source:"Granja / Pierre / JojaMart / Blue Moon Vineyard",season:"Primavera",method:"Cultivo SVE",growth:"12 días",seed:"Precio especial de SVE",sell:"100g",regrow:"2 días",extra:"Cosecha múltiple. SVE lo añade como cultivo especial de primavera."},
-tomato:{source:"Granja",season:"Verano",method:"Cultivo",growth:"11 días",seed:"50g · Pierre/Joja",sell:"60g",regrow:"4 días"},
-hot_pepper:{source:"Granja",season:"Verano",method:"Cultivo",growth:"5 días",seed:"40g · Pierre/Joja",sell:"40g",regrow:"3 días"},
-blueberry:{source:"Granja",season:"Verano",method:"Cultivo",growth:"13 días",seed:"80g · Pierre/Joja",sell:"50g",regrow:"4 días",extra:"Produce varias unidades por cosecha."},
-melon:{source:"Granja",season:"Verano",method:"Cultivo",growth:"12 días",seed:"80g · Pierre/Joja",sell:"250g",regrow:"—"},
-butternut_squash:{source:"Granja",season:"Verano",method:"Cultivo SVE",growth:"12 días",seed:"Precio especial de SVE",sell:"250g",regrow:"—",extra:"Cultivo añadido por Stardew Valley Expanded. No es la calabaza normal del juego base."},
-corn:{source:"Granja",season:"Verano, Otoño",method:"Cultivo",growth:"14 días",seed:"150g · Pierre/Joja",sell:"50g",regrow:"4 días"},
-eggplant:{source:"Granja",season:"Otoño",method:"Cultivo",growth:"5 días",seed:"20g · Pierre/Joja",sell:"60g",regrow:"5 días"},
-pumpkin:{source:"Granja",season:"Otoño",method:"Cultivo",growth:"13 días",seed:"100g · Pierre/Joja",sell:"320g",regrow:"—"},
-yam:{source:"Granja",season:"Otoño",method:"Cultivo",growth:"10 días",seed:"60g · Pierre/Joja",sell:"160g",regrow:"—"},
-sweet_potato:{source:"Granja",season:"Otoño",method:"Cultivo SVE",growth:"12 días",seed:"Precio especial de SVE",sell:"110g",regrow:"—",extra:"Cultivo añadido por SVE. Produce una sola cosecha."},
-gold_carrot:{source:"Comerciante del Desierto",season:"Primavera, Verano, Otoño",method:"Cultivo SVE",growth:"6 días",seed:"3 Lingotes de oro",sell:"1000g",regrow:"—",extra:"Semillas de adquisición especial; no son una semilla normal de Pierre/Joja."},
-joja_berry:{source:"Ruta/tienda Joja",season:"Primavera, Verano, Otoño",method:"Cultivo SVE",growth:"25 días",seed:"Adquisición especial",sell:"650g",regrow:"4 días",extra:"Cultivo relacionado con la ruta Joja."},
-joja_veggie:{source:"Ruta/tienda Joja",season:"Primavera, Verano, Otoño",method:"Cultivo SVE",growth:"13 días",seed:"Adquisición especial",sell:"1140g",regrow:"—",extra:"Cultivo relacionado con la ruta Joja."},
-salal_berry:{source:"Zonas nuevas de SVE / Highlands / Sequoias",season:"Primavera, Verano",method:"Cultivo SVE",growth:"13 días",seed:"Adquisición especial",sell:"75g",regrow:"4 días",extra:"Puede producir varias unidades por cosecha."},
-slime_berry:{source:"Slimes / enemigos de SVE",season:"Primavera",method:"Cultivo especial SVE",growth:"13 días",seed:"Botín de enemigos",sell:"85g",regrow:"4 días",extra:"Las semillas se obtienen de contenido de combate; no tienen precio normal de tienda."},
-monster_fruit:{source:"Contenido de SVE",season:"Verano",method:"Cultivo SVE",growth:"25 días",seed:"Adquisición especial",sell:"350g",regrow:"—"},
-ancient_ferns:{source:"Contenido de SVE",season:"Verano",method:"Cultivo SVE",growth:"12 días",seed:"Adquisición especial",sell:"145g",regrow:"—",extra:"Puede producir varias unidades por cosecha."},
-fungus:{source:"Contenido de SVE",season:"Otoño",method:"Cultivo SVE",growth:"13 días",seed:"Adquisición especial",sell:"200g",regrow:"—"},
-void_root:{source:"Contenido de combate SVE",season:"Invierno",method:"Cultivo especial SVE",growth:"8 días",seed:"Botín/adquisición especial",sell:"250g",regrow:"—",extra:"Relacionado con contenido de combate avanzado de SVE."}
+
+parsnip:{
+  source:"Tienda de Pierre",
+  season:"Primavera",
+  method:"Cultivar",
+  growth:"4 días",
+  seed:"Semillas de chirivía",
+  sell:"35g"
+},
+
+green_bean:{
+  source:"Tienda de Pierre",
+  season:"Primavera",
+  method:"Cultivar",
+  growth:"10 días",
+  seed:"Semillas de judía verde",
+  sell:"40g",
+  regrow:"Cada 3 días"
+},
+
+cauliflower:{
+  source:"Tienda de Pierre",
+  season:"Primavera",
+  method:"Cultivar",
+  growth:"12 días",
+  seed:"Semillas de coliflor",
+  sell:"175g"
+},
+
+potato:{
+  source:"Tienda de Pierre",
+  season:"Primavera",
+  method:"Cultivar",
+  growth:"6 días",
+  seed:"Semillas de patata",
+  sell:"80g"
+},
+
+cucumber:{
+  source:"Pierre, JojaMart y Blue Moon Vineyard",
+  season:"Primavera",
+  method:"Cultivar",
+  growth:"12 días",
+  seed:"Semillas de pepino",
+  sell:"60g",
+  regrow:"Cada 2 días",
+  extra:"2–3 cosechas"
+},
+
+tomato:{
+  source:"Tienda de Pierre",
+  season:"Verano",
+  method:"Cultivar",
+  growth:"11 días",
+  seed:"Semillas de tomate",
+  sell:"60g",
+  regrow:"Cada 4 días"
+},
+
+hot_pepper:{
+  source:"Tienda de Pierre",
+  season:"Verano",
+  method:"Cultivar",
+  growth:"5 días",
+  seed:"Semillas de pimiento picante",
+  sell:"40g",
+  regrow:"Cada 3 días"
+},
+
+blueberry:{
+  source:"Tienda de Pierre",
+  season:"Verano",
+  method:"Cultivar",
+  growth:"13 días",
+  seed:"Semillas de arándano",
+  sell:"50g",
+  regrow:"Cada 4 días"
+},
+
+melon:{
+  source:"Tienda de Pierre",
+  season:"Verano",
+  method:"Cultivar",
+  growth:"12 días",
+  seed:"Semillas de melón",
+  sell:"250g"
+},
+
+butternut_squash:{
+  source:"Tienda de Pierre y JojaMart",
+  season:"Verano",
+  method:"Cultivar",
+  growth:"12 días",
+  seed:"Semillas de calabaza moscada",
+  sell:"180g"
+},
+
+corn:{
+  source:"Tienda de Pierre",
+  season:"Verano/Otoño",
+  method:"Cultivar",
+  growth:"14 días",
+  seed:"Semillas de maíz",
+  sell:"50g",
+  regrow:"Cada 4 días"
+},
+
+eggplant:{
+  source:"Tienda de Pierre",
+  season:"Otoño",
+  method:"Cultivar",
+  growth:"5 días",
+  seed:"Semillas de berenjena",
+  sell:"60g",
+  regrow:"Cada 5 días"
+},
+
+pumpkin:{
+  source:"Tienda de Pierre",
+  season:"Otoño",
+  method:"Cultivar",
+  growth:"13 días",
+  seed:"Semillas de calabaza",
+  sell:"320g"
+},
+
+yam:{
+  source:"Tienda de Pierre",
+  season:"Otoño",
+  method:"Cultivar",
+  growth:"10 días",
+  seed:"Semillas de ñame",
+  sell:"160g"
+},
+
+sweet_potato:{
+  source:"Tienda de Pierre y JojaMart",
+  season:"Otoño",
+  method:"Cultivar",
+  growth:"12 días",
+  seed:"Semillas de batata",
+  sell:"280g"
+},
+
+gold_carrot:{
+  source:"Botín de monstruos legendarios, Comerciante del Desierto y puntos de excavación raros",
+  season:"Primavera/Verano/Otoño",
+  method:"Cultivar",
+  growth:"6 días",
+  seed:"3 lingotes de oro",
+  sell:"1000g"
+},
+
+joja_berry:{
+  source:"JojaMart",
+  season:"Primavera/Verano/Otoño",
+  method:"Cultivar",
+  growth:"25 días",
+  seed:"Semillas de Joja Berry",
+  sell:"650g",
+  regrow:"Cada 4 días"
+},
+
+joja_veggie:{
+  source:"JojaMart",
+  season:"Primavera/Verano/Otoño",
+  method:"Cultivar",
+  growth:"13 días",
+  seed:"Semillas de Joja Veggie",
+  sell:"1140g"
+},
+
+salal_berry:{
+  source:"Zonas de SVE, Highlands y Sequoias",
+  season:"Primavera/Verano",
+  method:"Cultivar",
+  growth:"13 días",
+  seed:"Semillas de arbusto",
+  sell:"75g",
+  regrow:"Cada 4 días"
+},
+
+slime_berry:{
+  source:"Plantas de monstruos y semillas obtenidas de slimes/enemigos",
+  season:"Primavera",
+  method:"Cultivar",
+  growth:"13 días",
+  seed:"Semillas de slime",
+  sell:"—",
+  regrow:"Cada 4 días"
+},
+
+monster_fruit:{
+  source:"Cultivo de monstruo",
+  season:"Verano",
+  method:"Cultivar",
+  growth:"25 días",
+  seed:"Semillas de tallo",
+  sell:"—"
+},
+
+ancient_ferns:{
+  source:"Cultivo de SVE",
+  season:"Verano",
+  method:"Cultivar",
+  growth:"12 días",
+  seed:"Semillas de helecho antiguo",
+  sell:"—",
+  extra:"2–4 cosechas"
+},
+
+fungus:{
+  source:"Cultivo de SVE",
+  season:"Otoño",
+  method:"Cultivar",
+  growth:"13 días",
+  seed:"Semillas de hongo",
+  sell:"—"
+},
+
+void_root:{
+  source:"Cultivo de monstruo / planta sombría",
+  season:"Invierno",
+  method:"Cultivar",
+  growth:"8 días",
+  seed:"Semillas del vacío",
+  sell:"—"
+}
+
 };
+
+
+/*
+============================================================
+INFORMACIÓN DE RECOLECCIÓN
+============================================================
+*/
 
 const forageInfo = {
-wild_horseradish:["Forraje","Primavera","Recolectable"],daffodil:["Forraje / Tienda de Pierre durante el Festival de las Flores","Primavera","Recolectable"],
-leek:["Forraje","Primavera","Recolectable"],dandelion:["Forraje / Tienda de Pierre durante el Festival de las Flores","Primavera","Recolectable"],
-grape:["Forraje","Verano, Otoño","Recolectable"],spice_berry:["Forraje","Verano","Recolectable"],sweet_pea:["Forraje","Verano","Recolectable"],red_baneberry:["Forraje en Bosque Secreto","Verano","Recolectable"],
-common_mushroom:["Forraje","Otoño","Recolectable"],wild_plum:["Forraje","Otoño","Recolectable"],hazelnut:["Forraje","Otoño","Recolectable"],blackberry:["Forraje","Otoño","Recolectable"],mushroom_colony:["Bosque Secreto / Bosque Oeste","Otoño","Recolectable"],
-winter_root:["Excavar / cultivar con azada en puntos de artefactos; forraje","Invierno","Recolectable"],crystal_fruit:["Forraje / Polvorines","Invierno","Recolectable"],snow_yam:["Excavar / puntos de artefactos","Invierno","Recolectable"],crocus:["Forraje","Invierno","Recolectable"],bearberry:["Bosque Secreto","Invierno","Recolectable"],
-coconut:["Desierto","Todo el año","Recolectable"],cactus_fruit:["Desierto","Todo el año","Recolectable"],cave_carrot:["Minas","Todo el año","Caja/azada"],red_mushroom:["Minas / Bosque Secreto / Cueva de hongos","Todo el año","Forraje"],
-purple_mushroom:["Minas / Cueva de hongos","Todo el año","Forraje"],fir_wax:["Roble de abeto con extractor","Todo el año","Extractor"],birch_water:["Abedul con extractor","Todo el año","Extractor"],pine_tar:["Pino con extractor","Todo el año","Extractor"],poison_mushroom:["Bosque Secreto","Todo el año","Forraje"],
-fiddlehead_fern:["Bosque Secreto / Bosque Oeste","Verano","Hacha de hierro en vegetación"],poppy:["Granja","Verano","Cultivo"],sunflower:["Granja","Verano, Otoño","Cultivo"],red_cabbage:["Granja","Verano","Cultivo"],persimmon:["Árbol de caqui","Otoño","Árbol frutal"],
-four_leaf_clover:["Bosque Oeste / Bosque Secreto","Primavera, Verano","Forraje"],nautilus_shell:["Playa","Invierno","Forraje"],sea_urchin:["Playa","Todo el año","Forraje"],amber:["Puntos de artefactos","Todo el año","Artefacto"]
+
+wild_horseradish:{
+  source:"Recolección en Primavera",
+  season:"Primavera",
+  method:"Recolectar"
+},
+
+daffodil:{
+  source:"Recolección en Primavera",
+  season:"Primavera",
+  method:"Recolectar"
+},
+
+leek:{
+  source:"Recolección en Primavera",
+  season:"Primavera",
+  method:"Recolectar"
+},
+
+dandelion:{
+  source:"Recolección en Primavera",
+  season:"Primavera",
+  method:"Recolectar"
+},
+
+grape:{
+  source:"Recolección en Verano",
+  season:"Verano",
+  method:"Recolectar"
+},
+
+spice_berry:{
+  source:"Recolección en Verano",
+  season:"Verano",
+  method:"Recolectar"
+},
+
+sweet_pea:{
+  source:"Recolección en Verano",
+  season:"Verano",
+  method:"Recolectar"
+},
+
+red_baneberry:{
+  source:"Recolección en Verano",
+  season:"Verano",
+  method:"Recolectar"
+},
+
+common_mushroom:{
+  source:"Recolección en Otoño",
+  season:"Otoño",
+  method:"Recolectar"
+},
+
+wild_plum:{
+  source:"Recolección en Otoño",
+  season:"Otoño",
+  method:"Recolectar"
+},
+
+hazelnut:{
+  source:"Recolección en Otoño",
+  season:"Otoño",
+  method:"Recolectar"
+},
+
+blackberry:{
+  source:"Recolección en Otoño",
+  season:"Otoño",
+  method:"Recolectar"
+},
+
+mushroom_colony:{
+  source:"Recolección en Otoño",
+  season:"Otoño",
+  method:"Recolectar"
+},
+
+winter_root:{
+  source:"Recolección en Invierno",
+  season:"Invierno",
+  method:"Recolectar o cavar puntos de artefactos"
+},
+
+crystal_fruit:{
+  source:"Recolección en Invierno",
+  season:"Invierno",
+  method:"Recolectar"
+},
+
+snow_yam:{
+  source:"Recolección en Invierno",
+  season:"Invierno",
+  method:"Cavar puntos de artefactos"
+},
+
+crocus:{
+  source:"Recolección en Invierno",
+  season:"Invierno",
+  method:"Recolectar"
+},
+
+bearberry:{
+  source:"Recolección de SVE",
+  season:"Invierno",
+  method:"Recolectar"
+},
+
+coconut:{
+  source:"Desierto",
+  season:"Todo el año",
+  method:"Recolectar"
+},
+
+cactus_fruit:{
+  source:"Desierto",
+  season:"Todo el año",
+  method:"Recolectar"
+},
+
+cave_carrot:{
+  source:"Minas",
+  season:"Todo el año",
+  method:"Recolectar / cavar"
+},
+
+red_mushroom:{
+  source:"Minas y Bosque Secreto",
+  season:"Todo el año",
+  method:"Recolectar"
+},
+
+purple_mushroom:{
+  source:"Minas",
+  season:"Todo el año",
+  method:"Recolectar"
+},
+
+fir_wax:{
+  source:"Árboles de abeto",
+  season:"Todo el año",
+  method:"Recolectar"
+},
+
+birch_water:{
+  source:"Árboles de abedul",
+  season:"Todo el año",
+  method:"Recolectar"
+},
+
+pine_tar:{
+  source:"Pinos",
+  season:"Todo el año",
+  method:"Extraer de árboles"
+},
+
+poison_mushroom:{
+  source:"Minas / zonas peligrosas",
+  season:"Todo el año",
+  method:"Recolectar"
+},
+
+four_leaf_clover:{
+  source:"Bosque Oeste y Bosque Secreto",
+  season:"Primavera/Verano",
+  method:"Recolectar",
+  sell:"400g"
+}
+
 };
+
+
+/*
+============================================================
+INFORMACIÓN GENERAL
+============================================================
+*/
 
 const genericInfo = {
-wood:["Bosque / granja","Todo el año","Talar árboles y ramas","—"],clay:["Suelo / puntos de artefactos / geodas","Todo el año","Azada","—"],stone:["Minas / canteras / rocas","Todo el año","Pico","—"],hardwood:["Bosque Secreto / tocones grandes","Todo el año","Hacha de acero","—"],
-large_milk:["Vaca con suficiente amistad","Todo el año","Animal","—"],large_goat_milk:["Cabra con suficiente amistad","Todo el año","Animal","—"],wool:["Oveja o conejo","Todo el año","Animal","—"],duck_egg:["Pato","Todo el año","Animal","—"],large_egg_white:["Gallina blanca con suficiente amistad","Todo el año","Animal","—"],large_egg_brown:["Gallina marrón con suficiente amistad","Todo el año","Animal","—"],
-truffle_oil:["Prensa de aceite","Todo el año","Aceite de trufa","—"],cloth:["Telar / momias / reciclaje","Todo el año","Producto artesanal","—"],goat_cheese:["Prensa de queso con leche de cabra","Todo el año","Producto artesanal","—"],cheese:["Prensa de queso con leche","Todo el año","Producto artesanal","—"],honey:["Colmena","Primavera, Verano, Otoño","Producto artesanal","—"],jelly:["Tarro de conservas","Todo el año","Fruta procesada","—"],apricot:["Árbol de albaricoque","Primavera","Árbol frutal","—"],orange:["Árbol de naranja","Verano","Árbol frutal","—"],pear:["Árbol de pera","Primavera","Árbol frutal","—"],nectarine:["Árbol de nectarina","Verano","Árbol frutal","—"],butter:["Mantequera / mod SVE correspondiente","Todo el año","Producto artesanal","—"],
-copper_bar:["Horno","Todo el año","5 minerales de cobre + carbón","Minas"],iron_bar:["Horno","Todo el año","5 minerales de hierro + carbón","Minas"],gold_bar:["Horno","Todo el año","5 minerales de oro + carbón","Minas"],
-quartz:["Minas","Todo el año","Forrajeo/minería","Pisos 1–40"],earth_crystal:["Minas","Todo el año","Geodas / nodos","Pisos 1–40"],frozen_tear:["Minas","Todo el año","Forrajeo/minería","Pisos 40–80"],fire_quartz:["Minas","Todo el año","Forrajeo/minería","Pisos 80–120"],
-slime:["Monstruos","Todo el año","Eliminar babas","Minas"],bat_wing:["Monstruos","Todo el año","Eliminar murciélagos","Minas"],solar_essence:["Monstruos","Todo el año","Fantasmas y otros","Minas"],void_essence:["Monstruos","Todo el año","Brutos/sombríos y otros","Minas"],
-maple_syrup:["Árbol de arce con extractor","Todo el año","Extractor","~9 días"],truffle:["Cerdo","Primavera, Verano, Otoño","Animal al aire libre","—"],maki_roll:["Cocina","Todo el año","Receta de cocina","—"],fried_egg:["Cocina","Todo el año","Receta de cocina","—"],candy:["Saloon Stardrop / cocina","Todo el año","Comprar/cocinar","—"],
-wheat:["Granja","Verano, Otoño","Cultivo","4 días"],hay:["Silo / Marnie","Todo el año","Hierba cortada con silo","—"],apple:["Árbol de manzana / cueva de murciélagos","Otoño","Árbol frutal","—"],oak_resin:["Roble con extractor","Todo el año","Extractor","~7–8 días"],wine:["Barril","Todo el año","Fruta en barril","7 días"],rabbit_foot:["Conejo / Serpientes reales","Todo el año","Animal / monstruo","—"],pomegranate:["Árbol de granada / cueva de murciélagos","Otoño","Árbol frutal","—"],
-aquamarine:["Minas / nodos de gemas","Todo el año","Minería","Pisos 40–80"],duck_feather:["Pato","Todo el año","Animal","—"],chub:["Ríos y lagos","Todo el año","Pesca","6:00–19:00"],frozen_geode:["Minas / geodas","Todo el año","Pico / geoda","Pisos 41–79"],
-money_2500:["Tu oro","Todo el año","Tener 2.500g","—"],money_5000:["Tu oro","Todo el año","Tener 5.000g","—"],money_10000:["Tu oro","Todo el año","Tener 10.000g","—"],money_25000:["Tu oro","Todo el año","Tener 25.000g","—"]
+
+wood:{
+  source:"Árboles, ramas y tocones",
+  season:"Todo el año",
+  method:"Talar"
+},
+
+clay:{
+  source:"Puntos de excavación y suelo",
+  season:"Todo el año",
+  method:"Cavar"
+},
+
+stone:{
+  source:"Rocas y minas",
+  season:"Todo el año",
+  method:"Romper rocas"
+},
+
+hardwood:{
+  source:"Tocones grandes y troncos grandes",
+  season:"Todo el año",
+  method:"Hacha"
+},
+
+copper_bar:{
+  source:"Horno",
+  season:"Todo el año",
+  method:"Fundir mineral de cobre",
+  req:"5 Minerales de cobre + 1 Carbón"
+},
+
+iron_bar:{
+  source:"Horno",
+  season:"Todo el año",
+  method:"Fundir mineral de hierro",
+  req:"5 Minerales de hierro + 1 Carbón"
+},
+
+gold_bar:{
+  source:"Horno",
+  season:"Todo el año",
+  method:"Fundir mineral de oro",
+  req:"5 Minerales de oro + 1 Carbón"
+},
+
+quartz:{
+  source:"Minas",
+  season:"Todo el año",
+  method:"Recolectar o romper geodas"
+},
+
+earth_crystal:{
+  source:"Minas",
+  season:"Todo el año",
+  method:"Recolectar"
+},
+
+frozen_tear:{
+  source:"Minas",
+  season:"Todo el año",
+  method:"Recolectar"
+},
+
+fire_quartz:{
+  source:"Minas",
+  season:"Todo el año",
+  method:"Recolectar"
+},
+
+slime:{
+  source:"Slimes",
+  season:"Todo el año",
+  method:"Derrotar slimes"
+},
+
+bat_wing:{
+  source:"Murciélagos",
+  season:"Todo el año",
+  method:"Derrotar murciélagos"
+},
+
+solar_essence:{
+  source:"Monstruos",
+  season:"Todo el año",
+  method:"Derrotar monstruos"
+},
+
+void_essence:{
+  source:"Monstruos del Vacío",
+  season:"Todo el año",
+  method:"Derrotar monstruos"
+}
+
 };
 
+
+/*
+============================================================
+FUNCIÓN DE INFORMACIÓN
+============================================================
+*/
+
 function infoFor(id){
-  if(fishInfo[id]){const x=fishInfo[id];return {source:x.source,season:x.season,method:"Pesca",req:x.req,time:x.time,weather:x.weather};}
-  if(cropInfo[id]){const x=cropInfo[id];return {source:x.source,season:x.season,method:x.method,req:x.growth,seed:x.seed,sell:x.sell,regrow:x.regrow,extra:x.extra};}
-  if(forageInfo[id]){const x=forageInfo[id];return {source:x[0],season:x[1],method:x[2]};}
-  if(genericInfo[id]){const x=genericInfo[id];return {source:x[0],season:x[1],method:x[2],req:x[3]};}
-  if(id.startsWith("gold_")){return {source:"Cultivo",season:"Según el cultivo",method:"Cultivar y conseguir calidad oro",req:"5 unidades de calidad oro"};}
-  return {source:"Consulta la fuente del objeto en el juego",season:"Según disponibilidad",method:"—"};
+
+  if(fishInfo[id]){
+    return fishInfo[id];
+  }
+
+  if(cropInfo[id]){
+
+    const x=cropInfo[id];
+
+    return {
+      source:x.source,
+      season:x.season,
+      method:x.method,
+      req:x.req,
+      growth:x.growth,
+      seed:x.seed,
+      sell:x.sell,
+      regrow:x.regrow,
+      extra:x.extra
+    };
+
+  }
+
+  if(forageInfo[id]){
+    return forageInfo[id];
+  }
+
+  if(genericInfo[id]){
+    return genericInfo[id];
+  }
+
+  if(id.startsWith("gold_")){
+
+    return {
+      source:"Cultivo",
+      season:"Según el cultivo",
+      method:"Cultivar y conseguir calidad oro",
+      req:"5 unidades de calidad oro"
+    };
+
+  }
+
+  return {
+    source:"Consulta la fuente del objeto en el juego",
+    season:"Según disponibilidad",
+    method:"—"
+  };
 }
 
-function allBundles(){return rooms.flatMap(r=>r.bundles.map(b=>({...b,room:r})))}
-function itemId(bundle,item){return "sve_"+bundle.id+"_"+item[0]}
-function isDone(bundle){
-  return bundle.items.filter(x=>!!checked[itemId(bundle,x)]).length >= bundle.need;
+
+/*
+============================================================
+FUNCIONES PRINCIPALES
+============================================================
+*/
+
+function allBundles(){
+
+  return rooms.flatMap(
+    r=>r.bundles.map(
+      b=>({...b,room:r})
+    )
+  );
+
 }
-function countDone(bundle){return bundle.items.filter(x=>!!checked[itemId(bundle,x)]).length}
+
+
+function itemId(bundle,item){
+
+  return "sve_"+bundle.id+"_"+item[0];
+
+}
+
+
+function isDone(bundle){
+
+  return bundle.items.filter(
+    x=>!!checked[itemId(bundle,x)]
+  ).length >= bundle.need;
+
+}
+
+
+function countDone(bundle){
+
+  return bundle.items.filter(
+    x=>!!checked[itemId(bundle,x)]
+  ).length;
+
+}
+
+
+/*
+============================================================
+ESTADOS
+============================================================
+*/
 
 function setStatus(msg,type=""){
-  const el=document.getElementById("appStatus"); el.textContent=msg; el.className="status "+type;
+
+  const el=document.getElementById("appStatus");
+
+  el.textContent=msg;
+  el.className="status "+type;
+
 }
+
+
 function loginStatus(msg,type=""){
-  const el=document.getElementById("loginStatus"); el.textContent=msg; el.className="status "+type;
+
+  const el=document.getElementById("loginStatus");
+
+  el.textContent=msg;
+  el.className="status "+type;
+
 }
-function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.style.display="block";clearTimeout(window._toast);window._toast=setTimeout(()=>t.style.display="none",1800)}
+
+
+function toast(msg){
+
+  const t=document.getElementById("toast");
+
+  t.textContent=msg;
+  t.style.display="block";
+
+  clearTimeout(window._toast);
+
+  window._toast=setTimeout(
+    ()=>t.style.display="none",
+    1800
+  );
+
+}
+
+
+/*
+============================================================
+SUPABASE
+============================================================
+*/
 
 async function initSupabase(){
+
   if(supabaseClient)return true;
+
   try{
-    const src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+
+    const src=
+      "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+
     if(!window.supabase){
-      await new Promise((resolve,reject)=>{
-        const s=document.createElement("script");s.src=src;s.onload=resolve;s.onerror=()=>reject(new Error("No se pudo cargar Supabase desde el CDN."));document.head.appendChild(s);
-      });
+
+      await new Promise(
+        (resolve,reject)=>{
+
+          const s=document.createElement("script");
+
+          s.src=src;
+
+          s.onload=resolve;
+
+          s.onerror=()=>{
+            reject(
+              new Error(
+                "No se pudo cargar Supabase desde el CDN."
+              )
+            );
+          };
+
+          document.head.appendChild(s);
+
+        }
+      );
+
     }
-    if(!window.supabase?.createClient)throw new Error("La biblioteca de Supabase no se cargó correctamente.");
-    supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+
+    if(!window.supabase?.createClient){
+
+      throw new Error(
+        "La biblioteca de Supabase no se cargó correctamente."
+      );
+
+    }
+
+    supabaseClient=
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
     return true;
-  }catch(e){console.error(e);return false}
+
+  }catch(e){
+
+    console.error(e);
+
+    return false;
+
+  }
+
 }
+
+
+/*
+============================================================
+CONECTAR PARTIDA
+============================================================
+*/
 
 async function conectar(){
-  const nombre=document.getElementById("partidaInput").value.trim();
-  if(!nombre){loginStatus("🟠 Escribe un nombre de partida.","warn");return}
+
+  const nombre=
+    document.getElementById("partidaInput")
+      .value
+      .trim();
+
+  if(!nombre){
+
+    loginStatus(
+      "🟠 Escribe un nombre de partida.",
+      "warn"
+    );
+
+    return;
+  }
+
   loginStatus("🟡 Conectando...");
+
   const ok=await initSupabase();
-  if(!ok){loginStatus("🔴 No se pudo cargar Supabase.","err");return}
+
+  if(!ok){
+
+    loginStatus(
+      "🔴 No se pudo cargar Supabase.",
+      "err"
+    );
+
+    return;
+  }
+
   partida=nombre;
+
   try{
-    const {data,error}=await supabaseClient.from("progreso").select("item_id,conseguido").eq("partida",partida);
+
+    const {
+      data,
+      error
+    }=
+      await supabaseClient
+        .from("progreso")
+        .select("item_id,conseguido")
+        .eq("partida",partida);
+
     if(error){
+
       console.error(error);
-      loginStatus("🔴 "+error.message,"err");
+
+      loginStatus(
+        "🔴 "+error.message,
+        "err"
+      );
+
       return;
     }
+
     checked={};
-    (data||[]).forEach(r=>checked[r.item_id]=!!r.conseguido);
-    document.getElementById("login").classList.add("hidden");
-    document.getElementById("app").classList.remove("hidden");
-    document.getElementById("partidaPill").textContent=partida;
-    setStatus("🟢 Partida conectada. El progreso se guarda en la nube.","ok");
+
+    (data||[]).forEach(
+      r=>{
+        checked[r.item_id]=!!r.conseguido;
+      }
+    );
+
+    document
+      .getElementById("login")
+      .classList
+      .add("hidden");
+
+    document
+      .getElementById("app")
+      .classList
+      .remove("hidden");
+
+    document
+      .getElementById("partidaPill")
+      .textContent=partida;
+
+    setStatus(
+      "🟢 Partida conectada. El progreso se guarda en la nube.",
+      "ok"
+    );
+
     render();
+
     subscribeRealtime();
-  }catch(e){console.error(e);loginStatus("🔴 "+e.message,"err")}
+
+  }catch(e){
+
+    console.error(e);
+
+    loginStatus(
+      "🔴 "+e.message,
+      "err"
+    );
+
+  }
+
 }
+
+
+/*
+============================================================
+MARCAR / DESMARCAR OBJETO
+============================================================
+*/
 
 async function toggleItem(id,value){
-  checked[id]=value; render();
+
+  checked[id]=value;
+
+  render();
+
   if(!supabaseClient||!partida)return;
-  const {error}=await supabaseClient.from("progreso").upsert(
-    {partida:partida,item_id:id,conseguido:value,actualizado_en:new Date().toISOString()},
-    {onConflict:"partida,item_id"}
-  );
-  if(error){console.error(error);setStatus("🔴 Error al guardar: "+error.message,"err");}
-  else toast(value?"✅ Guardado":"↩️ Desmarcado");
+
+  const {
+    error
+  }=
+    await supabaseClient
+      .from("progreso")
+      .upsert(
+        {
+          partida:partida,
+          item_id:id,
+          conseguido:value,
+          actualizado_en:
+            new Date().toISOString()
+        },
+        {
+          onConflict:"partida,item_id"
+        }
+      );
+
+  if(error){
+
+    console.error(error);
+
+    setStatus(
+      "🔴 Error al guardar: "+error.message,
+      "err"
+    );
+
+  }else{
+
+    toast(
+      value
+        ?"✅ Guardado"
+        :"↩️ Desmarcado"
+    );
+
+  }
+
 }
+
+
+/*
+============================================================
+SINCRONIZACIÓN EN TIEMPO REAL
+============================================================
+*/
 
 function subscribeRealtime(){
+
   if(!supabaseClient||!partida)return;
-  if(realtimeChannel)supabaseClient.removeChannel(realtimeChannel);
-  realtimeChannel=supabaseClient.channel("cc-"+encodeURIComponent(partida))
-    .on("postgres_changes",{event:"*",schema:"public",table:"progreso",filter:"partida=eq."+partida},payload=>{
-      const row=payload.new||payload.old;
-      if(row?.partida!==partida)return;
-      if(payload.eventType==="DELETE")delete checked[row.item_id];
-      else checked[row.item_id]=!!row.conseguido;
-      render();
-    }).subscribe();
+
+  if(realtimeChannel){
+
+    supabaseClient.removeChannel(
+      realtimeChannel
+    );
+
+  }
+
+  realtimeChannel=
+    supabaseClient
+      .channel(
+        "cc-"+encodeURIComponent(partida)
+      )
+
+      .on(
+        "postgres_changes",
+        {
+          event:"*",
+          schema:"public",
+          table:"progreso",
+          filter:"partida=eq."+partida
+        },
+
+        payload=>{
+
+          const row=
+            payload.new||payload.old;
+
+          if(row?.partida!==partida)return;
+
+          if(payload.eventType==="DELETE"){
+
+            delete checked[row.item_id];
+
+          }else{
+
+            checked[row.item_id]=
+              !!row.conseguido;
+
+          }
+
+          render();
+
+        }
+      )
+
+      .subscribe();
+
 }
+
+
+/*
+============================================================
+ FILA DE OBJETO
+============================================================
+*/
 
 function itemRow(bundle,item){
-  const id=itemId(bundle,item), done=!!checked[id], inf=infoFor(item[0]);
-  const row=document.createElement("div");row.className="item"+(done?" done":"");
-  const main=document.createElement("div");main.className="item-main";
-  const cb=document.createElement("input");cb.type="checkbox";cb.checked=done;
-  cb.addEventListener("change",()=>toggleItem(id,cb.checked));
-  const name=document.createElement("span");name.className="item-name";name.textContent=item[1];
-  const qty=document.createElement("span");qty.className="qty";qty.textContent="×"+item[2];
-  const info=document.createElement("div");info.className="info";
-  let h=`<div><b>📍 Dónde conseguirlo:</b> ${inf.source||"—"}</div>`;
-  if(inf.season)h+=`<div><b>🌱 Estación:</b> ${inf.season}</div>`;
-  if(inf.weather)h+=`<div><b>🌦️ Clima:</b> ${inf.weather}</div>`;
-  if(inf.time)h+=`<div><b>🕐 Hora:</b> ${inf.time}</div>`;
-  if(inf.method)h+=`<div><b>🧰 Cómo:</b> ${inf.method}</div>`;
-  if(inf.req&&inf.req!=="—")h+=`<div><b>🔑 Requisito:</b> ${inf.req}</div>`;
+
+  const id=
+    itemId(bundle,item);
+
+  const done=
+    !!checked[id];
+
+  const inf=
+    infoFor(item[0]);
+
+  const row=
+    document.createElement("div");
+
+  row.className=
+    "item"+(done?" done":"");
+
+  const main=
+    document.createElement("div");
+
+  main.className="item-main";
+
+  const cb=
+    document.createElement("input");
+
+  cb.type="checkbox";
+  cb.checked=done;
+
+  cb.addEventListener(
+    "change",
+    ()=>toggleItem(
+      id,
+      cb.checked
+    )
+  );
+
+  const name=
+    document.createElement("span");
+
+  name.className="item-name";
+  name.textContent=item[1];
+
+  const qty=
+    document.createElement("span");
+
+  qty.className="qty";
+  qty.textContent="×"+item[2];
+
+  const info=
+    document.createElement("div");
+
+  info.className="info";
+
+  let h=
+    `<div><b>📍 Dónde conseguirlo:</b> ${inf.source||"—"}</div>`;
+
+  if(inf.season){
+
+    h+=
+      `<div><b>🌱 Estación:</b> ${inf.season}</div>`;
+
+  }
+
+  if(inf.weather){
+
+    h+=
+      `<div><b>🌦️ Clima:</b> ${inf.weather}</div>`;
+
+  }
+
+  if(inf.time){
+
+    h+=
+      `<div><b>🕐 Hora:</b> ${inf.time}</div>`;
+
+  }
+
+  if(inf.method){
+
+    h+=
+      `<div><b>🧰 Cómo:</b> ${inf.method}</div>`;
+
+  }
+
+  if(inf.req&&inf.req!=="—"){
+
+    h+=
+      `<div><b>🔑 Requisito:</b> ${inf.req}</div>`;
+
+  }
+
+  if(inf.growth){
+
+    h+=
+      `<div><b>⏱️ Crecimiento:</b> ${inf.growth}</div>`;
+
+  }
+
+  if(inf.seed){
+
+    h+=
+      `<div><b>🌰 Semilla:</b> ${inf.seed}</div>`;
+
+  }
+
+  if(inf.regrow){
+
+    h+=
+      `<div><b>🔄 Regeneración:</b> ${inf.regrow}</div>`;
+
+  }
+
+  if(inf.sell){
+
+    h+=
+      `<div><b>💰 Venta base:</b> ${inf.sell}</div>`;
+
+  }
+
+  if(inf.extra){
+
+    h+=
+      `<div><b>📖 SVE:</b> ${inf.extra}</div>`;
+
+  }
+
   info.innerHTML=h;
-  name.addEventListener("click",()=>info.classList.toggle("open"));
-  main.append(cb,name,qty);row.append(main,info);return row;
+
+  name.addEventListener(
+    "click",
+    ()=>{
+      info.classList.toggle("open");
+    }
+  );
+
+  main.append(
+    cb,
+    name,
+    qty
+  );
+
+  row.append(
+    main,
+    info
+  );
+
+  return row;
+
 }
+
+
+/*
+============================================================
+ ELEMENTO DE LOTE
+============================================================
+*/
 
 function bundleElement(bundle){
-  const b=document.createElement("div");b.className="bundle";
-  const head=document.createElement("div");head.className="bundle-head"+(isDone(bundle)?" complete":"");
-  const count=countDone(bundle);
-  head.innerHTML=`<div><b>📦 ${bundle.name}</b><small>${count}/${bundle.need} necesarios · ${bundle.items.length} opciones · 🎁 ${bundle.reward}</small></div><span>${isDone(bundle)?"✅":"▾"}</span>`;
-  const list=document.createElement("div");list.className="items";
-  const q=document.getElementById("buscar").value.toLowerCase().trim();
-  bundle.items.filter(x=>!q||x[1].toLowerCase().includes(q)).forEach(x=>list.appendChild(itemRow(bundle,x)));
-  head.addEventListener("click",()=>list.classList.toggle("open"));
-  b.append(head,list);return b;
+
+  const b=
+    document.createElement("div");
+
+  b.className="bundle";
+
+  const head=
+    document.createElement("div");
+
+  head.className=
+    "bundle-head"+
+    (isDone(bundle)?" complete":"");
+
+  const count=
+    countDone(bundle);
+
+  head.innerHTML=
+    `<div>
+      <b>📦 ${bundle.name}</b>
+      <small>
+        ${count}/${bundle.need} necesarios ·
+        ${bundle.items.length} opciones ·
+        🎁 ${bundle.reward}
+      </small>
+    </div>
+    <span>
+      ${isDone(bundle)?"✅":"▾"}
+    </span>`;
+
+  const list=
+    document.createElement("div");
+
+  list.className="items";
+
+  const q=
+    document
+      .getElementById("buscar")
+      .value
+      .toLowerCase()
+      .trim();
+
+  bundle.items
+
+    .filter(
+      x=>
+        !q||
+        x[1]
+          .toLowerCase()
+          .includes(q)
+    )
+
+    .forEach(
+      x=>
+        list.appendChild(
+          itemRow(bundle,x)
+        )
+    );
+
+  head.addEventListener(
+    "click",
+    ()=>{
+      list.classList.toggle("open");
+    }
+  );
+
+  b.append(
+    head,
+    list
+  );
+
+  return b;
+
 }
+
+
+/*
+============================================================
+VISTA POR LOTES
+============================================================
+*/
 
 function renderBundles(){
-  const content=document.getElementById("content");content.innerHTML="";
-  const q=document.getElementById("buscar").value.toLowerCase().trim();
+
+  const content=
+    document.getElementById("content");
+
+  content.innerHTML="";
+
+  const q=
+    document
+      .getElementById("buscar")
+      .value
+      .toLowerCase()
+      .trim();
+
   let shown=0;
-  rooms.forEach(room=>{
-    const matching=room.bundles.filter(b=>!q||b.name.toLowerCase().includes(q)||b.items.some(x=>x[1].toLowerCase().includes(q)));
-    if(!matching.length)return;
-    const sec=document.createElement("div");sec.className="room";
-    const rh=document.createElement("div");rh.className="room-head";
-    rh.innerHTML=`<div>${room.icon} ${room.name}<small>${matching.length} lotes</small></div><span>▾</span>`;
-    const rl=document.createElement("div");rl.className="items";
-    rh.addEventListener("click",()=>rl.classList.toggle("open"));
-    matching.forEach(b=>{rl.appendChild(bundleElement(b));shown++});
-    sec.append(rh,rl);content.appendChild(sec);
-  });
-  if(!shown)content.innerHTML='<div class="card empty">🔎 No encontré ese objeto o lote.</div>';
+
+  rooms.forEach(
+    room=>{
+
+      const matching=
+        room.bundles.filter(
+          b=>
+            !q||
+            b.name
+              .toLowerCase()
+              .includes(q)||
+            b.items.some(
+              x=>
+                x[1]
+                  .toLowerCase()
+                  .includes(q)
+            )
+        );
+
+      if(!matching.length)return;
+
+      const sec=
+        document.createElement("div");
+
+      sec.className="room";
+
+      const rh=
+        document.createElement("div");
+
+      rh.className="room-head";
+
+      rh.innerHTML=
+        `<div>
+          ${room.icon} ${room.name}
+          <small>
+            ${matching.length} lotes
+          </small>
+        </div>
+        <span>▾</span>`;
+
+      const rl=
+        document.createElement("div");
+
+      rl.className="items";
+
+      rh.addEventListener(
+        "click",
+        ()=>{
+          rl.classList.toggle("open");
+        }
+      );
+
+      matching.forEach(
+        b=>{
+          rl.appendChild(
+            bundleElement(b)
+          );
+          shown++;
+        }
+      );
+
+      sec.append(
+        rh,
+        rl
+      );
+
+      content.appendChild(sec);
+
+    }
+  );
+
+  if(!shown){
+
+    content.innerHTML=
+      '<div class="card empty">🔎 No encontré ese objeto o lote.</div>';
+
+  }
+
 }
+
+
+/*
+============================================================
+VISTA POR ESTACIONES
+============================================================
+*/
 
 function renderSeasons(){
-  const content=document.getElementById("content");content.innerHTML="";
-  const seasons=["Primavera","Verano","Otoño","Invierno"];const q=document.getElementById("buscar").value.toLowerCase().trim();
-  seasons.forEach(season=>{
-    const entries=[];
-    rooms.forEach(room=>room.bundles.forEach(bundle=>bundle.items.forEach(item=>{
-      const inf=infoFor(item[0]);
-      const belongs=(bundle.season==="Todas"||bundle.season===season||String(inf.season||"").includes(season));
-      if(belongs&&(!q||item[1].toLowerCase().includes(q)))entries.push({room,bundle,item});
-    })));
-    if(!entries.length)return;
-    const st=document.createElement("div");st.className="season-title";st.textContent=({Primavera:"🌸",Verano:"☀️",Otoño:"🍂",Invierno:"❄️"}[season])+" "+season;
-    content.appendChild(st);
-    entries.forEach(e=>{
-      const sec=document.createElement("div");sec.className="bundle";
-      const head=document.createElement("div");head.className="bundle-head";
-      const done=!!checked[itemId(e.bundle,e.item)];
-      head.innerHTML=`<div><b>${done?"✅":"🌱"} ${e.item[1]}</b><small>📦 ${e.bundle.name} · ${e.room.name}</small></div><span>▾</span>`;
-      const list=document.createElement("div");list.className="items";list.appendChild(itemRow(e.bundle,e.item));
-      head.addEventListener("click",()=>list.classList.toggle("open"));sec.append(head,list);content.appendChild(sec);
-    });
-  });
-  if(!content.children.length)content.innerHTML='<div class="card empty">🔎 No encontré resultados.</div>';
+
+  const content=
+    document.getElementById("content");
+
+  content.innerHTML="";
+
+  const seasons=[
+    "Primavera",
+    "Verano",
+    "Otoño",
+    "Invierno"
+  ];
+
+  const q=
+    document
+      .getElementById("buscar")
+      .value
+      .toLowerCase()
+      .trim();
+
+  seasons.forEach(
+    season=>{
+
+      const entries=[];
+
+      rooms.forEach(
+        room=>
+          room.bundles.forEach(
+            bundle=>
+              bundle.items.forEach(
+                item=>{
+
+                  const inf=
+                    infoFor(item[0]);
+
+                  const belongs=
+                    (
+                      bundle.season==="Todas"||
+                      bundle.season===season||
+                      String(
+                        inf.season||""
+                      ).includes(season)
+                    );
+
+                  if(
+                    belongs&&
+                    (
+                      !q||
+                      item[1]
+                        .toLowerCase()
+                        .includes(q)
+                    )
+                  ){
+
+                    entries.push({
+                      room,
+                      bundle,
+                      item
+                    });
+
+                  }
+
+                }
+              )
+          )
+      );
+
+      if(!entries.length)return;
+
+      const st=
+        document.createElement("div");
+
+      st.className="season-title";
+
+      st.textContent=
+        (
+          {
+            Primavera:"🌸",
+            Verano:"☀️",
+            Otoño:"🍂",
+            Invierno:"❄️"
+          }[season]
+        )+
+        " "+
+        season;
+
+      content.appendChild(st);
+
+      entries.forEach(
+        e=>{
+
+          const sec=
+            document.createElement("div");
+
+          sec.className="bundle";
+
+          const head=
+            document.createElement("div");
+
+          head.className="bundle-head";
+
+          const done=
+            !!checked[
+              itemId(
+                e.bundle,
+                e.item
+              )
+            ];
+
+          head.innerHTML=
+            `<div>
+              <b>
+                ${done?"✅":"🌱"}
+                ${e.item[1]}
+              </b>
+              <small>
+                📦 ${e.bundle.name} ·
+                ${e.room.name}
+              </small>
+            </div>
+            <span>▾</span>`;
+
+          const list=
+            document.createElement("div");
+
+          list.className="items";
+
+          list.appendChild(
+            itemRow(
+              e.bundle,
+              e.item
+            )
+          );
+
+          head.addEventListener(
+            "click",
+            ()=>{
+              list.classList.toggle("open");
+            }
+          );
+
+          sec.append(
+            head,
+            list
+          );
+
+          content.appendChild(sec);
+
+        }
+      );
+
+    }
+  );
+
+  if(!content.children.length){
+
+    content.innerHTML=
+      '<div class="card empty">🔎 No encontré resultados.</div>';
+
+  }
+
 }
+
+
+/*
+============================================================
+PROGRESO
+============================================================
+*/
 
 function updateProgress(){
-  const bs=allBundles();let bd=bs.filter(isDone).length;
-  let total=0,done=0;bs.forEach(b=>b.items.forEach(x=>{total++;if(checked[itemId(b,x)])done++}));
-  document.getElementById("bundleProgress").innerHTML=`${bd} / ${bs.length} <small>lotes</small>`;
-  document.getElementById("itemProgress").innerHTML=`${done} / ${total} <small>objetos</small>`;
-  document.getElementById("bundleFill").style.width=(bd/bs.length*100)+"%";
-  document.getElementById("itemFill").style.width=(done/total*100)+"%";
+
+  const bs=
+    allBundles();
+
+  let bd=
+    bs.filter(isDone).length;
+
+  let total=0;
+  let done=0;
+
+  bs.forEach(
+    b=>
+      b.items.forEach(
+        x=>{
+          total++;
+
+          if(
+            checked[
+              itemId(b,x)
+            ]
+          ){
+
+            done++;
+
+          }
+
+        }
+      )
+  );
+
+  document
+    .getElementById("bundleProgress")
+    .innerHTML=
+      `${bd} / ${bs.length}
+       <small>lotes</small>`;
+
+  document
+    .getElementById("itemProgress")
+    .innerHTML=
+      `${done} / ${total}
+       <small>objetos</small>`;
+
+  document
+    .getElementById("bundleFill")
+    .style.width=
+      (
+        bd/
+        bs.length*
+        100
+      )+
+      "%";
+
+  document
+    .getElementById("itemFill")
+    .style.width=
+      (
+        done/
+        total*
+        100
+      )+
+      "%";
+
 }
 
-function render(){updateProgress();modo==="bundles"?renderBundles():renderSeasons()}
 
-document.getElementById("entrar").addEventListener("click",conectar);
-document.getElementById("partidaInput").addEventListener("keydown",e=>{if(e.key==="Enter")conectar()});
-document.getElementById("buscar").addEventListener("input",render);
-document.getElementById("tabBundles").addEventListener("click",()=>{modo="bundles";document.getElementById("tabBundles").classList.add("active");document.getElementById("tabSeasons").classList.remove("active");render()});
-document.getElementById("tabSeasons").addEventListener("click",()=>{modo="seasons";document.getElementById("tabSeasons").classList.add("active");document.getElementById("tabBundles").classList.remove("active");render()});
-document.getElementById("salir").addEventListener("click",()=>{
-  if(realtimeChannel&&supabaseClient)supabaseClient.removeChannel(realtimeChannel);
-  realtimeChannel=null;partida="";checked={};
-  document.getElementById("app").classList.add("hidden");document.getElementById("login").classList.remove("hidden");
-  document.getElementById("partidaInput").value="";loginStatus("🟡 Escribe el nombre de la partida.");
-});
+/*
+============================================================
+RENDER
+============================================================
+*/
+
+function render(){
+
+  updateProgress();
+
+  modo==="bundles"
+    ?renderBundles()
+    :renderSeasons();
+
+}
+
+
+/*
+============================================================
+EVENTOS
+============================================================
+*/
+
+document
+  .getElementById("entrar")
+  .addEventListener(
+    "click",
+    conectar
+  );
+
+
+document
+  .getElementById("partidaInput")
+  .addEventListener(
+    "keydown",
+    e=>{
+      if(e.key==="Enter"){
+        conectar();
+      }
+    }
+  );
+
+
+document
+  .getElementById("buscar")
+  .addEventListener(
+    "input",
+    render
+  );
+
+
+document
+  .getElementById("tabBundles")
+  .addEventListener(
+    "click",
+    ()=>{
+      modo="bundles";
+
+      document
+        .getElementById("tabBundles")
+        .classList
+        .add("active");
+
+      document
+        .getElementById("tabSeasons")
+        .classList
+        .remove("active");
+
+      render();
+    }
+  );
+
+
+document
+  .getElementById("tabSeasons")
+  .addEventListener(
+    "click",
+    ()=>{
+      modo="seasons";
+
+      document
+        .getElementById("tabSeasons")
+        .classList
+        .add("active");
+
+      document
+        .getElementById("tabBundles")
+        .classList
+        .remove("active");
+
+      render();
+    }
+  );
+
+
+document
+  .getElementById("salir")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      if(
+        realtimeChannel&&
+        supabaseClient
+      ){
+
+        supabaseClient.removeChannel(
+          realtimeChannel
+        );
+
+      }
+
+      realtimeChannel=null;
+      partida="";
+      checked={};
+
+      document
+        .getElementById("app")
+        .classList
+        .add("hidden");
+
+      document
+        .getElementById("login")
+        .classList
+        .remove("hidden");
+
+      document
+        .getElementById("partidaInput")
+        .value="";
+
+      loginStatus(
+        "🟡 Escribe el nombre de la partida."
+      );
+
+    }
+  );
+
 </script>
+
 </body>
 </html>
