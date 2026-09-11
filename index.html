@@ -3,26 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Centro Cívico SVE</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+    box-sizing:border-box;
+}
+
 body{
     margin:0;
     font-family:Arial,sans-serif;
     background:#f5f1e8;
     color:#3b3025;
 }
+
 header{
     background:#6b4f35;
     color:white;
     padding:18px;
     text-align:center;
 }
-header h1{margin:0;font-size:24px}
-header p{margin:6px 0 0;font-size:14px}
+
+header h1{
+    margin:0;
+    font-size:24px;
+}
+
+header p{
+    margin:6px 0 0;
+    font-size:14px;
+}
 
 .container{
     max-width:900px;
@@ -57,14 +71,23 @@ button{
     font-size:15px;
 }
 
+button:hover{
+    opacity:.9;
+}
+
 .buttons{
     display:flex;
     gap:8px;
     margin-bottom:15px;
 }
 
-.buttons button{flex:1}
-button.active{background:#9a713f}
+.buttons button{
+    flex:1;
+}
+
+button.active{
+    background:#9a713f;
+}
 
 .progress-bar{
     width:100%;
@@ -79,6 +102,7 @@ button.active{background:#9a713f}
     width:0%;
     height:100%;
     background:#6b9b45;
+    transition:.3s;
 }
 
 .section{
@@ -95,6 +119,7 @@ button.active{background:#9a713f}
     cursor:pointer;
     display:flex;
     justify-content:space-between;
+    align-items:center;
 }
 
 .items{
@@ -102,7 +127,9 @@ button.active{background:#9a713f}
     border-top:1px solid #eee;
 }
 
-.items.open{display:block}
+.items.open{
+    display:block;
+}
 
 .item{
     padding:12px 15px;
@@ -112,9 +139,14 @@ button.active{background:#9a713f}
     gap:10px;
 }
 
+.item:last-child{
+    border-bottom:0;
+}
+
 .item input{
     width:20px;
     height:20px;
+    flex-shrink:0;
 }
 
 .item.completed{
@@ -127,77 +159,170 @@ button.active{background:#9a713f}
     margin-top:8px;
 }
 
-@media(max-width:600px){
-    header h1{font-size:21px}
-    .buttons{flex-direction:column}
+.search-box{
+    margin-bottom:15px;
 }
+
+.search-box input{
+    margin:0;
+}
+
+.bundle-count{
+    font-size:13px;
+    font-weight:normal;
+    opacity:.7;
+    margin-left:8px;
+}
+
+.season-title{
+    background:#6b4f35;
+    color:white;
+    padding:14px;
+    border-radius:10px;
+    margin-bottom:10px;
+    font-weight:bold;
+}
+
+.no-results{
+    text-align:center;
+    padding:25px;
+    color:#777;
+}
+
+@media(max-width:600px){
+
+    header h1{
+        font-size:21px;
+    }
+
+    .buttons{
+        flex-direction:column;
+    }
+
+}
+
 </style>
 </head>
 
 <body>
 
 <header>
+
 <h1>🏛️ Centro Cívico SVE</h1>
+
 <p>Stardew Valley Expanded · Normal</p>
+
 </header>
+
 
 <div class="container">
 
+
+<!-- PARTIDA -->
+
 <div class="card">
-    <strong>Partida compartida</strong>
 
-    <input
-        type="text"
-        id="partida"
-        placeholder="Nombre de la partida"
-    >
+<strong>🎮 Partida compartida</strong>
 
-    <button onclick="conectarPartida()">
-        Conectar
-    </button>
+<input
+    type="text"
+    id="partida"
+    placeholder="Nombre de la partida"
+>
 
-    <div id="status">Sin conectar</div>
+<button onclick="conectarPartida()">
+    Conectar
+</button>
+
+<div id="status">
+    🔴 Sin conectar
 </div>
 
+</div>
+
+
+<!-- PROGRESO -->
+
 <div class="card">
 
-<strong>Progreso general</strong>
+<strong>📊 Progreso general</strong>
 
-<div id="progressText">0 / 0</div>
+<div id="progressText">
+    0 / 148
+</div>
 
 <div class="progress-bar">
-    <div class="progress-fill" id="progressFill"></div>
+
+<div
+    class="progress-fill"
+    id="progressFill">
 </div>
 
 </div>
+
+</div>
+
+
+<!-- BUSCADOR -->
+
+<div class="card search-box">
+
+<strong>🔎 Buscar objeto</strong>
+
+<input
+    type="text"
+    id="search"
+    placeholder="Ejemplo: pescado, calabaza, queso..."
+    oninput="buscar()"
+>
+
+</div>
+
+
+<!-- BOTONES -->
 
 <div class="buttons">
 
-<button id="byBundle" class="active">
+<button
+    id="byBundle"
+    class="active"
+    onclick="mostrarPorLotes()">
+
 📦 Por lotes
+
 </button>
 
-<button id="bySeason">
+
+<button
+    id="bySeason"
+    onclick="mostrarPorEstacion()">
+
 🌱 Por estación
+
 </button>
 
 </div>
+
 
 <div id="content"></div>
 
+
 </div>
+
 
 <script>
 
-/* =========================
+
+/* =====================================================
    SUPABASE
-========================= */
+===================================================== */
 
 const SUPABASE_URL =
 "https://mfjzjbkokmaugdypgrxi.supabase.co";
 
 const SUPABASE_KEY =
-"sb_publishable_hjU3mOzq8-eeGeaqXtg4mA_kHsRKEQu";
+"sb_publishable_hjU3mOzq8-eeGeAQXtg4mA_kHsRKEQu";
+
 
 const supabaseClient =
 supabase.createClient(
@@ -205,357 +330,430 @@ supabase.createClient(
     SUPABASE_KEY
 );
 
+
 let partidaActual = "";
 
 let checked = {};
 
+let modoActual = "bundle";
 
-/* =========================
+let canalActual = null;
+
+
+/* =====================================================
    DATOS
-========================= */
+===================================================== */
 
 const bundles = {
 
-"Crafts Room":[
+
+/* =========================
+   SALA DE MANUALIDADES
+========================= */
+
+"Sala de manualidades":[
 
 {
-name:"Spring Foraging",
+name:"Recolección de primavera",
+season:"Primavera",
 items:[
-"Wild Horseradish",
-"Daffodil",
-"Leek",
-"Dandelion"
+"Rábano silvestre",
+"Narciso",
+"Puerro",
+"Diente de león"
 ]
 },
 
 {
-name:"Summer Foraging",
+name:"Recolección de verano",
+season:"Verano",
 items:[
-"Grape",
-"Spice Berry",
-"Sweet Pea",
-"Red Baneberry"
+"Uva",
+"Baya especiada",
+"Guisante de olor",
+"Baya venenosa roja"
 ]
 },
 
 {
-name:"Fall Foraging",
+name:"Recolección de otoño",
+season:"Otoño",
 items:[
-"Common Mushroom",
-"Wild Plum",
-"Hazelnut",
-"Blackberry",
-"Mushroom Colony"
+"Champiñón común",
+"Ciruela silvestre",
+"Avellana",
+"Mora",
+"Colonia de hongos"
 ]
 },
 
 {
-name:"Winter Foraging",
+name:"Recolección de invierno",
+season:"Invierno",
 items:[
-"Winter Root",
-"Crystal Fruit",
-"Snow Yam",
-"Crocus",
-"Bearberry"
+"Raíz invernal",
+"Fruta cristalina",
+"Ñame de nieve",
+"Azafrán",
+"Baya de oso"
 ]
 },
 
 {
-name:"Construction",
+name:"Construcción",
+season:"Todas",
 items:[
-"Wood ×499",
-"Clay ×10",
-"Stone ×199",
-"Hardwood ×30"
+"Madera ×499",
+"Arcilla ×10",
+"Piedra ×199",
+"Madera noble ×30"
 ]
 },
 
 {
-name:"Exotic Foraging",
+name:"Recolección exótica",
+season:"Todas",
 items:[
-"Coconut",
-"Cactus Fruit",
-"Cave Carrot",
-"Red Mushroom",
-"Purple Mushroom",
-"Fir Wax",
-"Birch Water",
-"Pine Tar",
-"Poison Mushroom"
+"Coco",
+"Fruta de cactus",
+"Zanahoria cavernaria",
+"Champiñón rojo",
+"Champiñón morado",
+"Cera de abeto",
+"Agua de abedul",
+"Brea de pino",
+"Champiñón venenoso"
 ]
 }
 
 ],
 
-"Pantry":[
+
+/* =========================
+   DESPENSA
+========================= */
+
+"Despensa":[
 
 {
-name:"Spring Crops",
+name:"Cultivos de primavera",
+season:"Primavera",
 items:[
-"Parsnip",
-"Green Bean",
-"Cauliflower",
-"Potato",
-"Cucumber"
+"Chirivía",
+"Judía verde",
+"Coliflor",
+"Patata",
+"Pepino"
 ]
 },
 
 {
-name:"Summer Crops",
+name:"Cultivos de verano",
+season:"Verano",
 items:[
-"Tomato",
-"Hot Pepper",
-"Blueberry",
-"Melon",
-"Butternut Squash"
+"Tomate",
+"Pimiento picante",
+"Arándano",
+"Melón",
+"Calabaza moscada"
 ]
 },
 
 {
-name:"Fall Crops",
+name:"Cultivos de otoño",
+season:"Otoño",
 items:[
-"Corn",
-"Eggplant",
-"Pumpkin",
-"Yam",
-"Sweet Potato"
+"Maíz",
+"Berenjena",
+"Calabaza",
+"Ñame",
+"Batata"
 ]
 },
 
 {
-name:"Quality Crops",
+name:"Cultivos de calidad",
+season:"Todas",
 items:[
-"Gold Parsnip ×5",
-"Gold Melon ×5",
-"Gold Pumpkin ×5",
-"Gold Corn ×5",
-"Gold Cucumber ×5",
-"Gold Butternut Squash ×5",
-"Gold Sweet Potato ×5"
+"Chirivía de calidad ×5",
+"Melón de calidad ×5",
+"Calabaza de calidad ×5",
+"Maíz de calidad ×5",
+"Pepino de calidad ×5",
+"Calabaza moscada de calidad ×5",
+"Batata de calidad ×5"
 ]
 },
 
 {
-name:"Animal",
+name:"Animales",
+season:"Todas",
 items:[
-"Large Milk",
-"Large Goat Milk",
-"Wool",
-"Duck Egg",
-"Large Egg (White)",
-"Large Egg (Brown)"
+"Leche grande",
+"Leche de cabra grande",
+"Lana",
+"Huevo de pato",
+"Huevo grande (blanco)",
+"Huevo grande (marrón)"
 ]
 },
 
 {
-name:"Artisan",
+name:"Artesano",
+season:"Todas",
 items:[
-"Truffle Oil",
-"Cloth",
-"Goat Cheese",
-"Cheese",
-"Honey",
-"Jelly",
-"Apricot",
-"Orange",
-"Pear",
-"Nectarine",
-"Butter"
+"Aceite de trufa",
+"Tela",
+"Queso de cabra",
+"Queso",
+"Miel",
+"Gelatina",
+"Albaricoque",
+"Naranja",
+"Pera",
+"Nectarina",
+"Mantequilla"
 ]
 }
 
 ],
 
-"Fish Tank":[
+
+/* =========================
+   PECERA
+========================= */
+
+"Pecera":[
 
 {
-name:"River Fish",
+name:"Peces de río",
+season:"Primavera/Verano/Otoño/Invierno",
 items:[
-"Sunfish",
-"Catfish",
-"Shad",
-"Tiger Trout",
-"Minnow",
-"Goldfish"
+"Pez sol",
+"Pez gato",
+"Sábalo",
+"Trucha tigre",
+"Pececillo",
+"Pez dorado"
 ]
 },
 
 {
-name:"Lake Fish",
+name:"Peces de lago",
+season:"Todas",
 items:[
-"Largemouth Bass",
-"Carp",
-"Bullhead",
-"Sturgeon",
-"Tadpole"
+"Lubina negra",
+"Carpa",
+"Siluro",
+"Esturión",
+"Renacuajo"
 ]
 },
 
 {
-name:"Ocean Fish",
+name:"Peces de océano",
+season:"Primavera/Verano/Otoño/Invierno",
 items:[
-"Sardine",
-"Tuna",
-"Red Snapper",
+"Sardina",
+"Atún",
+"Pargo colorado",
 "Tilapia",
-"Starfish"
+"Estrella de mar"
 ]
 },
 
 {
-name:"Night Fishing",
+name:"Pesca nocturna",
+season:"Todas",
 items:[
-"Walleye",
-"Bream",
-"Eel",
-"Frog"
+"Lucioperca",
+"Brema",
+"Anguila",
+"Rana"
 ]
 },
 
 {
-name:"Crab Pot",
+name:"Trampa para cangrejos",
+season:"Todas",
 items:[
-"Lobster",
-"Crayfish",
-"Crab",
-"Cockle",
-"Mussel",
-"Shrimp",
-"Snail",
-"Periwinkle",
-"Oyster",
-"Clam"
+"Langosta",
+"Cangrejo de río",
+"Cangrejo",
+"Berberecho",
+"Mejillón",
+"Gamba",
+"Caracol",
+"Bígaro",
+"Ostra",
+"Almeja"
 ]
 },
 
 {
-name:"Specialty Fish",
+name:"Peces especiales",
+season:"Todas",
 items:[
-"Pufferfish",
-"Ghostfish",
-"Sandfish",
-"Woodskip",
-"King Salmon",
-"Butterfish"
+"Pez globo",
+"Pez fantasma",
+"Pez de arena",
+"Pez de bosque",
+"Salmón rey",
+"Pez mantequilla"
 ]
 }
 
 ],
 
-"Boiler Room":[
+
+/* =========================
+   SALA DE CALDERAS
+========================= */
+
+"Sala de calderas":[
 
 {
-name:"Blacksmith",
+name:"Herrero",
+season:"Todas",
 items:[
-"Copper Bar",
-"Iron Bar",
-"Gold Bar"
+"Lingote de cobre",
+"Lingote de hierro",
+"Lingote de oro"
 ]
 },
 
 {
-name:"Geologist",
+name:"Geólogo",
+season:"Todas",
 items:[
-"Quartz",
-"Earth Crystal",
-"Frozen Tear",
-"Fire Quartz"
+"Cuarzo",
+"Cristal de tierra",
+"Lágrima helada",
+"Cuarzo de fuego"
 ]
 },
 
 {
-name:"Adventurer",
+name:"Aventurero",
+season:"Todas",
 items:[
-"Slime ×99",
-"Bat Wing ×10",
-"Solar Essence",
-"Void Essence"
+"Baba ×99",
+"Ala de murciélago ×10",
+"Esencia solar",
+"Esencia del vacío"
 ]
 }
 
 ],
 
-"Bulletin Board":[
+
+/* =========================
+   TABLÓN DE ANUNCIOS
+========================= */
+
+"Tablón de anuncios":[
 
 {
 name:"Chef",
+season:"Todas",
 items:[
-"Maple Syrup",
-"Fiddlehead Fern",
-"Truffle",
-"Poppy",
-"Maki Roll",
-"Fried Egg",
-"Candy"
+"Jarabe de arce",
+"Helecho",
+"Trufa",
+"Amapola",
+"Maki",
+"Huevo frito",
+"Caramelo"
 ]
 },
 
 {
-name:"Fodder",
+name:"Forraje",
+season:"Todas",
 items:[
-"Wheat ×10",
-"Hay ×10",
-"Apple ×3"
+"Trigo ×10",
+"Heno ×10",
+"Manzana ×3"
 ]
 },
 
 {
-name:"Enchanter",
+name:"Encantador",
+season:"Todas",
 items:[
-"Oak Resin",
-"Wine",
-"Rabbit's Foot",
-"Pomegranate",
-"Four Leaf Clover"
+"Resina de roble",
+"Vino",
+"Pata de conejo",
+"Granada",
+"Trébol de cuatro hojas"
 ]
 },
 
 {
-name:"Field Research",
+name:"Investigación de campo",
+season:"Todas",
 items:[
-"Purple Mushroom",
-"Nautilus Shell",
-"Chub",
-"Frozen Geode",
-"Amber"
+"Champiñón morado",
+"Concha de nautilus",
+"Cacho",
+"Geoda congelada",
+"Ámbar"
 ]
 },
 
 {
-name:"Dye",
+name:"Tinte",
+season:"Todas",
 items:[
-"Red Mushroom",
-"Sea Urchin",
-"Sunflower",
-"Duck Feather",
-"Aquamarine",
-"Red Cabbage",
-"Persimmon"
+"Champiñón rojo",
+"Erizo de mar",
+"Girasol",
+"Pluma de pato",
+"Aguamarina",
+"Col lombarda",
+"Caqui"
 ]
 }
 
 ],
 
-"Vault":[
+
+/* =========================
+   CAJA FUERTE
+========================= */
+
+"Caja fuerte":[
 
 {
-name:"2,500g",
-items:["2,500g"]
+name:"2.500g",
+season:"Todas",
+items:[
+"2.500g"
+]
 },
 
 {
-name:"5,000g",
-items:["5,000g"]
+name:"5.000g",
+season:"Todas",
+items:[
+"5.000g"
+]
 },
 
 {
-name:"10,000g",
-items:["10,000g"]
+name:"10.000g",
+season:"Todas",
+items:[
+"10.000g"
+]
 },
 
 {
-name:"25,000g",
-items:["25,000g"]
+name:"25.000g",
+season:"Todas",
+items:[
+"25.000g"
+]
 }
 
 ]
@@ -563,236 +761,457 @@ items:["25,000g"]
 };
 
 
-/* =========================
+/* =====================================================
    CONECTAR PARTIDA
-========================= */
+===================================================== */
 
 async function conectarPartida(){
 
     const nombre =
         document.getElementById("partida").value.trim();
 
+
     if(!nombre){
-        alert("Escribe un nombre para la partida.");
+
+        alert(
+            "Escribe un nombre para la partida."
+        );
+
         return;
     }
 
+
     partidaActual = nombre;
 
-    document.getElementById("status").textContent =
-        "Conectando...";
+
+    document.getElementById("status")
+        .textContent =
+        "🟡 Conectando...";
+
 
     const { data, error } =
         await supabaseClient
         .from("progreso")
-        .select("item_id, conseguido")
-        .eq("partida", partidaActual);
+        .select(
+            "item_id, conseguido"
+        )
+        .eq(
+            "partida",
+            partidaActual
+        );
+
 
     if(error){
 
         console.error(error);
 
-        document.getElementById("status").textContent =
-            "Error al conectar.";
+        document.getElementById("status")
+            .textContent =
+            "🔴 Error al conectar.";
 
         return;
     }
+
 
     checked = {};
 
+
     data.forEach(row => {
-        checked[row.item_id] = row.conseguido;
+
+        checked[row.item_id] =
+            row.conseguido;
+
     });
 
-    document.getElementById("status").textContent =
-        "🟢 Partida conectada: " + partidaActual;
 
-    showBundles();
+    document.getElementById("status")
+        .textContent =
+        "🟢 Partida conectada: " +
+        partidaActual;
+
+
+    mostrarVista();
+
 
     escucharCambios();
+
 }
 
 
-/* =========================
+/* =====================================================
    GUARDAR CAMBIO
-========================= */
+===================================================== */
 
-async function cambiarItem(id, valor){
+async function cambiarItem(
+    id,
+    valor
+){
 
     if(!partidaActual){
-        alert("Primero conecta una partida.");
+
+        alert(
+            "Primero conecta una partida."
+        );
+
         return;
     }
 
+
     checked[id] = valor;
+
 
     const { error } =
         await supabaseClient
         .from("progreso")
         .upsert({
 
-            partida: partidaActual,
+            partida:
+                partidaActual,
 
-            item_id: id,
+            item_id:
+                id,
 
-            conseguido: valor,
+            conseguido:
+                valor,
 
             actualizado_en:
                 new Date().toISOString()
 
         },{
-            onConflict:"partida,item_id"
+            onConflict:
+                "partida,item_id"
         });
 
+
     if(error){
+
         console.error(error);
-        alert("No se pudo guardar el cambio.");
+
+        alert(
+            "No se pudo guardar el cambio."
+        );
+
+        return;
     }
 
+
     updateProgress();
+
 }
 
 
-/* =========================
-   ESCUCHAR CAMBIOS
-========================= */
+/* =====================================================
+   ESCUCHAR CAMBIOS DE LA OTRA PERSONA
+===================================================== */
 
 function escucharCambios(){
 
-    supabaseClient
-    .channel("progreso-" + partidaActual)
+    if(canalActual){
 
+        supabaseClient
+            .removeChannel(
+                canalActual
+            );
+
+    }
+
+
+    canalActual =
+        supabaseClient
+        .channel(
+            "progreso-" +
+            partidaActual
+        );
+
+
+    canalActual
     .on(
+
         "postgres_changes",
+
         {
             event:"*",
             schema:"public",
             table:"progreso",
-            filter:"partida=eq." + partidaActual
+            filter:
+                "partida=eq." +
+                partidaActual
         },
+
         payload => {
 
             if(
-                payload.eventType === "INSERT" ||
-                payload.eventType === "UPDATE"
+                payload.eventType ===
+                "INSERT" ||
+
+                payload.eventType ===
+                "UPDATE"
             ){
 
-                checked[payload.new.item_id] =
+                checked[
+                    payload.new.item_id
+                ] =
                     payload.new.conseguido;
 
-                showBundles();
+
+                mostrarVista();
+
             }
 
         }
-    )
 
+    )
     .subscribe();
+
 }
 
 
-/* =========================
+/* =====================================================
+   ID DEL OBJETO
+===================================================== */
+
+function obtenerId(
+    room,
+    bundle,
+    item
+){
+
+    return (
+        room +
+        "_" +
+        bundle +
+        "_" +
+        item
+    );
+
+}
+
+
+/* =====================================================
    MOSTRAR LOTES
-========================= */
+===================================================== */
 
 function showBundles(){
 
     const content =
-        document.getElementById("content");
+        document.getElementById(
+            "content"
+        );
+
 
     content.innerHTML = "";
 
-    for(const room in bundles){
+
+    const busqueda =
+        document.getElementById(
+            "search"
+        ).value
+        .toLowerCase()
+        .trim();
+
+
+    let encontrados = 0;
+
+
+    for(
+        const room in bundles
+    ){
 
         const roomSection =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
-        roomSection.className = "section";
+        roomSection.className =
+            "section";
+
 
         const roomTitle =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
         roomTitle.className =
             "section-title";
 
+
         roomTitle.innerHTML =
-            `<span>🏛️ ${room}</span><span>▼</span>`;
+            `<span>🏛️ ${room}</span>
+             <span>▼</span>`;
+
 
         const roomItems =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
-        roomItems.className = "items";
+        roomItems.className =
+            "items";
+
 
         roomTitle.onclick = () => {
-            roomItems.classList.toggle("open");
+
+            roomItems.classList.toggle(
+                "open"
+            );
+
         };
 
 
-        bundles[room].forEach(bundle => {
+        bundles[room].forEach(
+            bundle => {
+
+            const itemsFiltrados =
+                bundle.items.filter(
+                    item =>
+                        !busqueda ||
+                        item.toLowerCase()
+                            .includes(busqueda)
+                );
+
+
+            if(
+                busqueda &&
+                itemsFiltrados.length === 0
+            ){
+
+                return;
+
+            }
+
+
+            encontrados +=
+                itemsFiltrados.length;
+
 
             const bundleTitle =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
+
 
             bundleTitle.className =
                 "section-title";
 
+
             bundleTitle.style.fontSize =
                 "15px";
 
+
+            const cantidad =
+                bundle.items.length;
+
+
+            const completados =
+                bundle.items.filter(
+                    item => {
+
+                        const id =
+                            obtenerId(
+                                room,
+                                bundle.name,
+                                item
+                            );
+
+                        return !!checked[id];
+
+                    }
+                ).length;
+
+
             bundleTitle.innerHTML =
-                `<span>📦 ${bundle.name}</span><span>▼</span>`;
+                `<span>
+                    📦 ${bundle.name}
+                    <span class="bundle-count">
+                        ${completados}/${cantidad}
+                    </span>
+                 </span>
+                 <span>▼</span>`;
 
 
             const bundleItems =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
+
 
             bundleItems.className =
                 "items";
 
 
             bundleTitle.onclick = () => {
-                bundleItems.classList.toggle("open");
+
+                bundleItems.classList.toggle(
+                    "open"
+                );
+
             };
 
 
-            bundle.items.forEach(item => {
+            itemsFiltrados.forEach(
+                item => {
 
                 const id =
-                    room + "_" +
-                    bundle.name + "_" +
-                    item;
+                    obtenerId(
+                        room,
+                        bundle.name,
+                        item
+                    );
+
 
                 const row =
-                    document.createElement("label");
+                    document.createElement(
+                        "label"
+                    );
 
-                row.className = "item";
+
+                row.className =
+                    "item";
 
 
                 const checkbox =
-                    document.createElement("input");
+                    document.createElement(
+                        "input"
+                    );
 
-                checkbox.type = "checkbox";
+
+                checkbox.type =
+                    "checkbox";
+
 
                 checkbox.checked =
                     !!checked[id];
 
 
                 const text =
-                    document.createElement("span");
+                    document.createElement(
+                        "span"
+                    );
 
-                text.textContent = item;
+
+                text.textContent =
+                    item;
 
 
-                if(checkbox.checked){
-                    row.classList.add("completed");
+                if(
+                    checkbox.checked
+                ){
+
+                    row.classList.add(
+                        "completed"
+                    );
+
                 }
 
 
-                checkbox.onchange = () => {
+                checkbox.onchange =
+                    () => {
 
                     row.classList.toggle(
                         "completed",
                         checkbox.checked
                     );
+
 
                     cambiarItem(
                         id,
@@ -802,91 +1221,518 @@ function showBundles(){
                 };
 
 
-                row.appendChild(checkbox);
-                row.appendChild(text);
+                row.appendChild(
+                    checkbox
+                );
 
-                bundleItems.appendChild(row);
+                row.appendChild(
+                    text
+                );
+
+                bundleItems.appendChild(
+                    row
+                );
 
             });
 
 
-            roomItems.appendChild(bundleTitle);
-            roomItems.appendChild(bundleItems);
+            roomItems.appendChild(
+                bundleTitle
+            );
+
+            roomItems.appendChild(
+                bundleItems
+            );
 
         });
 
 
-        roomSection.appendChild(roomTitle);
-        roomSection.appendChild(roomItems);
+        if(
+            roomItems.children.length === 0
+        ){
 
-        content.appendChild(roomSection);
+            return;
+
+        }
+
+
+        roomSection.appendChild(
+            roomTitle
+        );
+
+        roomSection.appendChild(
+            roomItems
+        );
+
+
+        content.appendChild(
+            roomSection
+        );
 
     }
 
+
+    if(
+        busqueda &&
+        encontrados === 0
+    ){
+
+        content.innerHTML =
+            `<div class="card no-results">
+                🔎 No encontré ese objeto.
+             </div>`;
+
+    }
+
+
     updateProgress();
+
 }
 
 
-/* =========================
-   PROGRESO
-========================= */
+/* =====================================================
+   VISTA POR ESTACIÓN
+===================================================== */
 
-function updateProgress(){
+function showSeasons(){
 
-    let total = 0;
-    let done = 0;
+    const content =
+        document.getElementById(
+            "content"
+        );
 
-    document
-    .querySelectorAll(".item input")
-    .forEach(input => {
 
-        total++;
+    content.innerHTML = "";
 
-        if(input.checked){
-            done++;
+
+    const busqueda =
+        document.getElementById(
+            "search"
+        ).value
+        .toLowerCase()
+        .trim();
+
+
+    const estaciones = [
+        "Primavera",
+        "Verano",
+        "Otoño",
+        "Invierno",
+        "Todas"
+    ];
+
+
+    estaciones.forEach(
+        estacion => {
+
+        const titulo =
+            document.createElement(
+                "div"
+            );
+
+
+        titulo.className =
+            "season-title";
+
+
+        titulo.textContent =
+            "🌱 " + estacion;
+
+
+        content.appendChild(
+            titulo
+        );
+
+
+        let encontrados = 0;
+
+
+        for(
+            const room in bundles
+        ){
+
+            bundles[room].forEach(
+                bundle => {
+
+                const pertenece =
+                    bundle.season
+                        .includes(
+                            estacion
+                        );
+
+
+                if(!pertenece){
+                    return;
+                }
+
+
+                const items =
+                    bundle.items.filter(
+                        item =>
+                            !busqueda ||
+                            item.toLowerCase()
+                                .includes(
+                                    busqueda
+                                )
+                    );
+
+
+                if(
+                    items.length === 0
+                ){
+
+                    return;
+
+                }
+
+
+                encontrados +=
+                    items.length;
+
+
+                const section =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                section.className =
+                    "section";
+
+
+                const title =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                title.className =
+                    "section-title";
+
+
+                title.innerHTML =
+                    `<span>
+                        📦 ${bundle.name}
+                        <span class="bundle-count">
+                            ${room}
+                        </span>
+                     </span>
+                     <span>▼</span>`;
+
+
+                const list =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                list.className =
+                    "items open";
+
+
+                title.onclick = () => {
+
+                    list.classList.toggle(
+                        "open"
+                    );
+
+                };
+
+
+                items.forEach(
+                    item => {
+
+                    const id =
+                        obtenerId(
+                            room,
+                            bundle.name,
+                            item
+                        );
+
+
+                    const row =
+                        document.createElement(
+                            "label"
+                        );
+
+
+                    row.className =
+                        "item";
+
+
+                    const checkbox =
+                        document.createElement(
+                            "input"
+                        );
+
+
+                    checkbox.type =
+                        "checkbox";
+
+
+                    checkbox.checked =
+                        !!checked[id];
+
+
+                    const text =
+                        document.createElement(
+                            "span"
+                        );
+
+
+                    text.textContent =
+                        item;
+
+
+                    if(
+                        checkbox.checked
+                    ){
+
+                        row.classList.add(
+                            "completed"
+                        );
+
+                    }
+
+
+                    checkbox.onchange =
+                        () => {
+
+                        row.classList.toggle(
+                            "completed",
+                            checkbox.checked
+                        );
+
+
+                        cambiarItem(
+                            id,
+                            checkbox.checked
+                        );
+
+                    };
+
+
+                    row.appendChild(
+                        checkbox
+                    );
+
+                    row.appendChild(
+                        text
+                    );
+
+                    list.appendChild(
+                        row
+                    );
+
+                });
+
+
+                section.appendChild(
+                    title
+                );
+
+                section.appendChild(
+                    list
+                );
+
+                content.appendChild(
+                    section
+                );
+
+            });
+
+        }
+
+
+        if(
+            encontrados === 0
+        ){
+
+            titulo.style.display =
+                "none";
+
         }
 
     });
 
-    document.getElementById("progressText")
+
+    updateProgress();
+
+}
+
+
+/* =====================================================
+   BUSCADOR
+===================================================== */
+
+function buscar(){
+
+    mostrarVista();
+
+}
+
+
+/* =====================================================
+   MOSTRAR VISTA ACTUAL
+===================================================== */
+
+function mostrarVista(){
+
+    if(
+        modoActual === "bundle"
+    ){
+
+        showBundles();
+
+    }else{
+
+        showSeasons();
+
+    }
+
+}
+
+
+/* =====================================================
+   BOTÓN POR LOTES
+===================================================== */
+
+function mostrarPorLotes(){
+
+    modoActual =
+        "bundle";
+
+
+    document
+        .getElementById(
+            "byBundle"
+        )
+        .classList.add(
+            "active"
+        );
+
+
+    document
+        .getElementById(
+            "bySeason"
+        )
+        .classList.remove(
+            "active"
+        );
+
+
+    showBundles();
+
+}
+
+
+/* =====================================================
+   BOTÓN POR ESTACIÓN
+===================================================== */
+
+function mostrarPorEstacion(){
+
+    modoActual =
+        "season";
+
+
+    document
+        .getElementById(
+            "bySeason"
+        )
+        .classList.add(
+            "active"
+        );
+
+
+    document
+        .getElementById(
+            "byBundle"
+        )
+        .classList.remove(
+            "active"
+        );
+
+
+    showSeasons();
+
+}
+
+
+/* =====================================================
+   PROGRESO
+===================================================== */
+
+function updateProgress(){
+
+    let total = 0;
+
+    let done = 0;
+
+
+    for(
+        const room in bundles
+    ){
+
+        bundles[room].forEach(
+            bundle => {
+
+            bundle.items.forEach(
+                item => {
+
+                total++;
+
+
+                const id =
+                    obtenerId(
+                        room,
+                        bundle.name,
+                        item
+                    );
+
+
+                if(
+                    checked[id]
+                ){
+
+                    done++;
+
+                }
+
+            });
+
+        });
+
+    }
+
+
+    document
+        .getElementById(
+            "progressText"
+        )
         .textContent =
         `${done} / ${total}`;
+
 
     const percentage =
         total === 0
         ? 0
         : (done / total) * 100;
 
-    document.getElementById("progressFill")
+
+    document
+        .getElementById(
+            "progressFill"
+        )
         .style.width =
         percentage + "%";
+
 }
 
 
-/* =========================
-   BOTONES
-========================= */
-
-document.getElementById("byBundle").onclick = () => {
-
-    document.getElementById("byBundle")
-        .classList.add("active");
-
-    document.getElementById("bySeason")
-        .classList.remove("active");
-
-    showBundles();
-};
-
-
-document.getElementById("bySeason").onclick = () => {
-
-    alert(
-        "La vista por estación la añadiremos después de comprobar que la sincronización funciona."
-    );
-
-};
-
+/* =====================================================
+   INICIO
+===================================================== */
 
 showBundles();
 
