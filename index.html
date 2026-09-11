@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>Centro Cívico SVE</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
 <style>
 
@@ -134,13 +141,13 @@ button.active{
 .item{
     padding:12px 15px;
     border-bottom:1px solid #eee;
+    display:block;
+}
+
+.item-main{
     display:flex;
     align-items:center;
     gap:10px;
-}
-
-.item:last-child{
-    border-bottom:0;
 }
 
 .item input{
@@ -150,8 +157,35 @@ button.active{
 }
 
 .item.completed{
-    text-decoration:line-through;
     opacity:.55;
+}
+
+.item.completed .item-name{
+    text-decoration:line-through;
+}
+
+.item-name{
+    cursor:pointer;
+    flex:1;
+}
+
+.item-info{
+    display:none;
+    margin-top:10px;
+    margin-left:30px;
+    padding:10px;
+    background:#f7f3eb;
+    border-radius:8px;
+    font-size:14px;
+    line-height:1.5;
+}
+
+.item-info.open{
+    display:block;
+}
+
+.item-info strong{
+    color:#6b4f35;
 }
 
 #status{
@@ -189,6 +223,10 @@ button.active{
     color:#777;
 }
 
+.info-line{
+    margin-bottom:4px;
+}
+
 @media(max-width:600px){
 
     header h1{
@@ -202,9 +240,12 @@ button.active{
 }
 
 </style>
+
 </head>
 
+
 <body>
+
 
 <header>
 
@@ -218,7 +259,9 @@ button.active{
 <div class="container">
 
 
-<!-- PARTIDA -->
+<!-- ==========================================
+     PARTIDA
+========================================== -->
 
 <div class="card">
 
@@ -241,7 +284,9 @@ button.active{
 </div>
 
 
-<!-- PROGRESO -->
+<!-- ==========================================
+     PROGRESO
+========================================== -->
 
 <div class="card">
 
@@ -263,7 +308,9 @@ button.active{
 </div>
 
 
-<!-- BUSCADOR -->
+<!-- ==========================================
+     BUSCADOR
+========================================== -->
 
 <div class="card search-box">
 
@@ -272,21 +319,24 @@ button.active{
 <input
     type="text"
     id="search"
-    placeholder="Ejemplo: pescado, calabaza, queso..."
+    placeholder="Ejemplo: calabaza, pez, queso..."
     oninput="buscar()"
 >
 
 </div>
 
 
-<!-- BOTONES -->
+<!-- ==========================================
+     BOTONES
+========================================== -->
 
 <div class="buttons">
 
 <button
     id="byBundle"
     class="active"
-    onclick="mostrarPorLotes()">
+    onclick="mostrarPorLotes()"
+>
 
 📦 Por lotes
 
@@ -295,7 +345,8 @@ button.active{
 
 <button
     id="bySeason"
-    onclick="mostrarPorEstacion()">
+    onclick="mostrarPorEstacion()"
+>
 
 🌱 Por estación
 
@@ -347,412 +398,1703 @@ let canalActual = null;
 const bundles = {
 
 
-/* =========================
+/* =====================================================
    SALA DE MANUALIDADES
-========================= */
+===================================================== */
 
 "Sala de manualidades":[
 
 {
+id:"spring_foraging",
 name:"Recolección de primavera",
 season:"Primavera",
+
 items:[
-"Rábano silvestre",
-"Narciso",
-"Puerro",
-"Diente de león"
-]
+
+{
+id:"wild_horseradish",
+name:"Rábano silvestre",
+info:{
+temporada:"Primavera",
+lugar:"Recolección",
+metodo:"Se encuentra como objeto de recolección."
+}
 },
 
 {
-name:"Recolección de verano",
-season:"Verano",
-items:[
-"Uva",
-"Baya especiada",
-"Guisante de olor",
-"Baya venenosa roja"
-]
+id:"daffodil",
+name:"Narciso",
+info:{
+temporada:"Primavera",
+lugar:"Varias zonas",
+metodo:"Recolección."
+}
 },
 
 {
-name:"Recolección de otoño",
-season:"Otoño",
-items:[
-"Champiñón común",
-"Ciruela silvestre",
-"Avellana",
-"Mora",
-"Colonia de hongos"
-]
+id:"leek",
+name:"Puerro",
+info:{
+temporada:"Primavera",
+lugar:"Varias zonas",
+metodo:"Recolección."
+}
 },
 
 {
-name:"Recolección de invierno",
-season:"Invierno",
-items:[
-"Raíz invernal",
-"Fruta cristalina",
-"Ñame de nieve",
-"Azafrán",
-"Baya de oso"
-]
-},
-
-{
-name:"Construcción",
-season:"Todas",
-items:[
-"Madera ×499",
-"Arcilla ×10",
-"Piedra ×199",
-"Madera noble ×30"
-]
-},
-
-{
-name:"Recolección exótica",
-season:"Todas",
-items:[
-"Coco",
-"Fruta de cactus",
-"Zanahoria cavernaria",
-"Champiñón rojo",
-"Champiñón morado",
-"Cera de abeto",
-"Agua de abedul",
-"Brea de pino",
-"Champiñón venenoso"
-]
+id:"dandelion",
+name:"Diente de león",
+info:{
+temporada:"Primavera",
+lugar:"Varias zonas",
+metodo:"Recolección."
+}
 }
 
-],
+]
+},
 
 
-/* =========================
+{
+id:"summer_foraging",
+name:"Recolección de verano",
+season:"Verano",
+
+items:[
+
+{
+id:"grape",
+name:"Uva",
+info:{
+temporada:"Verano",
+lugar:"Recolección",
+metodo:"Recolección."
+}
+},
+
+{
+id:"spice_berry",
+name:"Baya especiada",
+info:{
+temporada:"Verano",
+lugar:"Varias zonas",
+metodo:"Recolección."
+}
+},
+
+{
+id:"sweet_pea",
+name:"Guisante de olor",
+info:{
+temporada:"Verano",
+lugar:"Varias zonas",
+metodo:"Recolección."
+}
+},
+
+{
+id:"red_baneberry",
+name:"Baya venenosa roja",
+info:{
+temporada:"Verano",
+lugar:"Recolección",
+metodo:"Objeto de recolección de SVE."
+}
+}
+
+]
+},
+
+
+{
+id:"fall_foraging",
+name:"Recolección de otoño",
+season:"Otoño",
+
+items:[
+
+{
+id:"common_mushroom",
+name:"Champiñón común",
+info:{
+temporada:"Otoño",
+lugar:"Bosque y zonas de recolección",
+metodo:"Recolección."
+}
+},
+
+{
+id:"wild_plum",
+name:"Ciruela silvestre",
+info:{
+temporada:"Otoño",
+lugar:"Varias zonas",
+metodo:"Recolección."
+}
+},
+
+{
+id:"hazelnut",
+name:"Avellana",
+info:{
+temporada:"Otoño",
+lugar:"Varias zonas",
+metodo:"Recolección."
+}
+},
+
+{
+id:"blackberry",
+name:"Mora",
+info:{
+temporada:"Otoño",
+lugar:"Varias zonas",
+metodo:"Recolección."
+}
+},
+
+{
+id:"mushroom_colony",
+name:"Colonia de hongos",
+info:{
+temporada:"Otoño",
+lugar:"SVE",
+metodo:"Recolección."
+}
+}
+
+]
+},
+
+
+{
+id:"winter_foraging",
+name:"Recolección de invierno",
+season:"Invierno",
+
+items:[
+
+{
+id:"winter_root",
+name:"Raíz invernal",
+info:{
+temporada:"Invierno",
+lugar:"Varias zonas",
+metodo:"Recolección."
+}
+},
+
+{
+id:"crystal_fruit",
+name:"Fruta cristalina",
+info:{
+temporada:"Invierno",
+lugar:"Varias zonas",
+metodo:"Recolección."
+}
+},
+
+{
+id:"snow_yam",
+name:"Ñame de nieve",
+info:{
+temporada:"Invierno",
+lugar:"Excavando puntos de artefactos",
+metodo:"Recolección."
+}
+},
+
+{
+id:"crocus",
+name:"Azafrán",
+info:{
+temporada:"Invierno",
+lugar:"Varias zonas",
+metodo:"Recolección."
+}
+},
+
+{
+id:"bearberry",
+name:"Baya de oso",
+info:{
+temporada:"Invierno",
+lugar:"SVE",
+metodo:"Recolección."
+}
+}
+
+]
+},
+
+
+{
+id:"construction",
+name:"Construcción",
+season:"Todas",
+
+items:[
+
+{
+id:"wood",
+name:"Madera ×499",
+info:{
+cantidad:"499",
+metodo:"Cortar árboles, tocones y ramas."
+}
+},
+
+{
+id:"clay",
+name:"Arcilla ×10",
+info:{
+cantidad:"10",
+metodo:"Cavar puntos de artefactos o labrar tierra."
+}
+},
+
+{
+id:"stone",
+name:"Piedra ×199",
+info:{
+cantidad:"199",
+metodo:"Romper rocas."
+}
+},
+
+{
+id:"hardwood",
+name:"Madera noble ×30",
+info:{
+cantidad:"30",
+metodo:"Cortar tocones grandes y troncos grandes."
+}
+}
+
+]
+},
+
+
+{
+id:"exotic_foraging",
+name:"Recolección exótica",
+season:"Todas",
+
+items:[
+
+{
+id:"coconut",
+name:"Coco",
+info:{
+temporada:"Todas",
+lugar:"Desierto",
+metodo:"Recolección."
+}
+},
+
+{
+id:"cactus_fruit",
+name:"Fruta de cactus",
+info:{
+temporada:"Todas",
+lugar:"Desierto",
+metodo:"Recolección."
+}
+},
+
+{
+id:"cave_carrot",
+name:"Zanahoria cavernaria",
+info:{
+temporada:"Todas",
+lugar:"Minas",
+metodo:"Recolección."
+}
+},
+
+{
+id:"red_mushroom",
+name:"Champiñón rojo",
+info:{
+temporada:"Todas",
+lugar:"Minas / Bosque",
+metodo:"Recolección."
+}
+},
+
+{
+id:"purple_mushroom",
+name:"Champiñón morado",
+info:{
+temporada:"Todas",
+lugar:"Minas",
+metodo:"Recolección."
+}
+},
+
+{
+id:"fir_wax",
+name:"Cera de abeto",
+info:{
+temporada:"Todas",
+lugar:"SVE",
+metodo:"Objeto de recolección de SVE."
+}
+},
+
+{
+id:"birch_water",
+name:"Agua de abedul",
+info:{
+temporada:"Todas",
+lugar:"SVE",
+metodo:"Objeto de SVE."
+}
+},
+
+{
+id:"pine_tar",
+name:"Brea de pino",
+info:{
+temporada:"Todas",
+lugar:"Roble / pino",
+metodo:"Extractor de savia colocado en un pino."
+}
+},
+
+{
+id:"poison_mushroom",
+name:"Champiñón venenoso",
+info:{
+temporada:"Todas",
+lugar:"SVE",
+metodo:"Recolección."
+}
+}
+
+]
+},
+
+
+/* =====================================================
    DESPENSA
-========================= */
+===================================================== */
 
 "Despensa":[
 
 {
+id:"spring_crops",
 name:"Cultivos de primavera",
 season:"Primavera",
+
 items:[
-"Chirivía",
-"Judía verde",
-"Coliflor",
-"Patata",
-"Pepino"
-]
+
+{
+id:"parsnip",
+name:"Chirivía",
+info:{
+temporada:"Primavera",
+metodo:"Cultivo."
+}
 },
 
 {
-name:"Cultivos de verano",
-season:"Verano",
-items:[
-"Tomate",
-"Pimiento picante",
-"Arándano",
-"Melón",
-"Calabaza moscada"
-]
+id:"green_bean",
+name:"Judía verde",
+info:{
+temporada:"Primavera",
+metodo:"Cultivo."
+}
 },
 
 {
-name:"Cultivos de otoño",
-season:"Otoño",
-items:[
-"Maíz",
-"Berenjena",
-"Calabaza",
-"Ñame",
-"Batata"
-]
+id:"cauliflower",
+name:"Coliflor",
+info:{
+temporada:"Primavera",
+metodo:"Cultivo."
+}
 },
 
 {
-name:"Cultivos de calidad",
-season:"Todas",
-items:[
-"Chirivía de calidad ×5",
-"Melón de calidad ×5",
-"Calabaza de calidad ×5",
-"Maíz de calidad ×5",
-"Pepino de calidad ×5",
-"Calabaza moscada de calidad ×5",
-"Batata de calidad ×5"
-]
+id:"potato",
+name:"Patata",
+info:{
+temporada:"Primavera",
+metodo:"Cultivo."
+}
 },
 
 {
-name:"Animales",
-season:"Todas",
-items:[
-"Leche grande",
-"Leche de cabra grande",
-"Lana",
-"Huevo de pato",
-"Huevo grande (blanco)",
-"Huevo grande (marrón)"
-]
-},
-
-{
-name:"Artesano",
-season:"Todas",
-items:[
-"Aceite de trufa",
-"Tela",
-"Queso de cabra",
-"Queso",
-"Miel",
-"Gelatina",
-"Albaricoque",
-"Naranja",
-"Pera",
-"Nectarina",
-"Mantequilla"
-]
+id:"cucumber",
+name:"Pepino",
+info:{
+temporada:"Primavera",
+metodo:"Cultivo de SVE."
+}
 }
 
-],
+]
+},
 
 
-/* =========================
+{
+id:"summer_crops",
+name:"Cultivos de verano",
+season:"Verano",
+
+items:[
+
+{
+id:"tomato",
+name:"Tomate",
+info:{
+temporada:"Verano",
+metodo:"Cultivo."
+}
+},
+
+{
+id:"hot_pepper",
+name:"Pimiento picante",
+info:{
+temporada:"Verano",
+metodo:"Cultivo."
+}
+},
+
+{
+id:"blueberry",
+name:"Arándano",
+info:{
+temporada:"Verano",
+metodo:"Cultivo."
+}
+},
+
+{
+id:"melon",
+name:"Melón",
+info:{
+temporada:"Verano",
+metodo:"Cultivo."
+}
+},
+
+{
+id:"butternut_squash",
+name:"Calabaza moscada",
+info:{
+temporada:"Verano",
+metodo:"Cultivo de SVE."
+}
+}
+
+]
+},
+
+
+{
+id:"fall_crops",
+name:"Cultivos de otoño",
+season:"Otoño",
+
+items:[
+
+{
+id:"corn",
+name:"Maíz",
+info:{
+temporada:"Verano / Otoño",
+metodo:"Cultivo."
+}
+},
+
+{
+id:"eggplant",
+name:"Berenjena",
+info:{
+temporada:"Otoño",
+metodo:"Cultivo."
+}
+},
+
+{
+id:"pumpkin",
+name:"Calabaza",
+info:{
+temporada:"Otoño",
+metodo:"Cultivo."
+}
+},
+
+{
+id:"yam",
+name:"Ñame",
+info:{
+temporada:"Otoño",
+metodo:"Cultivo."
+}
+},
+
+{
+id:"sweet_potato",
+name:"Batata",
+info:{
+temporada:"Otoño",
+metodo:"Cultivo de SVE."
+}
+}
+
+]
+},
+
+
+{
+id:"quality_crops",
+name:"Cultivos de calidad",
+season:"Todas",
+
+items:[
+
+{
+id:"gold_parsnip",
+name:"Chirivía de calidad ×5",
+info:{
+calidad:"Oro",
+cantidad:"5",
+metodo:"Cultivar chirivías y obtener calidad oro."
+}
+},
+
+{
+id:"gold_melon",
+name:"Melón de calidad ×5",
+info:{
+calidad:"Oro",
+cantidad:"5",
+metodo:"Cultivar melones y obtener calidad oro."
+}
+},
+
+{
+id:"gold_pumpkin",
+name:"Calabaza de calidad ×5",
+info:{
+calidad:"Oro",
+cantidad:"5",
+metodo:"Cultivar calabazas y obtener calidad oro."
+}
+},
+
+{
+id:"gold_corn",
+name:"Maíz de calidad ×5",
+info:{
+calidad:"Oro",
+cantidad:"5",
+metodo:"Cultivar maíz y obtener calidad oro."
+}
+},
+
+{
+id:"gold_cucumber",
+name:"Pepino de calidad ×5",
+info:{
+calidad:"Oro",
+cantidad:"5",
+metodo:"Cultivar pepinos y obtener calidad oro."
+}
+},
+
+{
+id:"gold_butternut_squash",
+name:"Calabaza moscada de calidad ×5",
+info:{
+calidad:"Oro",
+cantidad:"5",
+metodo:"Cultivar calabazas moscadas y obtener calidad oro."
+}
+},
+
+{
+id:"gold_sweet_potato",
+name:"Batata de calidad ×5",
+info:{
+calidad:"Oro",
+cantidad:"5",
+metodo:"Cultivar batatas y obtener calidad oro."
+}
+}
+
+]
+},
+
+
+{
+id:"animal",
+name:"Animales",
+season:"Todas",
+
+items:[
+
+{
+id:"large_milk",
+name:"Leche grande",
+info:{
+metodo:"Vacas con suficiente amistad."
+}
+},
+
+{
+id:"large_goat_milk",
+name:"Leche de cabra grande",
+info:{
+metodo:"Cabra con suficiente amistad."
+}
+},
+
+{
+id:"wool",
+name:"Lana",
+info:{
+metodo:"Oveja o conejo."
+}
+},
+
+{
+id:"duck_egg",
+name:"Huevo de pato",
+info:{
+metodo:"Pato."
+}
+},
+
+{
+id:"large_egg_white",
+name:"Huevo grande (blanco)",
+info:{
+metodo:"Gallina blanca con suficiente amistad."
+}
+},
+
+{
+id:"large_egg_brown",
+name:"Huevo grande (marrón)",
+info:{
+metodo:"Gallina marrón con suficiente amistad."
+}
+}
+
+]
+},
+
+
+{
+id:"artisan",
+name:"Artesano",
+season:"Todas",
+
+items:[
+
+{
+id:"truffle_oil",
+name:"Aceite de trufa",
+info:{
+metodo:"Trufa en prensa de aceite."
+}
+},
+
+{
+id:"cloth",
+name:"Tela",
+info:{
+metodo:"Lana en telar."
+}
+},
+
+{
+id:"goat_cheese",
+name:"Queso de cabra",
+info:{
+metodo:"Leche de cabra en prensa de queso."
+}
+},
+
+{
+id:"cheese",
+name:"Queso",
+info:{
+metodo:"Leche en prensa de queso."
+}
+},
+
+{
+id:"honey",
+name:"Miel",
+info:{
+metodo:"Colmena."
+}
+},
+
+{
+id:"jelly",
+name:"Gelatina",
+info:{
+metodo:"Fruta en tarro de conservas."
+}
+},
+
+{
+id:"apricot",
+name:"Albaricoque",
+info:{
+metodo:"Árbol frutal."
+}
+},
+
+{
+id:"orange",
+name:"Naranja",
+info:{
+metodo:"Árbol frutal."
+}
+},
+
+{
+id:"pear",
+name:"Pera",
+info:{
+metodo:"Árbol frutal."
+}
+},
+
+{
+id:"nectarine",
+name:"Nectarina",
+info:{
+metodo:"Árbol frutal de SVE."
+}
+},
+
+{
+id:"butter",
+name:"Mantequilla",
+info:{
+metodo:"Producto de SVE."
+}
+}
+
+]
+},
+
+
+/* =====================================================
    PECERA
-========================= */
+===================================================== */
 
 "Pecera":[
 
 {
+id:"river_fish",
 name:"Peces de río",
-season:"Primavera/Verano/Otoño/Invierno",
-items:[
-"Pez sol",
-"Pez gato",
-"Sábalo",
-"Trucha tigre",
-"Pececillo",
-"Pez dorado"
-]
-},
-
-{
-name:"Peces de lago",
 season:"Todas",
+
 items:[
-"Lubina negra",
-"Carpa",
-"Siluro",
-"Esturión",
-"Renacuajo"
-]
+
+{
+id:"sunfish",
+name:"Pez sol",
+info:{
+temporada:"Primavera / Verano",
+lugar:"Río",
+clima:"Soleado",
+horario:"6:00 - 19:00"
+}
 },
 
 {
-name:"Peces de océano",
-season:"Primavera/Verano/Otoño/Invierno",
-items:[
-"Sardina",
-"Atún",
-"Pargo colorado",
-"Tilapia",
-"Estrella de mar"
-]
+id:"catfish",
+name:"Pez gato",
+info:{
+temporada:"Primavera / Otoño",
+lugar:"Río",
+clima:"Lluvia",
+horario:"6:00 - 00:00"
+}
 },
 
 {
-name:"Pesca nocturna",
-season:"Todas",
-items:[
-"Lucioperca",
-"Brema",
-"Anguila",
-"Rana"
-]
+id:"shad",
+name:"Sábalo",
+info:{
+temporada:"Primavera / Verano / Otoño",
+lugar:"Río",
+clima:"Lluvia",
+horario:"9:00 - 02:00"
+}
 },
 
 {
-name:"Trampa para cangrejos",
-season:"Todas",
-items:[
-"Langosta",
-"Cangrejo de río",
-"Cangrejo",
-"Berberecho",
-"Mejillón",
-"Gamba",
-"Caracol",
-"Bígaro",
-"Ostra",
-"Almeja"
-]
+id:"tiger_trout",
+name:"Trucha tigre",
+info:{
+temporada:"Otoño / Invierno",
+lugar:"Río",
+clima:"Cualquier clima",
+horario:"6:00 - 19:00"
+}
 },
 
 {
-name:"Peces especiales",
-season:"Todas",
-items:[
-"Pez globo",
-"Pez fantasma",
-"Pez de arena",
-"Pez de bosque",
-"Salmón rey",
-"Pez mantequilla"
-]
+id:"minnow",
+name:"Pececillo",
+info:{
+temporada:"Todas",
+lugar:"Ríos",
+clima:"Cualquier clima"
+}
+},
+
+{
+id:"goldfish",
+name:"Pez dorado",
+info:{
+temporada:"Primavera",
+lugar:"Río",
+clima:"Soleado",
+horario:"10:00 - 17:00"
+}
 }
 
-],
+]
+},
 
 
-/* =========================
+{
+id:"lake_fish",
+name:"Peces de lago",
+season:"Todas",
+
+items:[
+
+{
+id:"largemouth_bass",
+name:"Lubina negra",
+info:{
+temporada:"Todas",
+lugar:"Lago de montaña"
+}
+},
+
+{
+id:"carp",
+name:"Carpa",
+info:{
+temporada:"Primavera / Verano / Otoño",
+lugar:"Lago de montaña"
+}
+},
+
+{
+id:"bullhead",
+name:"Siluro",
+info:{
+temporada:"Todas",
+lugar:"Lago de montaña"
+}
+},
+
+{
+id:"sturgeon",
+name:"Esturión",
+info:{
+temporada:"Verano / Invierno",
+lugar:"Lago de montaña"
+}
+},
+
+{
+id:"tadpole",
+name:"Renacuajo",
+info:{
+temporada:"Primavera",
+lugar:"Lago de montaña"
+}
+}
+
+]
+},
+
+
+{
+id:"ocean_fish",
+name:"Peces de océano",
+season:"Todas",
+
+items:[
+
+{
+id:"sardine",
+name:"Sardina",
+info:{
+temporada:"Primavera / Otoño / Invierno",
+lugar:"Océano"
+}
+},
+
+{
+id:"tuna",
+name:"Atún",
+info:{
+temporada:"Verano / Invierno",
+lugar:"Océano"
+}
+},
+
+{
+id:"red_snapper",
+name:"Pargo colorado",
+info:{
+temporada:"Verano / Otoño",
+lugar:"Océano",
+clima:"Lluvia"
+}
+},
+
+{
+id:"tilapia",
+name:"Tilapia",
+info:{
+temporada:"Verano / Otoño",
+lugar:"Océano"
+}
+},
+
+{
+id:"starfish",
+name:"Estrella de mar",
+info:{
+temporada:"Primavera / Verano / Invierno",
+lugar:"Océano"
+}
+}
+
+]
+},
+
+
+{
+id:"night_fishing",
+name:"Pesca nocturna",
+season:"Todas",
+
+items:[
+
+{
+id:"walleye",
+name:"Lucioperca",
+info:{
+temporada:"Otoño",
+lugar:"Ríos y lagos",
+clima:"Lluvia"
+}
+},
+
+{
+id:"bream",
+name:"Brema",
+info:{
+temporada:"Todas",
+lugar:"Río",
+horario:"18:00 - 02:00"
+}
+},
+
+{
+id:"eel",
+name:"Anguila",
+info:{
+temporada:"Primavera / Otoño",
+lugar:"Océano",
+clima:"Lluvia",
+horario:"16:00 - 02:00"
+}
+},
+
+{
+id:"frog",
+name:"Rana",
+info:{
+temporada:"Primavera / Verano",
+lugar:"Lago de montaña"
+}
+}
+
+]
+},
+
+
+{
+id:"crab_pot",
+name:"Trampa para cangrejos",
+season:"Todas",
+
+items:[
+
+{
+id:"lobster",
+name:"Langosta",
+info:{
+metodo:"Trampa para cangrejos."
+}
+},
+
+{
+id:"crayfish",
+name:"Cangrejo de río",
+info:{
+metodo:"Trampa para cangrejos."
+}
+},
+
+{
+id:"crab",
+name:"Cangrejo",
+info:{
+metodo:"Trampa para cangrejos."
+}
+},
+
+{
+id:"cockle",
+name:"Berberecho",
+info:{
+metodo:"Trampa para cangrejos / playa."
+}
+},
+
+{
+id:"mussel",
+name:"Mejillón",
+info:{
+metodo:"Trampa para cangrejos / playa."
+}
+},
+
+{
+id:"shrimp",
+name:"Gamba",
+info:{
+metodo:"Trampa para cangrejos."
+}
+},
+
+{
+id:"snail",
+name:"Caracol",
+info:{
+metodo:"Trampa para cangrejos."
+}
+},
+
+{
+id:"periwinkle",
+name:"Bígaro",
+info:{
+metodo:"Trampa para cangrejos."
+}
+},
+
+{
+id:"oyster",
+name:"Ostra",
+info:{
+metodo:"Trampa para cangrejos / playa."
+}
+},
+
+{
+id:"clam",
+name:"Almeja",
+info:{
+metodo:"Trampa para cangrejos / playa."
+}
+}
+
+]
+},
+
+
+{
+id:"specialty_fish",
+name:"Peces especiales",
+season:"Todas",
+
+items:[
+
+{
+id:"pufferfish",
+name:"Pez globo",
+info:{
+temporada:"Verano",
+lugar:"Océano",
+horario:"12:00 - 16:00",
+clima:"Soleado"
+}
+},
+
+{
+id:"ghostfish",
+name:"Pez fantasma",
+info:{
+temporada:"Todas",
+lugar:"Minas",
+metodo:"Pesca en las Minas."
+}
+},
+
+{
+id:"sandfish",
+name:"Pez de arena",
+info:{
+temporada:"Todas",
+lugar:"Desierto"
+}
+},
+
+{
+id:"woodskip",
+name:"Pez de bosque",
+info:{
+temporada:"Todas",
+lugar:"Bosque secreto"
+}
+},
+
+{
+id:"king_salmon",
+name:"Salmón rey",
+info:{
+temporada:"Primavera / Verano",
+lugar:"Bosque Oeste",
+horario:"6:00 - 20:00",
+nivel:"Pesca nivel 8"
+}
+},
+
+{
+id:"butterfish",
+name:"Pez mantequilla",
+info:{
+temporada:"Primavera / Verano / Otoño",
+lugar:"Puente Shearwater"
+}
+}
+
+]
+},
+
+
+/* =====================================================
    SALA DE CALDERAS
-========================= */
+===================================================== */
 
 "Sala de calderas":[
 
 {
+id:"blacksmith",
 name:"Herrero",
 season:"Todas",
+
 items:[
-"Lingote de cobre",
-"Lingote de hierro",
-"Lingote de oro"
-]
+
+{
+id:"copper_bar",
+name:"Lingote de cobre",
+info:{
+lugar:"Minas 1-40",
+metodo:"Fundir mineral de cobre."
+}
 },
 
 {
-name:"Geólogo",
-season:"Todas",
-items:[
-"Cuarzo",
-"Cristal de tierra",
-"Lágrima helada",
-"Cuarzo de fuego"
-]
+id:"iron_bar",
+name:"Lingote de hierro",
+info:{
+lugar:"Minas 40-80",
+metodo:"Fundir mineral de hierro."
+}
 },
 
 {
-name:"Aventurero",
-season:"Todas",
-items:[
-"Baba ×99",
-"Ala de murciélago ×10",
-"Esencia solar",
-"Esencia del vacío"
-]
+id:"gold_bar",
+name:"Lingote de oro",
+info:{
+lugar:"Minas 80-120",
+metodo:"Fundir mineral de oro."
+}
 }
 
-],
+]
+},
 
 
-/* =========================
+{
+id:"geologist",
+name:"Geólogo",
+season:"Todas",
+
+items:[
+
+{
+id:"quartz",
+name:"Cuarzo",
+info:{
+lugar:"Minas 1-40"
+}
+},
+
+{
+id:"earth_crystal",
+name:"Cristal de tierra",
+info:{
+lugar:"Minas 1-40"
+}
+},
+
+{
+id:"frozen_tear",
+name:"Lágrima helada",
+info:{
+lugar:"Minas 40-80"
+}
+},
+
+{
+id:"fire_quartz",
+name:"Cuarzo de fuego",
+info:{
+lugar:"Minas 80-120"
+}
+}
+
+]
+},
+
+
+{
+id:"adventurer",
+name:"Aventurero",
+season:"Todas",
+
+items:[
+
+{
+id:"slime",
+name:"Baba ×99",
+info:{
+cantidad:"99",
+metodo:"Derrotar babas."
+}
+},
+
+{
+id:"bat_wing",
+name:"Ala de murciélago ×10",
+info:{
+cantidad:"10",
+metodo:"Derrotar murciélagos."
+}
+},
+
+{
+id:"solar_essence",
+name:"Esencia solar",
+info:{
+metodo:"Monstruos de las Minas."
+}
+},
+
+{
+id:"void_essence",
+name:"Esencia del vacío",
+info:{
+metodo:"Monstruos de las Minas."
+}
+}
+
+]
+},
+
+
+/* =====================================================
    TABLÓN DE ANUNCIOS
-========================= */
+===================================================== */
 
 "Tablón de anuncios":[
 
 {
+id:"chef",
 name:"Chef",
 season:"Todas",
+
 items:[
-"Jarabe de arce",
-"Helecho",
-"Trufa",
-"Amapola",
-"Maki",
-"Huevo frito",
-"Caramelo"
-]
+
+{
+id:"maple_syrup",
+name:"Jarabe de arce",
+info:{
+metodo:"Extractor de savia en arce."
+}
 },
 
 {
+id:"fiddlehead_fern",
+name:"Helecho",
+info:{
+temporada:"Verano",
+lugar:"Bosque secreto",
+metodo:"Recolección."
+}
+},
+
+{
+id:"truffle",
+name:"Trufa",
+info:{
+metodo:"Cerdo."
+}
+},
+
+{
+id:"poppy",
+name:"Amapola",
+info:{
+temporada:"Verano",
+metodo:"Cultivo."
+}
+},
+
+{
+id:"maki_roll",
+name:"Maki",
+info:{
+metodo:"Cocina."
+}
+},
+
+{
+id:"fried_egg",
+name:"Huevo frito",
+info:{
+metodo:"Cocina."
+}
+},
+
+{
+id:"candy",
+name:"Caramelo",
+info:{
+metodo:"Compra en Stardrop Saloon."
+}
+}
+
+]
+},
+
+
+{
+id:"fodder",
 name:"Forraje",
 season:"Todas",
+
 items:[
-"Trigo ×10",
-"Heno ×10",
-"Manzana ×3"
-]
+
+{
+id:"wheat",
+name:"Trigo ×10",
+info:{
+cantidad:"10",
+metodo:"Cultivo."
+}
 },
 
 {
+id:"hay",
+name:"Heno ×10",
+info:{
+cantidad:"10",
+metodo:"Silo / hierba."
+}
+},
+
+{
+id:"apple",
+name:"Manzana ×3",
+info:{
+cantidad:"3",
+metodo:"Árbol frutal."
+}
+}
+
+]
+},
+
+
+{
+id:"enchanter",
 name:"Encantador",
 season:"Todas",
+
 items:[
-"Resina de roble",
-"Vino",
-"Pata de conejo",
-"Granada",
-"Trébol de cuatro hojas"
-]
+
+{
+id:"oak_resin",
+name:"Resina de roble",
+info:{
+metodo:"Extractor de savia en roble."
+}
 },
 
 {
+id:"wine",
+name:"Vino",
+info:{
+metodo:"Fruta en barril."
+}
+},
+
+{
+id:"rabbit_foot",
+name:"Pata de conejo",
+info:{
+metodo:"Conejo."
+}
+},
+
+{
+id:"pomegranate",
+name:"Granada",
+info:{
+metodo:"Árbol frutal."
+}
+},
+
+{
+id:"four_leaf_clover",
+name:"Trébol de cuatro hojas",
+info:{
+metodo:"Objeto de SVE."
+}
+}
+
+]
+},
+
+
+{
+id:"field_research",
 name:"Investigación de campo",
 season:"Todas",
+
 items:[
-"Champiñón morado",
-"Concha de nautilus",
-"Cacho",
-"Geoda congelada",
-"Ámbar"
-]
+
+{
+id:"purple_mushroom_2",
+name:"Champiñón morado",
+info:{
+metodo:"Minas / recolección."
+}
 },
 
 {
+id:"nautilus_shell",
+name:"Concha de nautilus",
+info:{
+temporada:"Invierno",
+metodo:"Recolección en la playa."
+}
+},
+
+{
+id:"chub",
+name:"Cacho",
+info:{
+metodo:"Pesca."
+}
+},
+
+{
+id:"frozen_geode",
+name:"Geoda congelada",
+info:{
+lugar:"Minas 40-80"
+}
+},
+
+{
+id:"amber",
+name:"Ámbar",
+info:{
+metodo:"Geoda / minería."
+}
+}
+
+]
+},
+
+
+{
+id:"dye",
 name:"Tinte",
 season:"Todas",
+
 items:[
-"Champiñón rojo",
-"Erizo de mar",
-"Girasol",
-"Pluma de pato",
-"Aguamarina",
-"Col lombarda",
-"Caqui"
+
+{
+id:"red_mushroom_2",
+name:"Champiñón rojo",
+info:{
+metodo:"Recolección / Minas."
+}
+},
+
+{
+id:"sea_urchin",
+name:"Erizo de mar",
+info:{
+metodo:"Recolección en la playa."
+}
+},
+
+{
+id:"sunflower",
+name:"Girasol",
+info:{
+temporada:"Verano / Otoño",
+metodo:"Cultivo."
+}
+},
+
+{
+id:"duck_feather",
+name:"Pluma de pato",
+info:{
+metodo:"Pato."
+}
+},
+
+{
+id:"aquamarine",
+name:"Aguamarina",
+info:{
+lugar:"Minas 40-80"
+}
+},
+
+{
+id:"red_cabbage",
+name:"Col lombarda",
+info:{
+temporada:"Verano",
+metodo:"Cultivo."
+}
+},
+
+{
+id:"persimmon",
+name:"Caqui",
+info:{
+metodo:"Árbol frutal de SVE."
+}
+}
+
 ]
 }
 
 ],
 
 
-/* =========================
+/* =====================================================
    CAJA FUERTE
-========================= */
+===================================================== */
 
 "Caja fuerte":[
 
 {
+id:"vault_2500",
 name:"2.500g",
 season:"Todas",
+
 items:[
-"2.500g"
+
+{
+id:"money_2500",
+name:"2.500g",
+info:{
+cantidad:"2.500g",
+metodo:"Dinero."
+}
+}
+
 ]
 },
 
 {
+id:"vault_5000",
 name:"5.000g",
 season:"Todas",
+
 items:[
-"5.000g"
+
+{
+id:"money_5000",
+name:"5.000g",
+info:{
+cantidad:"5.000g",
+metodo:"Dinero."
+}
+}
+
 ]
 },
 
 {
+id:"vault_10000",
 name:"10.000g",
 season:"Todas",
+
 items:[
-"10.000g"
+
+{
+id:"money_10000",
+name:"10.000g",
+info:{
+cantidad:"10.000g",
+metodo:"Dinero."
+}
+}
+
 ]
 },
 
 {
+id:"vault_25000",
 name:"25.000g",
 season:"Todas",
+
 items:[
-"25.000g"
+
+{
+id:"money_25000",
+name:"25.000g",
+info:{
+cantidad:"25.000g",
+metodo:"Dinero."
+}
+}
+
 ]
 }
 
@@ -762,13 +2104,16 @@ items:[
 
 
 /* =====================================================
-   CONECTAR PARTIDA
+   CONEXIÓN
 ===================================================== */
 
 async function conectarPartida(){
 
     const nombre =
-        document.getElementById("partida").value.trim();
+        document
+        .getElementById("partida")
+        .value
+        .trim();
 
 
     if(!nombre){
@@ -781,65 +2126,114 @@ async function conectarPartida(){
     }
 
 
-    partidaActual = nombre;
+    partidaActual =
+        nombre;
 
 
-    document.getElementById("status")
+    document
+        .getElementById("status")
         .textContent =
         "🟡 Conectando...";
 
 
-    const { data, error } =
-        await supabaseClient
-        .from("progreso")
-        .select(
-            "item_id, conseguido"
-        )
-        .eq(
-            "partida",
-            partidaActual
-        );
+    try{
+
+        const { data, error } =
+            await supabaseClient
+            .from("progreso")
+            .select(
+                "item_id, conseguido"
+            )
+            .eq(
+                "partida",
+                partidaActual
+            );
 
 
-    if(error){
+        if(error){
 
-        console.error(error);
+            console.error(
+                "ERROR SUPABASE:",
+                error
+            );
 
-        document.getElementById("status")
+
+            document
+                .getElementById("status")
+                .textContent =
+                "🔴 Error al conectar";
+
+
+            alert(
+                "ERROR DE SUPABASE:\n\n" +
+                error.message
+            );
+
+
+            return;
+
+        }
+
+
+        checked = {};
+
+
+        if(data){
+
+            data.forEach(
+                row => {
+
+                checked[
+                    row.item_id
+                ] =
+                row.conseguido;
+
+            });
+
+        }
+
+
+        document
+            .getElementById("status")
             .textContent =
-            "🔴 Error al conectar.";
+            "🟢 Partida conectada: " +
+            partidaActual;
 
-        return;
+
+        mostrarVista();
+
+
+        escucharCambios();
+
     }
 
 
-    checked = {};
+    catch(error){
+
+        console.error(
+            "ERROR:",
+            error
+        );
 
 
-    data.forEach(row => {
-
-        checked[row.item_id] =
-            row.conseguido;
-
-    });
+        document
+            .getElementById("status")
+            .textContent =
+            "🔴 Error de conexión";
 
 
-    document.getElementById("status")
-        .textContent =
-        "🟢 Partida conectada: " +
-        partidaActual;
+        alert(
+            "ERROR DE CONEXIÓN:\n\n" +
+            error.message
+        );
 
-
-    mostrarVista();
-
-
-    escucharCambios();
+    }
 
 }
 
 
 /* =====================================================
-   GUARDAR CAMBIO
+   GUARDAR
 ===================================================== */
 
 async function cambiarItem(
@@ -854,10 +2248,12 @@ async function cambiarItem(
         );
 
         return;
+
     }
 
 
-    checked[id] = valor;
+    checked[id] =
+        valor;
 
 
     const { error } =
@@ -875,7 +2271,8 @@ async function cambiarItem(
                 valor,
 
             actualizado_en:
-                new Date().toISOString()
+                new Date()
+                .toISOString()
 
         },{
             onConflict:
@@ -885,13 +2282,20 @@ async function cambiarItem(
 
     if(error){
 
-        console.error(error);
-
-        alert(
-            "No se pudo guardar el cambio."
+        console.error(
+            "ERROR GUARDANDO:",
+            error
         );
 
+
+        alert(
+            "No se pudo guardar:\n\n" +
+            error.message
+        );
+
+
         return;
+
     }
 
 
@@ -901,7 +2305,7 @@ async function cambiarItem(
 
 
 /* =====================================================
-   ESCUCHAR CAMBIOS DE LA OTRA PERSONA
+   REALTIME
 ===================================================== */
 
 function escucharCambios(){
@@ -909,9 +2313,9 @@ function escucharCambios(){
     if(canalActual){
 
         supabaseClient
-            .removeChannel(
-                canalActual
-            );
+        .removeChannel(
+            canalActual
+        );
 
     }
 
@@ -926,9 +2330,7 @@ function escucharCambios(){
 
     canalActual
     .on(
-
         "postgres_changes",
-
         {
             event:"*",
             schema:"public",
@@ -939,6 +2341,12 @@ function escucharCambios(){
         },
 
         payload => {
+
+            console.log(
+                "Cambio recibido:",
+                payload
+            );
+
 
             if(
                 payload.eventType ===
@@ -951,7 +2359,7 @@ function escucharCambios(){
                 checked[
                     payload.new.item_id
                 ] =
-                    payload.new.conseguido;
+                payload.new.conseguido;
 
 
                 mostrarVista();
@@ -961,13 +2369,24 @@ function escucharCambios(){
         }
 
     )
-    .subscribe();
+
+
+    .subscribe(
+        status => {
+
+            console.log(
+                "Realtime:",
+                status
+            );
+
+        }
+    );
 
 }
 
 
 /* =====================================================
-   ID DEL OBJETO
+   OBTENER ID
 ===================================================== */
 
 function obtenerId(
@@ -977,12 +2396,207 @@ function obtenerId(
 ){
 
     return (
+        "sve_" +
         room +
         "_" +
-        bundle +
+        bundle.id +
         "_" +
-        item
+        item.id
     );
+
+}
+
+
+/* =====================================================
+   CREAR ITEM
+===================================================== */
+
+function crearItem(
+    room,
+    bundle,
+    item
+){
+
+    const id =
+        obtenerId(
+            room,
+            bundle,
+            item
+        );
+
+
+    const row =
+        document.createElement(
+            "div"
+        );
+
+
+    row.className =
+        "item";
+
+
+    if(checked[id]){
+
+        row.classList.add(
+            "completed"
+        );
+
+    }
+
+
+    const main =
+        document.createElement(
+            "div"
+        );
+
+
+    main.className =
+        "item-main";
+
+
+    const checkbox =
+        document.createElement(
+            "input"
+        );
+
+
+    checkbox.type =
+        "checkbox";
+
+
+    checkbox.checked =
+        !!checked[id];
+
+
+    checkbox.onchange =
+        () => {
+
+        row.classList.toggle(
+            "completed",
+            checkbox.checked
+        );
+
+
+        cambiarItem(
+            id,
+            checkbox.checked
+        );
+
+    };
+
+
+    const name =
+        document.createElement(
+            "span"
+        );
+
+
+    name.className =
+        "item-name";
+
+
+    name.textContent =
+        item.name;
+
+
+    const info =
+        document.createElement(
+            "div"
+        );
+
+
+    info.className =
+        "item-info";
+
+
+    let html = "";
+
+
+    for(
+        const key in item.info
+    ){
+
+        html +=
+            `<div class="info-line">
+                <strong>
+                    ${traducirCampo(key)}:
+                </strong>
+                ${item.info[key]}
+             </div>`;
+
+    }
+
+
+    info.innerHTML =
+        html;
+
+
+    name.onclick =
+        () => {
+
+        info.classList.toggle(
+            "open"
+        );
+
+    };
+
+
+    main.appendChild(
+        checkbox
+    );
+
+
+    main.appendChild(
+        name
+    );
+
+
+    row.appendChild(
+        main
+    );
+
+
+    row.appendChild(
+        info
+    );
+
+
+    return row;
+
+}
+
+
+/* =====================================================
+   TRADUCIR CAMPOS
+===================================================== */
+
+function traducirCampo(
+    campo
+){
+
+    const nombres = {
+
+        temporada:"Temporada",
+
+        lugar:"Lugar",
+
+        clima:"Clima",
+
+        horario:"Horario",
+
+        metodo:"Cómo conseguirlo",
+
+        cantidad:"Cantidad",
+
+        calidad:"Calidad",
+
+        nivel:"Requisito"
+
+    };
+
+
+    return nombres[campo] ||
+           campo;
 
 }
 
@@ -999,18 +2613,22 @@ function showBundles(){
         );
 
 
-    content.innerHTML = "";
+    content.innerHTML =
+        "";
 
 
     const busqueda =
-        document.getElementById(
+        document
+        .getElementById(
             "search"
-        ).value
+        )
+        .value
         .toLowerCase()
         .trim();
 
 
-    let encontrados = 0;
+    let encontrados =
+        0;
 
 
     for(
@@ -1022,6 +2640,7 @@ function showBundles(){
                 "div"
             );
 
+
         roomSection.className =
             "section";
 
@@ -1031,12 +2650,15 @@ function showBundles(){
                 "div"
             );
 
+
         roomTitle.className =
             "section-title";
 
 
         roomTitle.innerHTML =
-            `<span>🏛️ ${room}</span>
+            `<span>
+                🏛️ ${room}
+             </span>
              <span>▼</span>`;
 
 
@@ -1045,11 +2667,13 @@ function showBundles(){
                 "div"
             );
 
+
         roomItems.className =
             "items";
 
 
-        roomTitle.onclick = () => {
+        roomTitle.onclick =
+            () => {
 
             roomItems.classList.toggle(
                 "open"
@@ -1065,8 +2689,11 @@ function showBundles(){
                 bundle.items.filter(
                     item =>
                         !busqueda ||
-                        item.toLowerCase()
-                            .includes(busqueda)
+                        item.name
+                        .toLowerCase()
+                        .includes(
+                            busqueda
+                        )
                 );
 
 
@@ -1106,26 +2733,31 @@ function showBundles(){
                 bundle.items.filter(
                     item => {
 
-                        const id =
-                            obtenerId(
-                                room,
-                                bundle.name,
-                                item
-                            );
+                    const id =
+                        obtenerId(
+                            room,
+                            bundle,
+                            item
+                        );
 
-                        return !!checked[id];
 
-                    }
-                ).length;
+                    return !!checked[id];
+
+                }).length;
 
 
             bundleTitle.innerHTML =
                 `<span>
                     📦 ${bundle.name}
-                    <span class="bundle-count">
+
+                    <span
+                        class="bundle-count"
+                    >
                         ${completados}/${cantidad}
                     </span>
+
                  </span>
+
                  <span>▼</span>`;
 
 
@@ -1139,7 +2771,8 @@ function showBundles(){
                 "items";
 
 
-            bundleTitle.onclick = () => {
+            bundleTitle.onclick =
+                () => {
 
                 bundleItems.classList.toggle(
                     "open"
@@ -1151,86 +2784,12 @@ function showBundles(){
             itemsFiltrados.forEach(
                 item => {
 
-                const id =
-                    obtenerId(
-                        room,
-                        bundle.name,
-                        item
-                    );
-
-
-                const row =
-                    document.createElement(
-                        "label"
-                    );
-
-
-                row.className =
-                    "item";
-
-
-                const checkbox =
-                    document.createElement(
-                        "input"
-                    );
-
-
-                checkbox.type =
-                    "checkbox";
-
-
-                checkbox.checked =
-                    !!checked[id];
-
-
-                const text =
-                    document.createElement(
-                        "span"
-                    );
-
-
-                text.textContent =
-                    item;
-
-
-                if(
-                    checkbox.checked
-                ){
-
-                    row.classList.add(
-                        "completed"
-                    );
-
-                }
-
-
-                checkbox.onchange =
-                    () => {
-
-                    row.classList.toggle(
-                        "completed",
-                        checkbox.checked
-                    );
-
-
-                    cambiarItem(
-                        id,
-                        checkbox.checked
-                    );
-
-                };
-
-
-                row.appendChild(
-                    checkbox
-                );
-
-                row.appendChild(
-                    text
-                );
-
                 bundleItems.appendChild(
-                    row
+                    crearItem(
+                        room,
+                        bundle,
+                        item
+                    )
                 );
 
             });
@@ -1239,6 +2798,7 @@ function showBundles(){
             roomItems.appendChild(
                 bundleTitle
             );
+
 
             roomItems.appendChild(
                 bundleItems
@@ -1259,6 +2819,7 @@ function showBundles(){
         roomSection.appendChild(
             roomTitle
         );
+
 
         roomSection.appendChild(
             roomItems
@@ -1291,7 +2852,7 @@ function showBundles(){
 
 
 /* =====================================================
-   VISTA POR ESTACIÓN
+   POR ESTACIÓN
 ===================================================== */
 
 function showSeasons(){
@@ -1302,28 +2863,104 @@ function showSeasons(){
         );
 
 
-    content.innerHTML = "";
+    content.innerHTML =
+        "";
 
 
     const busqueda =
-        document.getElementById(
+        document
+        .getElementById(
             "search"
-        ).value
+        )
+        .value
         .toLowerCase()
         .trim();
 
 
     const estaciones = [
+
         "Primavera",
         "Verano",
         "Otoño",
-        "Invierno",
-        "Todas"
+        "Invierno"
+
     ];
 
 
     estaciones.forEach(
         estacion => {
+
+        let contenidoEstacion =
+            [];
+
+
+        for(
+            const room in bundles
+        ){
+
+            bundles[room].forEach(
+                bundle => {
+
+                if(
+                    bundle.season ===
+                    "Todas"
+                ){
+
+                    return;
+
+                }
+
+
+                if(
+                    !bundle.season
+                    .includes(
+                        estacion
+                    )
+                ){
+
+                    return;
+
+                }
+
+
+                bundle.items.forEach(
+                    item => {
+
+                    if(
+                        busqueda &&
+                        !item.name
+                        .toLowerCase()
+                        .includes(
+                            busqueda
+                        )
+                    ){
+
+                        return;
+
+                    }
+
+
+                    contenidoEstacion.push({
+                        room:room,
+                        bundle:bundle,
+                        item:item
+                    });
+
+                });
+
+            });
+
+        }
+
+
+        if(
+            contenidoEstacion.length === 0
+        ){
+
+            return;
+
+        }
+
 
         const titulo =
             document.createElement(
@@ -1336,7 +2973,8 @@ function showSeasons(){
 
 
         titulo.textContent =
-            "🌱 " + estacion;
+            "🌱 " +
+            estacion;
 
 
         content.appendChild(
@@ -1344,214 +2982,89 @@ function showSeasons(){
         );
 
 
-        let encontrados = 0;
-
-
-        for(
-            const room in bundles
-        ){
-
-            bundles[room].forEach(
-                bundle => {
-
-                const pertenece =
-                    bundle.season
-                        .includes(
-                            estacion
-                        );
-
-
-                if(!pertenece){
-                    return;
-                }
-
-
-                const items =
-                    bundle.items.filter(
-                        item =>
-                            !busqueda ||
-                            item.toLowerCase()
-                                .includes(
-                                    busqueda
-                                )
-                    );
-
-
-                if(
-                    items.length === 0
-                ){
-
-                    return;
-
-                }
-
-
-                encontrados +=
-                    items.length;
-
-
-                const section =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                section.className =
-                    "section";
-
-
-                const title =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                title.className =
-                    "section-title";
-
-
-                title.innerHTML =
-                    `<span>
-                        📦 ${bundle.name}
-                        <span class="bundle-count">
-                            ${room}
-                        </span>
-                     </span>
-                     <span>▼</span>`;
-
-
-                const list =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                list.className =
-                    "items open";
-
-
-                title.onclick = () => {
-
-                    list.classList.toggle(
-                        "open"
-                    );
-
-                };
-
-
-                items.forEach(
-                    item => {
-
-                    const id =
-                        obtenerId(
-                            room,
-                            bundle.name,
-                            item
-                        );
-
-
-                    const row =
-                        document.createElement(
-                            "label"
-                        );
-
-
-                    row.className =
-                        "item";
-
-
-                    const checkbox =
-                        document.createElement(
-                            "input"
-                        );
-
-
-                    checkbox.type =
-                        "checkbox";
-
-
-                    checkbox.checked =
-                        !!checked[id];
-
-
-                    const text =
-                        document.createElement(
-                            "span"
-                        );
-
-
-                    text.textContent =
-                        item;
-
-
-                    if(
-                        checkbox.checked
-                    ){
-
-                        row.classList.add(
-                            "completed"
-                        );
-
-                    }
-
-
-                    checkbox.onchange =
-                        () => {
-
-                        row.classList.toggle(
-                            "completed",
-                            checkbox.checked
-                        );
-
-
-                        cambiarItem(
-                            id,
-                            checkbox.checked
-                        );
-
-                    };
-
-
-                    row.appendChild(
-                        checkbox
-                    );
-
-                    row.appendChild(
-                        text
-                    );
-
-                    list.appendChild(
-                        row
-                    );
-
-                });
-
-
-                section.appendChild(
-                    title
+        contenidoEstacion.forEach(
+            datos => {
+
+            const section =
+                document.createElement(
+                    "div"
                 );
 
-                section.appendChild(
-                    list
+
+            section.className =
+                "section";
+
+
+            const title =
+                document.createElement(
+                    "div"
                 );
 
-                content.appendChild(
-                    section
+
+            title.className =
+                "section-title";
+
+
+            title.innerHTML =
+                `<span>
+                    📦 ${datos.item.name}
+
+                    <span
+                        class="bundle-count"
+                    >
+                        ${datos.bundle.name}
+                        · ${datos.room}
+                    </span>
+
+                 </span>
+
+                 <span>▼</span>`;
+
+
+            const list =
+                document.createElement(
+                    "div"
                 );
 
-            });
 
-        }
+            list.className =
+                "items";
 
 
-        if(
-            encontrados === 0
-        ){
+            list.appendChild(
+                crearItem(
+                    datos.room,
+                    datos.bundle,
+                    datos.item
+                )
+            );
 
-            titulo.style.display =
-                "none";
 
-        }
+            title.onclick =
+                () => {
+
+                list.classList.toggle(
+                    "open"
+                );
+
+            };
+
+
+            section.appendChild(
+                title
+            );
+
+
+            section.appendChild(
+                list
+            );
+
+
+            content.appendChild(
+                section
+            );
+
+        });
 
     });
 
@@ -1562,7 +3075,7 @@ function showSeasons(){
 
 
 /* =====================================================
-   BUSCADOR
+   BUSCAR
 ===================================================== */
 
 function buscar(){
@@ -1573,18 +3086,20 @@ function buscar(){
 
 
 /* =====================================================
-   MOSTRAR VISTA ACTUAL
+   MOSTRAR VISTA
 ===================================================== */
 
 function mostrarVista(){
 
     if(
-        modoActual === "bundle"
+        modoActual ===
+        "bundle"
     ){
 
         showBundles();
 
-    }else{
+    }
+    else{
 
         showSeasons();
 
@@ -1594,7 +3109,7 @@ function mostrarVista(){
 
 
 /* =====================================================
-   BOTÓN POR LOTES
+   POR LOTES
 ===================================================== */
 
 function mostrarPorLotes(){
@@ -1627,7 +3142,7 @@ function mostrarPorLotes(){
 
 
 /* =====================================================
-   BOTÓN POR ESTACIÓN
+   POR ESTACIÓN
 ===================================================== */
 
 function mostrarPorEstacion(){
@@ -1665,9 +3180,11 @@ function mostrarPorEstacion(){
 
 function updateProgress(){
 
-    let total = 0;
+    let total =
+        0;
 
-    let done = 0;
+    let done =
+        0;
 
 
     for(
@@ -1686,7 +3203,7 @@ function updateProgress(){
                 const id =
                     obtenerId(
                         room,
-                        bundle.name,
+                        bundle,
                         item
                     );
 
@@ -1739,4 +3256,5 @@ showBundles();
 </script>
 
 </body>
+
 </html>
