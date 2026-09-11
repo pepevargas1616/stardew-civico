@@ -8,6 +8,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+
 *{
   box-sizing:border-box;
 }
@@ -22,6 +23,7 @@ body{
 .hidden{
   display:none!important;
 }
+
 
 /* =========================
    PANTALLA DE ENTRADA
@@ -83,6 +85,7 @@ body{
   font-size:14px;
 }
 
+
 /* =========================
    APP
 ========================= */
@@ -95,9 +98,16 @@ body{
 header{
   background:white;
   border-radius:20px;
-  padding:20px;
+  padding:18px 20px;
   margin-bottom:15px;
   box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+.header-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
 }
 
 header h1{
@@ -109,6 +119,29 @@ header h1{
   font-size:14px;
 }
 
+.refresh-button{
+  border:0;
+  background:#eee9df;
+  color:#40382f;
+  padding:10px 14px;
+  border-radius:11px;
+  cursor:pointer;
+  font-size:14px;
+  white-space:nowrap;
+}
+
+.refresh-button:hover{
+  background:#e3ddd2;
+}
+
+#refreshStatus{
+  font-size:12px;
+  color:#668f53;
+  margin-top:7px;
+  min-height:14px;
+}
+
+
 .card{
   background:white;
   border-radius:18px;
@@ -117,13 +150,29 @@ header h1{
   box-shadow:0 4px 15px rgba(0,0,0,.07);
 }
 
+
+/* =========================
+   PROGRESO
+========================= */
+
+.progress-main{
+  font-size:21px;
+  font-weight:bold;
+  margin-bottom:4px;
+}
+
+.progress-secondary{
+  color:#777;
+  font-size:13px;
+}
+
 .progress-bar{
   width:100%;
   height:18px;
   background:#e8e4dc;
   border-radius:20px;
   overflow:hidden;
-  margin-top:10px;
+  margin-top:12px;
 }
 
 #progressFill{
@@ -138,6 +187,11 @@ header h1{
   font-weight:bold;
 }
 
+
+/* =========================
+   BUSCADOR
+========================= */
+
 .search-box{
   display:flex;
   gap:8px;
@@ -150,6 +204,11 @@ header h1{
   border-radius:12px;
   font-size:16px;
 }
+
+
+/* =========================
+   BOTONES DE MODO
+========================= */
 
 .mode-buttons{
   display:flex;
@@ -173,6 +232,7 @@ header h1{
   color:white;
 }
 
+
 /* =========================
    HABITACIONES
 ========================= */
@@ -182,13 +242,30 @@ header h1{
 }
 
 .room-title{
-  padding:16px;
+  padding:15px 16px;
   border-radius:15px;
   color:white;
   font-size:20px;
   font-weight:bold;
   margin-bottom:10px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
 }
+
+.room-progress{
+  font-size:13px;
+  font-weight:normal;
+  background:rgba(255,255,255,.18);
+  padding:6px 10px;
+  border-radius:20px;
+  white-space:nowrap;
+}
+
+
+/* Colores de habitaciones */
 
 .room-crafts .room-title{
   background:#806246;
@@ -207,12 +284,13 @@ header h1{
 }
 
 .room-bulletin .room-title{
-  background:#8067a2;
+  background:#76579a;
 }
 
 .room-vault .room-title{
   background:#b38b35;
 }
+
 
 /* =========================
    LOTES
@@ -229,12 +307,21 @@ header h1{
 .bundle-title{
   padding:14px 16px;
   cursor:pointer;
+
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:10px;
+
   background:var(--bundle-bg,#f2eee8);
+
   border-left:7px solid var(--bundle-color,#806246);
+
+  transition:.15s;
+}
+
+.bundle-title:hover{
+  filter:brightness(.98);
 }
 
 .bundle-title-left{
@@ -257,6 +344,11 @@ header h1{
   white-space:nowrap;
 }
 
+.bundle-count.complete{
+  color:#4e8140;
+  font-weight:bold;
+}
+
 .items{
   padding:8px;
 }
@@ -268,6 +360,8 @@ header h1{
   padding:11px;
   border-radius:10px;
   transition:.2s;
+
+  flex-wrap:wrap;
 }
 
 .item:hover{
@@ -293,11 +387,13 @@ header h1{
   font-size:22px;
   width:28px;
   text-align:center;
+  flex:none;
 }
 
 .item-content{
   flex:1;
   cursor:pointer;
+  min-width:120px;
 }
 
 .item-name{
@@ -317,7 +413,9 @@ header h1{
   width:30px;
   height:30px;
   cursor:pointer;
+  flex:none;
 }
+
 
 /* =========================
    INFO
@@ -325,6 +423,9 @@ header h1{
 
 .info-panel{
   display:none;
+  width:100%;
+  flex-basis:100%;
+
   background:#f7f5f0;
   margin:0 8px 8px 8px;
   padding:14px;
@@ -340,6 +441,7 @@ header h1{
   display:block;
   margin-bottom:5px;
 }
+
 
 /* =========================
    ESTACIONES
@@ -359,20 +461,26 @@ header h1{
   margin-bottom:8px;
 }
 
+.season-list{
+  display:flex;
+  flex-direction:column;
+}
+
 .season-item{
   background:white;
   border-radius:13px;
   margin:6px 0;
   padding:12px;
+
   display:flex;
   align-items:center;
   gap:10px;
+
   box-shadow:0 2px 8px rgba(0,0,0,.05);
 }
 
 .season-item.completed{
   opacity:.5;
-  order:2;
 }
 
 .season-item input{
@@ -383,10 +491,20 @@ header h1{
 .season-info{
   flex:1;
   cursor:pointer;
+  min-width:0;
 }
 
+.season-info strong{
+  display:block;
+}
+
+.season-info small{
+  color:#777;
+}
+
+
 /* =========================
-   RESULTADOS BUSQUEDA
+   BUSQUEDA
 ========================= */
 
 .search-result{
@@ -394,26 +512,46 @@ header h1{
   padding:12px;
   border-radius:12px;
   margin:6px 0;
+
   display:flex;
   align-items:center;
   gap:10px;
+}
+
+.search-result.completed{
+  opacity:.5;
+}
+
+.search-result.completed strong{
+  text-decoration:line-through;
 }
 
 .search-result small{
   color:#777;
 }
 
+
 /* =========================
    RESPONSIVE
 ========================= */
 
 @media(max-width:600px){
+
   .container{
     width:96%;
   }
 
   header h1{
     font-size:24px;
+  }
+
+  .header-top{
+    align-items:flex-start;
+  }
+
+  .refresh-button{
+    padding:9px 10px;
+    font-size:13px;
   }
 
   .bundle-title{
@@ -427,15 +565,28 @@ header h1{
   .mode-buttons button{
     min-width:100%;
   }
+
+  .room-title{
+    font-size:17px;
+  }
+
+  .room-progress{
+    font-size:11px;
+    padding:5px 8px;
+  }
+
 }
+
 </style>
 </head>
 
+
 <body>
 
-<!-- =========================
+
+<!-- =====================================================
      LOGIN
-========================= -->
+===================================================== -->
 
 <div id="loginScreen">
 
@@ -465,48 +616,118 @@ header h1{
 </div>
 
 
-<!-- =========================
-     APLICACIÓN
-========================= -->
 
-<div class="container hidden" id="appContainer">
+<!-- =====================================================
+     APLICACIÓN
+===================================================== -->
+
+<div
+  class="container hidden"
+  id="appContainer"
+>
+
+
+  <!-- HEADER -->
 
   <header>
-    <h1>🏛️ Centro Cívico SVE</h1>
-    <div id="partidaActual"></div>
+
+    <div class="header-top">
+
+      <div>
+
+        <h1>
+          🏛️ Centro Cívico SVE
+        </h1>
+
+        <div id="partidaActual"></div>
+
+      </div>
+
+
+      <button
+        id="btnRefrescar"
+        class="refresh-button"
+      >
+        🔄 Actualizar
+      </button>
+
+    </div>
+
+    <div id="refreshStatus"></div>
+
   </header>
+
+
+
+  <!-- ===================================================
+       PROGRESO
+  =================================================== -->
 
   <div class="card">
 
-    <h3>📊 Progreso del Centro Cívico</h3>
+    <h3>
+      📊 Progreso del Centro Cívico
+    </h3>
 
-    <div class="progress-bar">
-      <div id="progressFill"></div>
+    <div
+      id="progressMain"
+      class="progress-main"
+    >
+      0 / 30 lotes
     </div>
 
+    <div
+      id="progressSecondary"
+      class="progress-secondary"
+    >
+      0 / 148 objetos conseguidos
+    </div>
+
+
+    <div class="progress-bar">
+
+      <div id="progressFill"></div>
+
+    </div>
+
+
     <div id="progressText">
-      0 / 148
+      0%
     </div>
 
   </div>
 
 
+
+  <!-- ===================================================
+       BUSCADOR
+  =================================================== -->
+
   <div class="card">
 
-    <h3>🔎 Buscar objeto</h3>
+    <h3>
+      🔎 Buscar objeto
+    </h3>
 
     <div class="search-box">
+
       <input
         id="buscador"
         type="text"
         placeholder="Busca un objeto..."
       >
+
     </div>
 
     <div id="searchResults"></div>
 
   </div>
 
+
+
+  <!-- ===================================================
+       MODOS
+  =================================================== -->
 
   <div class="card">
 
@@ -530,12 +751,16 @@ header h1{
   </div>
 
 
+
   <div id="contenido"></div>
+
 
 </div>
 
 
+
 <script>
+
 
 /* =========================================================
    SUPABASE
@@ -586,6 +811,8 @@ const rooms = [
       icon:"🌷",
       color:"#8b6b4d",
       bg:"#f4eee7",
+      required:4,
+
       items:[
         ["Wild Horseradish","Rábano picante silvestre","Primavera","Recolección"],
         ["Daffodil","Narciso","Primavera","Recolección"],
@@ -600,6 +827,8 @@ const rooms = [
       icon:"☀️",
       color:"#d69a43",
       bg:"#fff5df",
+      required:4,
+
       items:[
         ["Grape","Uva","Verano","Recolección"],
         ["Spice Berry","Baya especiada","Verano","Recolección"],
@@ -614,6 +843,8 @@ const rooms = [
       icon:"🍂",
       color:"#a75e39",
       bg:"#f8ebe3",
+      required:5,
+
       items:[
         ["Common Mushroom","Champiñón común","Otoño","Recolección"],
         ["Wild Plum","Ciruela silvestre","Otoño","Recolección"],
@@ -629,6 +860,8 @@ const rooms = [
       icon:"❄️",
       color:"#6c91ad",
       bg:"#eaf3f8",
+      required:5,
+
       items:[
         ["Winter Root","Raíz invernal","Invierno","Recolección"],
         ["Crystal Fruit","Fruta de cristal","Invierno","Recolección"],
@@ -644,12 +877,15 @@ const rooms = [
       icon:"🪵",
       color:"#74583f",
       bg:"#f1e8df",
+      required:4,
+
       items:[
         ["Wood","Madera","Cualquier estación","Talar árboles"],
         ["Clay","Arcilla","Cualquier estación","Cavar / artefactos"],
         ["Stone","Piedra","Cualquier estación","Minas / rocas"],
         ["Hardwood","Madera noble","Cualquier estación","Bosque Secreto / árboles"]
       ],
+
       requirements:[
         "499 unidades",
         "10 unidades",
@@ -664,6 +900,8 @@ const rooms = [
       icon:"🌴",
       color:"#4f8060",
       bg:"#eaf4ed",
+      required:8,
+
       items:[
         ["Coconut","Coco","Todo el año","Desierto"],
         ["Cactus Fruit","Fruta de cactus","Todo el año","Desierto"],
@@ -694,6 +932,8 @@ const rooms = [
       icon:"🌱",
       color:"#72a35e",
       bg:"#eef7e9",
+      required:5,
+
       items:[
         ["Parsnip","Chirivía","Primavera","Cultivo"],
         ["Green Bean","Judía verde","Primavera","Cultivo"],
@@ -709,6 +949,8 @@ const rooms = [
       icon:"🌻",
       color:"#c89b43",
       bg:"#fff7df",
+      required:5,
+
       items:[
         ["Tomato","Tomate","Verano","Cultivo"],
         ["Hot Pepper","Pimiento picante","Verano","Cultivo"],
@@ -724,6 +966,8 @@ const rooms = [
       icon:"🎃",
       color:"#ad633b",
       bg:"#f9ece3",
+      required:5,
+
       items:[
         ["Corn","Maíz","Otoño","Cultivo"],
         ["Eggplant","Berenjena","Otoño","Cultivo"],
@@ -739,6 +983,8 @@ const rooms = [
       icon:"⭐",
       color:"#c19b38",
       bg:"#fff8dc",
+      required:5,
+
       items:[
         ["Gold Parsnip","Chirivía de calidad oro ×5","Primavera","Calidad oro"],
         ["Gold Melon","Melón de calidad oro ×5","Verano","Calidad oro"],
@@ -756,6 +1002,8 @@ const rooms = [
       icon:"🐄",
       color:"#8c6a54",
       bg:"#f4ece6",
+      required:5,
+
       items:[
         ["Large Milk","Leche grande","Todo el año","Vaca"],
         ["Large Goat Milk","Leche de cabra grande","Todo el año","Cabra"],
@@ -772,6 +1020,8 @@ const rooms = [
       icon:"🫙",
       color:"#8b6b9d",
       bg:"#f4edf7",
+      required:8,
+
       items:[
         ["Truffle Oil","Aceite de trufa","Todo el año","Prensa de aceite"],
         ["Cloth","Tela","Todo el año","Telar"],
@@ -804,6 +1054,8 @@ const rooms = [
       icon:"🏞️",
       color:"#75abc5",
       bg:"#eaf6fb",
+      required:6,
+
       items:[
         ["Sunfish","Pez sol","Primavera / Verano","Río · 6:00–19:00 · soleado"],
         ["Catfish","Bagre","Primavera / Otoño","Río"],
@@ -820,6 +1072,8 @@ const rooms = [
       icon:"🏔️",
       color:"#5792b3",
       bg:"#e4f2f8",
+      required:5,
+
       items:[
         ["Largemouth Bass","Lubina negra","Todo el año","Lago de montaña"],
         ["Carp","Carpa","Primavera / Verano / Otoño","Lago / Bosque Secreto / Alcantarilla"],
@@ -835,6 +1089,8 @@ const rooms = [
       icon:"🌊",
       color:"#39799c",
       bg:"#e1f1f8",
+      required:5,
+
       items:[
         ["Sardine","Sardina","Primavera / Otoño / Invierno","Océano"],
         ["Tuna","Atún","Verano / Invierno","Océano"],
@@ -850,6 +1106,8 @@ const rooms = [
       icon:"🌙",
       color:"#486b91",
       bg:"#e9eff7",
+      required:4,
+
       items:[
         ["Walleye","Lucioperca","Otoño","Río / Lago · lluvia"],
         ["Bream","Brema","Todo el año","Río"],
@@ -864,6 +1122,8 @@ const rooms = [
       icon:"🦀",
       color:"#6689a4",
       bg:"#edf3f7",
+      required:5,
+
       items:[
         ["Lobster","Langosta","Todo el año","Trampa para cangrejos"],
         ["Crayfish","Cangrejo de río","Todo el año","Trampa para cangrejos"],
@@ -884,6 +1144,8 @@ const rooms = [
       icon:"✨",
       color:"#336d8c",
       bg:"#e5f1f6",
+      required:6,
+
       items:[
         ["Pufferfish","Pez globo","Verano","Océano"],
         ["Ghostfish","Pez fantasma","Todo el año","Minas"],
@@ -911,6 +1173,8 @@ const rooms = [
       icon:"⚒️",
       color:"#c16f43",
       bg:"#faeee7",
+      required:3,
+
       items:[
         ["Copper Bar","Lingote de cobre","Todo el año","Horno"],
         ["Iron Bar","Lingote de hierro","Todo el año","Horno"],
@@ -924,6 +1188,8 @@ const rooms = [
       icon:"💎",
       color:"#a96882",
       bg:"#f7ebf0",
+      required:4,
+
       items:[
         ["Quartz","Cuarzo","Todo el año","Minas"],
         ["Earth Crystal","Cristal terrestre","Todo el año","Minas"],
@@ -938,6 +1204,8 @@ const rooms = [
       icon:"⚔️",
       color:"#98554d",
       bg:"#f8e9e7",
+      required:2,
+
       items:[
         ["Slime","Baba ×99","Todo el año","Monstruos"],
         ["Bat Wing","Ala de murciélago ×10","Todo el año","Murciélagos"],
@@ -963,6 +1231,8 @@ const rooms = [
       icon:"🍳",
       color:"#9272aa",
       bg:"#f3edf7",
+      required:7,
+
       items:[
         ["Maple Syrup","Jarabe de arce","Todo el año","Árbol de arce"],
         ["Fiddlehead Fern","Helecho fiddlehead","Verano","Bosque Secreto"],
@@ -980,6 +1250,8 @@ const rooms = [
       icon:"🌾",
       color:"#8a9a58",
       bg:"#f1f5e5",
+      required:3,
+
       items:[
         ["Wheat","Trigo ×10","Verano / Otoño","Cultivo"],
         ["Hay","Heno ×10","Todo el año","Silo"],
@@ -993,6 +1265,8 @@ const rooms = [
       icon:"🔮",
       color:"#765f9c",
       bg:"#eeeaf7",
+      required:5,
+
       items:[
         ["Oak Resin","Resina de roble","Todo el año","Extractor"],
         ["Wine","Vino","Todo el año","Barril"],
@@ -1008,6 +1282,8 @@ const rooms = [
       icon:"🔬",
       color:"#687b9d",
       bg:"#edf1f8",
+      required:5,
+
       items:[
         ["Purple Mushroom","Seta morada","Todo el año","Minas"],
         ["Nautilus Shell","Concha de nautilo","Invierno","Playa"],
@@ -1023,6 +1299,8 @@ const rooms = [
       icon:"🎨",
       color:"#9b6892",
       bg:"#f7edf5",
+      required:7,
+
       items:[
         ["Red Mushroom","Seta roja","Todo el año","Minas / bosque"],
         ["Sea Urchin","Erizo de mar","Todo el año","Playa"],
@@ -1051,6 +1329,8 @@ const rooms = [
       icon:"🪙",
       color:"#d3ad45",
       bg:"#fff8df",
+      required:1,
+
       items:[
         ["2500g","2.500g","Cualquier momento","Dinero"]
       ]
@@ -1062,6 +1342,8 @@ const rooms = [
       icon:"💰",
       color:"#c59c35",
       bg:"#fff6d9",
+      required:1,
+
       items:[
         ["5000g","5.000g","Cualquier momento","Dinero"]
       ]
@@ -1073,6 +1355,8 @@ const rooms = [
       icon:"💰",
       color:"#b78c29",
       bg:"#fff4d2",
+      required:1,
+
       items:[
         ["10000g","10.000g","Cualquier momento","Dinero"]
       ]
@@ -1084,6 +1368,8 @@ const rooms = [
       icon:"👑",
       color:"#a77c1f",
       bg:"#fff2ca",
+      required:1,
+
       items:[
         ["25000g","25.000g","Cualquier momento","Dinero"]
       ]
@@ -1096,7 +1382,7 @@ const rooms = [
 
 
 /* =========================================================
-   EMOJIS DE OBJETOS
+   EMOJIS
 ========================================================= */
 
 const emojis = {
@@ -1311,60 +1597,84 @@ const infoExtra = {
 
   "Butterfish":
     "Pez de SVE asociado a zonas como Shearwater Bridge y Forest West."
+
 };
 
 
 /* =========================================================
-   CREAR DATOS NORMALIZADOS
+   PREPARAR DATOS
 ========================================================= */
 
 function prepararDatos(){
 
   let total = 0;
+  let totalBundles = 0;
 
-  rooms.forEach(room => {
+  rooms.forEach(room=>{
 
-    room.bundles.forEach(bundle => {
+    room.bundles.forEach(bundle=>{
 
-      bundle.items = bundle.items.map((item,index)=>{
+      totalBundles++;
 
-        const id = item[0];
+      bundle.items =
+        bundle.items.map((item,index)=>{
 
-        total++;
+          const id = item[0];
 
-        return {
-          id:id,
-          name:item[1],
-          season:item[2],
-          source:item[3],
-          requirement:
-            bundle.requirements &&
-            bundle.requirements[index]
-              ? bundle.requirements[index]
-              : "",
-          bundleId:bundle.id,
-          bundleName:bundle.name,
-          roomId:room.id,
-          roomName:room.name
-        };
+          total++;
 
-      });
+          return {
+
+            id:id,
+
+            name:item[1],
+
+            season:item[2],
+
+            source:item[3],
+
+            requirement:
+              bundle.requirements &&
+              bundle.requirements[index]
+                ? bundle.requirements[index]
+                : "",
+
+            bundleId:bundle.id,
+
+            bundleName:bundle.name,
+
+            roomId:room.id,
+
+            roomName:room.name
+
+          };
+
+        });
 
     });
 
   });
 
   window.totalItems = total;
+
+  window.totalBundles = totalBundles;
+
 }
 
 prepararDatos();
 
 
 /* =========================================================
-   ID ÚNICO
+   ID
 ========================================================= */
 
 function obtenerId(room,bundle,item){
+
+  /*
+     IMPORTANTE:
+     Se conserva el mismo formato del código actual
+     para que no se pierdan los progresos existentes.
+  */
 
   return "sve_" +
     room.id + "_" +
@@ -1386,34 +1696,193 @@ function obtenerEmoji(item){
 
 
 /* =========================================================
-   ACTUALIZAR PROGRESO
+   ESTADÍSTICAS DE LOTE
 ========================================================= */
 
-function updateProgress(){
+function obtenerEstadisticasLote(room,bundle){
 
-  const total = window.totalItems;
+  let done = 0;
 
-  const conseguido =
-    Object.values(checked)
-      .filter(Boolean)
-      .length;
+  bundle.items.forEach(item=>{
 
-  const porcentaje =
-    total > 0
-      ? Math.round((conseguido / total) * 100)
-      : 0;
+    const id =
+      obtenerId(room,bundle,item);
 
-  document.getElementById("progressFill").style.width =
-    porcentaje + "%";
+    if(checked[id]){
+      done++;
+    }
 
-  document.getElementById("progressText").textContent =
-    `${conseguido} / ${total} (${porcentaje}%)`;
+  });
+
+  const required =
+    bundle.required ??
+    bundle.items.length;
+
+  const completed =
+    done >= required;
+
+  return {
+
+    done:done,
+
+    required:required,
+
+    total:bundle.items.length,
+
+    completed:completed
+
+  };
 
 }
 
 
 /* =========================================================
-   CARGAR PROGRESO DESDE SUPABASE
+   ESTADÍSTICAS DE HABITACIÓN
+========================================================= */
+
+function obtenerEstadisticasHabitacion(room){
+
+  let completed = 0;
+
+  room.bundles.forEach(bundle=>{
+
+    if(
+      obtenerEstadisticasLote(room,bundle)
+        .completed
+    ){
+
+      completed++;
+
+    }
+
+  });
+
+  return {
+
+    completed:completed,
+
+    total:room.bundles.length
+
+  };
+
+}
+
+
+/* =========================================================
+   ESTADÍSTICAS GLOBALES
+========================================================= */
+
+function obtenerEstadisticasGlobales(){
+
+  let completedBundles = 0;
+  let totalBundles = 0;
+
+  let completedItems = 0;
+  let totalItems = 0;
+
+
+  rooms.forEach(room=>{
+
+    room.bundles.forEach(bundle=>{
+
+      totalBundles++;
+
+      const stats =
+        obtenerEstadisticasLote(
+          room,
+          bundle
+        );
+
+      if(stats.completed){
+        completedBundles++;
+      }
+
+      bundle.items.forEach(item=>{
+
+        totalItems++;
+
+        const id =
+          obtenerId(
+            room,
+            bundle,
+            item
+          );
+
+        if(checked[id]){
+          completedItems++;
+        }
+
+      });
+
+    });
+
+  });
+
+
+  return {
+
+    completedBundles,
+
+    totalBundles,
+
+    completedItems,
+
+    totalItems
+
+  };
+
+}
+
+
+/* =========================================================
+   ACTUALIZAR PROGRESO PRINCIPAL
+========================================================= */
+
+function updateProgress(){
+
+  const stats =
+    obtenerEstadisticasGlobales();
+
+
+  const porcentaje =
+    stats.totalBundles > 0
+      ? Math.round(
+          (
+            stats.completedBundles /
+            stats.totalBundles
+          ) * 100
+        )
+      : 0;
+
+
+  document
+    .getElementById("progressMain")
+    .textContent =
+      `${stats.completedBundles} / ${stats.totalBundles} lotes`;
+
+
+  document
+    .getElementById("progressSecondary")
+    .textContent =
+      `${stats.completedItems} / ${stats.totalItems} objetos conseguidos`;
+
+
+  document
+    .getElementById("progressFill")
+    .style.width =
+      porcentaje + "%";
+
+
+  document
+    .getElementById("progressText")
+    .textContent =
+      `${porcentaje}% completado`;
+
+}
+
+
+/* =========================================================
+   CARGAR PROGRESO
 ========================================================= */
 
 async function cargarProgreso(){
@@ -1424,17 +1893,23 @@ async function cargarProgreso(){
       .select("item_id, conseguido")
       .eq("partida",partidaActual);
 
+
   if(error){
 
     console.error(error);
 
-    document.getElementById("status").textContent =
-      "⚠️ No se pudo cargar el progreso.";
+    document
+      .getElementById("status")
+      .textContent =
+        "⚠️ No se pudo cargar el progreso.";
 
-    return;
+    return false;
+
   }
 
+
   checked = {};
+
 
   if(data){
 
@@ -1447,7 +1922,10 @@ async function cargarProgreso(){
 
   }
 
+
   updateProgress();
+
+  return true;
 
 }
 
@@ -1462,20 +1940,36 @@ async function guardarItem(id){
     await supabaseClient
       .from("progreso")
       .upsert(
+
         {
+
           partida:partidaActual,
+
           item_id:id,
+
           conseguido:!!checked[id],
-          actualizado_en:new Date().toISOString()
+
+          actualizado_en:
+            new Date().toISOString()
+
         },
+
         {
-          onConflict:"partida,item_id"
+
+          onConflict:
+            "partida,item_id"
+
         }
+
       );
+
 
   if(error){
 
-    console.error("Error guardando:",error);
+    console.error(
+      "Error guardando:",
+      error
+    );
 
   }
 
@@ -1488,12 +1982,15 @@ async function guardarItem(id){
 
 async function cambiarItem(id,checkbox){
 
-  checked[id] = checkbox.checked;
+  checked[id] =
+    checkbox.checked;
+
 
   const row =
     checkbox.closest(".item") ||
     checkbox.closest(".season-item") ||
     checkbox.closest(".search-result");
+
 
   if(row){
 
@@ -1504,29 +2001,35 @@ async function cambiarItem(id,checkbox){
 
   }
 
+
   updateProgress();
 
-  /*
-     IMPORTANTE:
-     NO usamos mostrarVista() aquí.
+  actualizarTodosLosContadores();
 
-     Así el lote que tienes abierto
-     NO se cierra y puedes marcar
-     varios objetos seguidos.
+
+  /*
+     En estación:
+     los objetos conseguidos bajan al final.
   */
 
-  if(modoActual === "season"){
+  if(
+    modoActual === "season" &&
+    row
+  ){
 
     const seasonContainer =
-      row?.parentElement;
+      row.parentElement;
 
     if(seasonContainer){
 
-      ordenarTemporada(seasonContainer);
+      ordenarTemporada(
+        seasonContainer
+      );
 
     }
 
   }
+
 
   await guardarItem(id);
 
@@ -1539,27 +2042,101 @@ async function cambiarItem(id,checkbox){
 
 function actualizarCheckboxVisual(id){
 
-  const checkbox =
-    document.querySelector(
-      `input[data-item-id="${CSS.escape(id)}"]`
+  const checkboxes =
+    document.querySelectorAll(
+      "input[data-item-id]"
     );
 
-  if(!checkbox) return;
 
-  checkbox.checked =
-    !!checked[id];
+  checkboxes.forEach(checkbox=>{
 
-  const row =
-    checkbox.closest(".item") ||
-    checkbox.closest(".season-item") ||
-    checkbox.closest(".search-result");
+    if(
+      checkbox.dataset.itemId !== id
+    ){
 
-  if(row){
+      return;
 
-    row.classList.toggle(
-      "completed",
-      !!checked[id]
+    }
+
+
+    checkbox.checked =
+      !!checked[id];
+
+
+    const row =
+      checkbox.closest(".item") ||
+      checkbox.closest(".season-item") ||
+      checkbox.closest(".search-result");
+
+
+    if(row){
+
+      row.classList.toggle(
+        "completed",
+        !!checked[id]
+      );
+
+    }
+
+  });
+
+}
+
+
+/* =========================================================
+   ACTUALIZAR TODOS LOS ELEMENTOS VISIBLES
+========================================================= */
+
+function actualizarTodosLosCheckboxes(){
+
+  const checkboxes =
+    document.querySelectorAll(
+      "input[data-item-id]"
     );
+
+
+  checkboxes.forEach(checkbox=>{
+
+    const id =
+      checkbox.dataset.itemId;
+
+    const estado =
+      !!checked[id];
+
+
+    checkbox.checked =
+      estado;
+
+
+    const row =
+      checkbox.closest(".item") ||
+      checkbox.closest(".season-item") ||
+      checkbox.closest(".search-result");
+
+
+    if(row){
+
+      row.classList.toggle(
+        "completed",
+        estado
+      );
+
+    }
+
+  });
+
+
+  if(modoActual === "season"){
+
+    document
+      .querySelectorAll(".season-list")
+      .forEach(container=>{
+
+        ordenarTemporada(
+          container
+        );
+
+      });
 
   }
 
@@ -1567,7 +2144,7 @@ function actualizarCheckboxVisual(id){
 
 
 /* =========================================================
-   INFO DEL OBJETO
+   INFO
 ========================================================= */
 
 function toggleInfo(panelId){
@@ -1577,7 +2154,9 @@ function toggleInfo(panelId){
 
   if(panel){
 
-    panel.classList.toggle("open");
+    panel.classList.toggle(
+      "open"
+    );
 
   }
 
@@ -1588,30 +2167,47 @@ function toggleInfo(panelId){
    CREAR ITEM
 ========================================================= */
 
-function crearItem(item,numero=0){
+function crearItem(item){
+
+  const room =
+    rooms.find(
+      r=>r.id === item.roomId
+    );
+
+
+  const bundle =
+    room.bundles.find(
+      b=>b.id === item.bundleId
+    );
+
 
   const id =
     obtenerId(
-      rooms.find(r=>r.id===item.roomId),
-      rooms
-        .find(r=>r.id===item.roomId)
-        .bundles
-        .find(b=>b.id===item.bundleId),
+      room,
+      bundle,
       item
     );
+
 
   const div =
     document.createElement("div");
 
+
   div.className =
     "item" +
-    (checked[id] ? " completed" : "");
+    (
+      checked[id]
+        ? " completed"
+        : ""
+    );
+
 
   const infoId =
     "info_" +
     Math.random()
       .toString(36)
       .substring(2,10);
+
 
   div.innerHTML = `
 
@@ -1621,9 +2217,11 @@ function crearItem(item,numero=0){
       ${checked[id] ? "checked" : ""}
     >
 
+
     <div class="item-icon">
       ${obtenerEmoji(item)}
     </div>
+
 
     <div
       class="item-content"
@@ -1636,13 +2234,16 @@ function crearItem(item,numero=0){
 
       ${
         item.requirement
-        ? `<div class="item-requirement">
-             ${item.requirement}
-           </div>`
-        : ""
+        ?
+        `<div class="item-requirement">
+          ${item.requirement}
+        </div>`
+        :
+        ""
       }
 
     </div>
+
 
     <button
       class="info-button"
@@ -1651,36 +2252,62 @@ function crearItem(item,numero=0){
       ℹ️
     </button>
 
+
     <div
       id="${infoId}"
       class="info-panel"
     >
-      <strong>📍 Fuente / ubicación</strong>
+
+      <strong>
+        📍 Fuente / ubicación
+      </strong>
+
       ${item.source}
+
 
       <br><br>
 
-      <strong>🌱 Temporada</strong>
+
+      <strong>
+        🌱 Temporada
+      </strong>
+
       ${item.season}
+
 
       ${
         infoExtra[item.id]
-        ? `<br><br>
-           <strong>💡 Información</strong>
-           ${infoExtra[item.id]}`
-        : ""
+        ?
+        `<br><br>
+
+        <strong>
+          💡 Información
+        </strong>
+
+        ${infoExtra[item.id]}`
+        :
+        ""
       }
 
     </div>
+
   `;
+
 
   const checkbox =
     div.querySelector("input");
 
+
   checkbox.addEventListener(
     "change",
-    ()=>cambiarItem(id,checkbox)
+    ()=>{
+      cambiarItem(
+        id,
+        checkbox
+      );
+    }
   );
+
 
   return div;
 
@@ -1695,68 +2322,109 @@ function showBundles(){
 
   modoActual = "bundles";
 
+
   const contenido =
-    document.getElementById("contenido");
+    document.getElementById(
+      "contenido"
+    );
+
 
   contenido.innerHTML = "";
+
 
   rooms.forEach(room=>{
 
     const roomDiv =
       document.createElement("div");
 
+
     roomDiv.className =
       `room ${room.className}`;
+
 
     const roomTitle =
       document.createElement("div");
 
+
     roomTitle.className =
       "room-title";
 
-    roomTitle.textContent =
-      room.name;
 
-    roomDiv.appendChild(roomTitle);
+    const roomStats =
+      obtenerEstadisticasHabitacion(
+        room
+      );
 
 
-    room.bundles.forEach((bundle,bundleIndex)=>{
+    roomTitle.innerHTML = `
+
+      <span>
+        ${room.name}
+      </span>
+
+      <span
+        class="room-progress"
+        data-room-progress="${room.id}"
+      >
+        ${roomStats.completed}/${roomStats.total} lotes
+      </span>
+
+    `;
+
+
+    roomDiv.appendChild(
+      roomTitle
+    );
+
+
+    room.bundles.forEach(bundle=>{
 
       const bundleDiv =
         document.createElement("div");
 
+
       bundleDiv.className =
         "bundle";
-
-      const pending =
-        bundle.items.filter(item=>{
-
-          const id =
-            obtenerId(room,bundle,item);
-
-          return !checked[id];
-
-        }).length;
-
-      const completed =
-        bundle.items.length - pending;
 
 
       const title =
         document.createElement("div");
 
+
       title.className =
         "bundle-title";
+
 
       title.style.setProperty(
         "--bundle-color",
         bundle.color
       );
 
+
       title.style.setProperty(
         "--bundle-bg",
         bundle.bg
       );
+
+
+      const itemsDiv =
+        document.createElement("div");
+
+
+      itemsDiv.className =
+        "items";
+
+
+      itemsDiv.style.display =
+        "none";
+
+
+      const stats =
+        obtenerEstadisticasLote(
+          room,
+          bundle
+        );
+
 
       title.innerHTML = `
 
@@ -1772,28 +2440,20 @@ function showBundles(){
 
         </div>
 
+
         <span
-          class="bundle-count"
+          class="bundle-count
+          ${stats.completed ? "complete" : ""}"
           data-bundle-count="${room.id}_${bundle.id}"
         >
-          ${completed}/${bundle.items.length}
+          ${Math.min(
+            stats.done,
+            stats.required
+          )}/${stats.required}
+          ${stats.completed ? "✓" : ""}
         </span>
 
       `;
-
-
-      const itemsDiv =
-        document.createElement("div");
-
-      itemsDiv.className =
-        "items";
-
-      /*
-         Los lotes comienzan cerrados.
-      */
-
-      itemsDiv.style.display =
-        "none";
 
 
       title.addEventListener(
@@ -1818,17 +2478,29 @@ function showBundles(){
       });
 
 
-      bundleDiv.appendChild(title);
-      bundleDiv.appendChild(itemsDiv);
+      bundleDiv.appendChild(
+        title
+      );
 
-      roomDiv.appendChild(bundleDiv);
+
+      bundleDiv.appendChild(
+        itemsDiv
+      );
+
+
+      roomDiv.appendChild(
+        bundleDiv
+      );
 
     });
 
 
-    contenido.appendChild(roomDiv);
+    contenido.appendChild(
+      roomDiv
+    );
 
   });
+
 
   actualizarTodosLosContadores();
 
@@ -1836,42 +2508,79 @@ function showBundles(){
 
 
 /* =========================================================
-   CONTADORES DE LOTES
+   ACTUALIZAR CONTADORES
 ========================================================= */
 
 function actualizarTodosLosContadores(){
 
   rooms.forEach(room=>{
 
+    let roomCompleted = 0;
+
+
     room.bundles.forEach(bundle=>{
 
-      const selector =
-        `[data-bundle-count="${room.id}_${bundle.id}"]`;
+      const stats =
+        obtenerEstadisticasLote(
+          room,
+          bundle
+        );
+
+
+      if(stats.completed){
+
+        roomCompleted++;
+
+      }
+
 
       const counter =
-        document.querySelector(selector);
+        document.querySelector(
+          `[data-bundle-count="${room.id}_${bundle.id}"]`
+        );
 
-      if(!counter) return;
 
-      let done = 0;
+      if(counter){
 
-      bundle.items.forEach(item=>{
+        counter.textContent =
+          `${Math.min(
+            stats.done,
+            stats.required
+          )}/${stats.required}` +
+          (
+            stats.completed
+              ? " ✓"
+              : ""
+          );
 
-        const id =
-          obtenerId(room,bundle,item);
 
-        if(checked[id]){
-          done++;
-        }
+        counter.classList.toggle(
+          "complete",
+          stats.completed
+        );
 
-      });
-
-      counter.textContent =
-        `${done}/${bundle.items.length}`;
+      }
 
     });
 
+
+    const roomCounter =
+      document.querySelector(
+        `[data-room-progress="${room.id}"]`
+      );
+
+
+    if(roomCounter){
+
+      roomCounter.textContent =
+        `${roomCompleted}/${room.bundles.length} lotes`;
+
+    }
+
   });
+
+
+  updateProgress();
 
 }
 
@@ -1885,38 +2594,61 @@ function ordenarTemporada(container){
   const items =
     [...container.children];
 
+
   items.sort((a,b)=>{
 
     const aCheck =
-      a.classList.contains("completed");
+      a.classList.contains(
+        "completed"
+      );
+
 
     const bCheck =
-      b.classList.contains("completed");
+      b.classList.contains(
+        "completed"
+      );
+
 
     if(aCheck !== bCheck){
 
-      return aCheck ? 1 : -1;
+      return aCheck
+        ? 1
+        : -1;
 
     }
 
+
     const aName =
-      a.querySelector(".season-info")
-        ?.textContent
-        .trim()
-        .toLowerCase() || "";
+      a.querySelector(
+        ".season-info strong"
+      )
+      ?.textContent
+      .trim()
+      .toLowerCase() || "";
+
 
     const bName =
-      b.querySelector(".season-info")
-        ?.textContent
-        .trim()
-        .toLowerCase() || "";
+      b.querySelector(
+        ".season-info strong"
+      )
+      ?.textContent
+      .trim()
+      .toLowerCase() || "";
 
-    return aName.localeCompare(bName);
+
+    return aName.localeCompare(
+      bName
+    );
 
   });
 
+
   items.forEach(item=>{
-    container.appendChild(item);
+
+    container.appendChild(
+      item
+    );
+
   });
 
 }
@@ -1930,8 +2662,12 @@ function showSeasons(){
 
   modoActual = "season";
 
+
   const contenido =
-    document.getElementById("contenido");
+    document.getElementById(
+      "contenido"
+    );
+
 
   contenido.innerHTML = "";
 
@@ -1967,30 +2703,77 @@ function showSeasons(){
 
       bundle.items.forEach(item=>{
 
-        let seasonText =
+        const seasonText =
           item.season || "";
 
-        let found = [];
 
-        if(seasonText.includes("Primavera"))
-          found.push("Primavera");
+        const found = [];
 
-        if(seasonText.includes("Verano"))
-          found.push("Verano");
 
-        if(seasonText.includes("Otoño"))
-          found.push("Otoño");
+        if(
+          seasonText.includes(
+            "Primavera"
+          )
+        ){
 
-        if(seasonText.includes("Invierno"))
-          found.push("Invierno");
+          found.push(
+            "Primavera"
+          );
+
+        }
+
+
+        if(
+          seasonText.includes(
+            "Verano"
+          )
+        ){
+
+          found.push(
+            "Verano"
+          );
+
+        }
+
+
+        if(
+          seasonText.includes(
+            "Otoño"
+          )
+        ){
+
+          found.push(
+            "Otoño"
+          );
+
+        }
+
+
+        if(
+          seasonText.includes(
+            "Invierno"
+          )
+        ){
+
+          found.push(
+            "Invierno"
+          );
+
+        }
 
 
         found.forEach(season=>{
 
-          seasons[season].items.push({
+          seasons[
+            season
+          ].items.push({
+
             room,
+
             bundle,
+
             item
+
           });
 
         });
@@ -2003,61 +2786,100 @@ function showSeasons(){
 
 
   Object.entries(seasons)
-    .forEach(([season,data])=>{
+    .forEach(
+      ([season,data])=>{
 
-      if(data.items.length===0) return;
+
+      if(
+        data.items.length === 0
+      ){
+
+        return;
+
+      }
 
 
       const section =
-        document.createElement("div");
+        document.createElement(
+          "div"
+        );
+
 
       section.className =
         "season";
 
 
       const title =
-        document.createElement("div");
+        document.createElement(
+          "div"
+        );
+
 
       title.className =
         "season-title";
+
 
       title.textContent =
         `${data.icon} ${season}`;
 
 
       const list =
-        document.createElement("div");
+        document.createElement(
+          "div"
+        );
 
-      /*
-         Primero pendientes.
-         Los conseguidos van abajo.
-      */
+
+      list.className =
+        "season-list";
+
 
       data.items.sort((a,b)=>{
 
         const idA =
-          obtenerId(a.room,a.bundle,a.item);
+          obtenerId(
+            a.room,
+            a.bundle,
+            a.item
+          );
+
 
         const idB =
-          obtenerId(b.room,b.bundle,b.item);
+          obtenerId(
+            b.room,
+            b.bundle,
+            b.item
+          );
+
 
         const doneA =
           !!checked[idA];
 
+
         const doneB =
           !!checked[idB];
 
-        if(doneA !== doneB)
-          return doneA ? 1 : -1;
 
-        return a.item.name.localeCompare(
-          b.item.name
-        );
+        if(
+          doneA !== doneB
+        ){
+
+          return doneA
+            ? 1
+            : -1;
+
+        }
+
+
+        return a.item.name
+          .localeCompare(
+            b.item.name
+          );
 
       });
 
 
-      data.items.forEach(dataItem=>{
+      data.items.forEach(
+        dataItem=>{
 
         const {
           room,
@@ -2065,16 +2887,28 @@ function showSeasons(){
           item
         } = dataItem;
 
+
         const id =
-          obtenerId(room,bundle,item);
+          obtenerId(
+            room,
+            bundle,
+            item
+          );
 
 
         const row =
-          document.createElement("div");
+          document.createElement(
+            "div"
+          );
+
 
         row.className =
           "season-item" +
-          (checked[id] ? " completed" : "");
+          (
+            checked[id]
+              ? " completed"
+              : ""
+          );
 
 
         const infoId =
@@ -2092,9 +2926,11 @@ function showSeasons(){
             ${checked[id] ? "checked" : ""}
           >
 
+
           <div class="item-icon">
             ${obtenerEmoji(item)}
           </div>
+
 
           <div
             class="season-info"
@@ -2111,6 +2947,7 @@ function showSeasons(){
 
           </div>
 
+
           <button
             class="info-button"
             onclick="toggleInfo('${infoId}')"
@@ -2118,25 +2955,41 @@ function showSeasons(){
             ℹ️
           </button>
 
+
           <div
             id="${infoId}"
             class="info-panel"
           >
 
-            <strong>📍 Fuente / ubicación</strong>
+            <strong>
+              📍 Fuente / ubicación
+            </strong>
+
             ${item.source}
+
 
             <br><br>
 
-            <strong>🌱 Temporada</strong>
+
+            <strong>
+              🌱 Temporada
+            </strong>
+
             ${item.season}
+
 
             ${
               infoExtra[item.id]
-              ? `<br><br>
-                 <strong>💡 Información</strong>
-                 ${infoExtra[item.id]}`
-              : ""
+              ?
+              `<br><br>
+
+              <strong>
+                💡 Información
+              </strong>
+
+              ${infoExtra[item.id]}`
+              :
+              ""
             }
 
           </div>
@@ -2145,24 +2998,42 @@ function showSeasons(){
 
 
         const checkbox =
-          row.querySelector("input");
+          row.querySelector(
+            "input"
+          );
 
 
         checkbox.addEventListener(
           "change",
-          ()=>cambiarItem(id,checkbox)
+          ()=>{
+            cambiarItem(
+              id,
+              checkbox
+            );
+          }
         );
 
 
-        list.appendChild(row);
+        list.appendChild(
+          row
+        );
 
       });
 
 
-      section.appendChild(title);
-      section.appendChild(list);
+      section.appendChild(
+        title
+      );
 
-      contenido.appendChild(section);
+
+      section.appendChild(
+        list
+      );
+
+
+      contenido.appendChild(
+        section
+      );
 
     });
 
@@ -2177,6 +3048,7 @@ function obtenerTodosLosItems(){
 
   const resultado = [];
 
+
   rooms.forEach(room=>{
 
     room.bundles.forEach(bundle=>{
@@ -2184,9 +3056,13 @@ function obtenerTodosLosItems(){
       bundle.items.forEach(item=>{
 
         resultado.push({
+
           room,
+
           bundle,
+
           item
+
         });
 
       });
@@ -2194,6 +3070,7 @@ function obtenerTodosLosItems(){
     });
 
   });
+
 
   return resultado;
 
@@ -2203,14 +3080,21 @@ function obtenerTodosLosItems(){
 function buscar(texto){
 
   const results =
-    document.getElementById("searchResults");
+    document.getElementById(
+      "searchResults"
+    );
+
 
   texto =
-    texto.trim().toLowerCase();
+    texto
+      .trim()
+      .toLowerCase();
+
 
   if(!texto){
 
-    results.innerHTML = "";
+    results.innerHTML =
+      "";
 
     return;
 
@@ -2222,14 +3106,25 @@ function buscar(texto){
       .filter(x=>{
 
         return (
-          x.item.name.toLowerCase().includes(texto) ||
-          x.item.id.toLowerCase().includes(texto)
+
+          x.item.name
+            .toLowerCase()
+            .includes(texto)
+
+          ||
+
+          x.item.id
+            .toLowerCase()
+            .includes(texto)
+
         );
 
       });
 
 
-  if(encontrados.length===0){
+  if(
+    encontrados.length === 0
+  ){
 
     results.innerHTML =
       "<p>No se encontró ese objeto.</p>";
@@ -2239,7 +3134,8 @@ function buscar(texto){
   }
 
 
-  results.innerHTML = "";
+  results.innerHTML =
+    "";
 
 
   encontrados.forEach(x=>{
@@ -2250,16 +3146,28 @@ function buscar(texto){
       item
     } = x;
 
+
     const id =
-      obtenerId(room,bundle,item);
+      obtenerId(
+        room,
+        bundle,
+        item
+      );
 
 
     const row =
-      document.createElement("div");
+      document.createElement(
+        "div"
+      );
+
 
     row.className =
       "search-result" +
-      (checked[id] ? " completed" : "");
+      (
+        checked[id]
+          ? " completed"
+          : ""
+      );
 
 
     row.innerHTML = `
@@ -2270,9 +3178,11 @@ function buscar(texto){
         ${checked[id] ? "checked" : ""}
       >
 
+
       <div class="item-icon">
         ${obtenerEmoji(item)}
       </div>
+
 
       <div style="flex:1">
 
@@ -2292,18 +3202,126 @@ function buscar(texto){
 
 
     const checkbox =
-      row.querySelector("input");
+      row.querySelector(
+        "input"
+      );
 
 
     checkbox.addEventListener(
       "change",
-      ()=>cambiarItem(id,checkbox)
+      ()=>{
+        cambiarItem(
+          id,
+          checkbox
+        );
+      }
     );
 
 
-    results.appendChild(row);
+    results.appendChild(
+      row
+    );
 
   });
+
+}
+
+
+/* =========================================================
+   REFRESCAR PROGRESO
+========================================================= */
+
+async function refrescarProgreso(){
+
+  if(!partidaActual){
+
+    return;
+
+  }
+
+
+  const refreshStatus =
+    document.getElementById(
+      "refreshStatus"
+    );
+
+
+  refreshStatus.textContent =
+    "🔄 Actualizando...";
+
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("progreso")
+      .select(
+        "item_id, conseguido"
+      )
+      .eq(
+        "partida",
+        partidaActual
+      );
+
+
+  if(error){
+
+    console.error(error);
+
+    refreshStatus.textContent =
+      "❌ No se pudo actualizar.";
+
+    return;
+
+  }
+
+
+  checked = {};
+
+
+  if(data){
+
+    data.forEach(row=>{
+
+      checked[
+        row.item_id
+      ] =
+        !!row.conseguido;
+
+    });
+
+  }
+
+
+  /*
+     NO usamos showBundles()
+     ni showSeasons() aquí.
+
+     Por eso:
+     - no volvemos al login
+     - no cambiamos de vista
+     - no cerramos los lotes
+     - no perdemos la posición
+  */
+
+  actualizarTodosLosCheckboxes();
+
+  actualizarTodosLosContadores();
+
+  updateProgress();
+
+
+  refreshStatus.textContent =
+    "✓ Progreso actualizado";
+
+
+  setTimeout(()=>{
+
+    refreshStatus.textContent =
+      "";
+
+  },2500);
 
 }
 
@@ -2326,51 +3344,83 @@ function iniciarRealtime(){
   realtimeChannel =
     supabaseClient
       .channel(
-        "progreso_" + partidaActual
+        "progreso_" +
+        partidaActual
       )
       .on(
+
         "postgres_changes",
+
         {
+
           event:"*",
+
           schema:"public",
+
           table:"progreso",
+
           filter:
             `partida=eq.${partidaActual}`
+
         },
+
         payload=>{
 
+          /*
+             INSERT / UPDATE
+          */
+
           if(
-            !payload.new ||
-            !payload.new.item_id
+            payload.new &&
+            payload.new.item_id
           ){
 
-            return;
+            const id =
+              payload.new.item_id;
+
+
+            checked[id] =
+              !!payload.new.conseguido;
+
+
+            actualizarCheckboxVisual(
+              id
+            );
+
+
+            actualizarTodosLosContadores();
 
           }
 
 
-          const id =
-            payload.new.item_id;
-
-          checked[id] =
-            !!payload.new.conseguido;
-
-
           /*
-             IMPORTANTE:
-             No hacemos mostrarVista().
-
-             Así si tú o tu novia marca algo,
-             no se cierran los lotes abiertos.
+             DELETE
           */
 
-          actualizarCheckboxVisual(id);
+          if(
+            payload.eventType === "DELETE" &&
+            payload.old &&
+            payload.old.item_id
+          ){
 
-          updateProgress();
+            const id =
+              payload.old.item_id;
 
-          actualizarTodosLosContadores();
+
+            delete checked[id];
+
+
+            actualizarCheckboxVisual(
+              id
+            );
+
+
+            actualizarTodosLosContadores();
+
+          }
 
         }
+
       )
       .subscribe();
 
@@ -2384,10 +3434,16 @@ function iniciarRealtime(){
 async function conectar(){
 
   const input =
-    document.getElementById("partida");
+    document.getElementById(
+      "partida"
+    );
+
 
   const status =
-    document.getElementById("status");
+    document.getElementById(
+      "status"
+    );
+
 
   const nombre =
     input.value.trim();
@@ -2411,15 +3467,16 @@ async function conectar(){
     nombre;
 
 
-  /*
-     Comprobamos que Supabase responda.
-  */
-
-  const {error} =
+  const {
+    error
+  } =
     await supabaseClient
       .from("progreso")
       .select("item_id")
-      .eq("partida",partidaActual)
+      .eq(
+        "partida",
+        partidaActual
+      )
       .limit(1);
 
 
@@ -2435,28 +3492,43 @@ async function conectar(){
   }
 
 
-  await cargarProgreso();
+  const cargado =
+    await cargarProgreso();
+
+
+  if(!cargado){
+
+    return;
+
+  }
 
 
   document
-    .getElementById("partidaActual")
+    .getElementById(
+      "partidaActual"
+    )
     .textContent =
       `🎮 Partida: ${partidaActual}`;
 
 
   document
-    .getElementById("loginScreen")
+    .getElementById(
+      "loginScreen"
+    )
     .classList
     .add("hidden");
 
 
   document
-    .getElementById("appContainer")
+    .getElementById(
+      "appContainer"
+    )
     .classList
     .remove("hidden");
 
 
   showBundles();
+
 
   iniciarRealtime();
 
@@ -2464,24 +3536,34 @@ async function conectar(){
 
 
 /* =========================================================
-   BOTONES
+   BOTÓN CONECTAR
 ========================================================= */
 
 document
-  .getElementById("btnConectar")
+  .getElementById(
+    "btnConectar"
+  )
   .addEventListener(
     "click",
     conectar
   );
 
 
+/* =========================================================
+   ENTER EN LOGIN
+========================================================= */
+
 document
-  .getElementById("partida")
+  .getElementById(
+    "partida"
+  )
   .addEventListener(
     "keydown",
     e=>{
 
-      if(e.key==="Enter"){
+      if(
+        e.key === "Enter"
+      ){
 
         conectar();
 
@@ -2491,21 +3573,47 @@ document
   );
 
 
+/* =========================================================
+   BOTÓN ACTUALIZAR
+========================================================= */
+
 document
-  .getElementById("btnLotes")
+  .getElementById(
+    "btnRefrescar"
+  )
+  .addEventListener(
+    "click",
+    refrescarProgreso
+  );
+
+
+/* =========================================================
+   BOTÓN LOTES
+========================================================= */
+
+document
+  .getElementById(
+    "btnLotes"
+  )
   .addEventListener(
     "click",
     ()=>{
 
       document
-        .getElementById("btnLotes")
+        .getElementById(
+          "btnLotes"
+        )
         .classList
         .add("active");
 
+
       document
-        .getElementById("btnEstaciones")
+        .getElementById(
+          "btnEstaciones"
+        )
         .classList
         .remove("active");
+
 
       showBundles();
 
@@ -2513,21 +3621,33 @@ document
   );
 
 
+/* =========================================================
+   BOTÓN ESTACIONES
+========================================================= */
+
 document
-  .getElementById("btnEstaciones")
+  .getElementById(
+    "btnEstaciones"
+  )
   .addEventListener(
     "click",
     ()=>{
 
       document
-        .getElementById("btnEstaciones")
+        .getElementById(
+          "btnEstaciones"
+        )
         .classList
         .add("active");
 
+
       document
-        .getElementById("btnLotes")
+        .getElementById(
+          "btnLotes"
+        )
         .classList
         .remove("active");
+
 
       showSeasons();
 
@@ -2535,13 +3655,21 @@ document
   );
 
 
+/* =========================================================
+   BUSCADOR
+========================================================= */
+
 document
-  .getElementById("buscador")
+  .getElementById(
+    "buscador"
+  )
   .addEventListener(
     "input",
     e=>{
 
-      buscar(e.target.value);
+      buscar(
+        e.target.value
+      );
 
     }
   );
