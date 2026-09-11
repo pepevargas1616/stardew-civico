@@ -856,6 +856,26 @@ const cropSVEInfo = {
 .calc-remove-btn{border:0;background:#f2e9e4;color:#9b4d39;border-radius:9px;padding:8px 10px;cursor:pointer;}
 .calc-plan-details{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px;}
 .calc-detail{background:#f7f5f0;border-radius:10px;padding:9px 10px;}.calc-detail span{display:block;font-size:11px;color:#777;margin-bottom:3px;}.calc-detail strong{font-size:13px;}
+.calc-income-row{
+  margin:0 12px 8px;
+  padding:10px 12px;
+  border-radius:10px;
+  background:#eef3e9;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.calc-income-row span{
+  color:#5f6e57;
+  font-size:12px;
+}
+
+.calc-income-row strong{
+  font-size:15px;
+}
+
 .calc-warning{margin-top:10px;padding:9px 11px;border-radius:10px;background:#fff3df;color:#8a611c;font-size:12px;}
 .calc-summary-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;}.calc-summary-item{background:#f7f5f0;border-radius:12px;padding:12px;}.calc-summary-item span{display:block;color:#777;font-size:12px;margin-bottom:5px;}.calc-summary-item strong{font-size:17px;}.calc-profit-item{background:#eef5e9;}
 .calc-harvest-summary{margin-top:12px;color:#5f584f;font-size:13px;line-height:1.6;}.calc-empty{text-align:center;padding:20px;color:#777;background:white;border:1px dashed #d5d0c8;border-radius:15px;margin-bottom:15px;}
@@ -5624,7 +5644,7 @@ function renderizarPlanCultivos(){
       const seedText=crop.seedCost===null?(crop.seedCostText||"Costo no monetario"):dinero(crop.seedCost)+" / semilla";
       const harvestText=calc.harvestCount>0?`Día ${calc.firstHarvestDay}`:"No madura esta temporada";
       const production=calc.harvestCount>0?`${calc.harvestCount} × ${calc.unitsPerHarvest} u. = ${calc.totalUnits.toLocaleString("es-ES")} u.`:"0 unidades";
-      return `<div class="calc-plan-card"><div class="calc-plan-top"><div class="calc-plan-icon">${crop.emoji}</div><div class="calc-plan-name"><strong>${crop.name} × ${item.quantity.toLocaleString("es-ES")}</strong><span>${season} · plantación día ${startDay} · ${seedText}</span></div><button class="calc-remove-btn" type="button" onclick="eliminarCultivoPlan(${index})">🗑️ Quitar</button></div><div class="calc-plan-details"><div class="calc-detail"><span>⏱️ Crecimiento</span><strong>${calc.growth} días</strong></div><div class="calc-detail"><span>🌾 Primera cosecha</span><strong>${harvestText}</strong></div><div class="calc-detail"><span>🔄 Cosechas</span><strong>${calc.harvestCount}</strong></div><div class="calc-detail"><span>📦 Producción</span><strong>${production}</strong></div><div class="calc-detail"><span>💵 Ingreso</span><strong>${formatoCostoCalc(calc.totalRevenue)}</strong></div></div><div class="calc-plan-details"><div class="calc-detail"><span>🌱 Semillas</span><strong>${formatoCostoCalc(calc.seedInvestment)}</strong></div><div class="calc-detail"><span>🧪 Fertilizante</span><strong>${formatoCostoCalc(calc.fertilizerInvestment)}</strong></div><div class="calc-detail"><span>💰 Inversión</span><strong>${formatoCostoCalc(calc.totalInvestment)}</strong></div><div class="calc-detail"><span>📈 Ganancia</span><strong>${formatoCostoCalc(calc.profit)}</strong></div></div>${calc.harvestCount===0?`<div class="calc-warning">⚠️ Este cultivo no alcanza su primera cosecha dentro de los 28 días con la configuración seleccionada.</div>`:""}${!calc.seedKnown?`<div class="calc-warning">ℹ️ El costo de la semilla no está expresado en oro, por lo que la inversión y ganancia neta se muestran como «—».</div>`:""}</div>`;
+      return `<div class="calc-plan-card"><div class="calc-plan-top"><div class="calc-plan-icon">${crop.emoji}</div><div class="calc-plan-name"><strong>${crop.name} × ${item.quantity.toLocaleString("es-ES")}</strong><span>${season} · plantación día ${startDay} · ${seedText}</span></div><button class="calc-remove-btn" type="button" onclick="eliminarCultivoPlan(${index})">🗑️ Quitar</button></div><div class="calc-plan-details"><div class="calc-detail"><span>⏱️ Crecimiento</span><strong>${calc.growth} días</strong></div><div class="calc-detail"><span>🌾 Primera cosecha</span><strong>${harvestText}</strong></div><div class="calc-detail"><span>🔄 Cosechas</span><strong>${calc.harvestCount}</strong></div><div class="calc-detail"><span>📦 Producción</span><strong>${production}</strong></div></div><div class="calc-income-row"><span>💵 Ingresos estimados</span><strong>${formatoCostoCalc(calc.totalRevenue)}</strong></div><div class="calc-plan-details"><div class="calc-detail"><span>🌱 Semillas</span><strong>${formatoCostoCalc(calc.seedInvestment)}</strong></div><div class="calc-detail"><span>🧪 Fertilizante</span><strong>${formatoCostoCalc(calc.fertilizerInvestment)}</strong></div><div class="calc-detail"><span>💰 Inversión</span><strong>${formatoCostoCalc(calc.totalInvestment)}</strong></div><div class="calc-detail"><span>📈 Ganancia</span><strong>${formatoCostoCalc(calc.profit)}</strong></div></div>${calc.harvestCount===0?`<div class="calc-warning">⚠️ Este cultivo no alcanza su primera cosecha dentro de los 28 días con la configuración seleccionada.</div>`:""}${!calc.seedKnown?`<div class="calc-warning">ℹ️ El costo de la semilla no está expresado en oro, por lo que la inversión y ganancia neta se muestran como «—».</div>`:""}</div>`;
     }).join("");
   }
   actualizarResumenPlan();
