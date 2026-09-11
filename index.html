@@ -582,6 +582,61 @@ header h1{
 }
 
 
+
+
+/* DATOS ESPECÍFICOS DE CULTIVOS SVE */
+const cropSVEInfo = {
+  "Cucumber": {
+    "seed": "Semillas de pepino",
+    "source": "Agricultura. En la configuración de lotes difíciles de SVE se requieren 5 pepinos.",
+    "season": "Primavera",
+    "growth": "Revisar el calendario de crecimiento de la versión instalada de SVE.",
+    "notes": "Cultivo añadido por SVE y usado en los lotes de Cultivos de primavera y de Cultivos de calidad."
+  },
+  "Butternut Squash": {
+    "seed": "Semillas de calabaza moscada",
+    "source": "Agricultura. En los lotes difíciles de SVE se requieren 5 unidades.",
+    "season": "Verano",
+    "growth": "Revisar el calendario de crecimiento de la versión instalada de SVE.",
+    "notes": "Cultivo añadido por SVE; también puede requerirse en calidad oro para el Lote de cultivos de calidad."
+  },
+  "Sweet Potato": {
+    "seed": "Semillas de batata",
+    "source": "Agricultura. En los lotes difíciles de SVE se requieren 5 unidades.",
+    "season": "Otoño",
+    "growth": "Revisar el calendario de crecimiento de la versión instalada de SVE.",
+    "notes": "Cultivo añadido por SVE; también aparece en el Lote de cultivos de calidad."
+  },
+  "Gold Carrot": {
+    "seed": "Semillas de zanahoria dorada",
+    "source": "Semillas de zanahoria dorada. El cultivo tarda 6 días y puede crecer en primavera, verano y otoño.",
+    "season": "Primavera / Verano / Otoño",
+    "growth": "6 días",
+    "notes": "Cultivo de SVE. No puede colocarse en una Seed Maker. Produce zanahoria dorada y se usa para productos artesanales."
+  },
+  "Cucumber Seeds": {
+    "seed": "Semillas de pepino",
+    "source": "Semillas de cultivo de SVE.",
+    "season": "Primavera",
+    "growth": "Consultar el calendario de la versión instalada.",
+    "notes": "Relacionadas con el Pepino, requerido en los lotes de primavera y calidad de SVE."
+  },
+  "Butternut Squash Seeds": {
+    "seed": "Semillas de calabaza moscada",
+    "source": "Semillas de cultivo de SVE.",
+    "season": "Verano",
+    "growth": "Consultar el calendario de la versión instalada.",
+    "notes": "Relacionadas con la Calabaza moscada, incluida en los lotes de verano y calidad de SVE."
+  },
+  "Sweet Potato Seeds": {
+    "seed": "Semillas de batata",
+    "source": "Semillas de cultivo de SVE.",
+    "season": "Otoño",
+    "growth": "Consultar el calendario de la versión instalada.",
+    "notes": "Relacionadas con la Batata, incluida en los lotes de otoño y calidad de SVE."
+  }
+};
+
 /* =========================
    CULTIVOS
 ========================= */
@@ -860,6 +915,30 @@ header h1{
     min-height:72px;
   }
 
+}
+
+
+.crop-source-box{
+  margin-top:10px;
+  padding:11px;
+  border-radius:10px;
+  background:#f7f5f0;
+  border-left:4px solid #668f53;
+  font-size:12px;
+  line-height:1.5;
+}
+.crop-source-box b{
+  color:#40382f;
+}
+.crop-sve-badge{
+  display:inline-block;
+  margin-top:6px;
+  padding:4px 8px;
+  border-radius:20px;
+  background:#e8f0e3;
+  color:#4f773f;
+  font-size:11px;
+  font-weight:bold;
 }
 
 </style>
@@ -2590,7 +2669,7 @@ const crops = [
     regrow:4,
     harvests:2,
     emoji:"🫐",
-    source:"Contenido de Stardew Valley Expanded",
+    source:"${getCropSVEExtra(crop.name)}",
     note:"La planta produce varias bayas por cosecha. El número puede variar."
   },
 
@@ -2606,7 +2685,7 @@ const crops = [
     regrow:4,
     harvests:1,
     emoji:"🟢",
-    source:"Contenido de Stardew Valley Expanded",
+    source:"${getCropSVEExtra(crop.name)}",
     note:"Puede producir entre 1 y 3 frutos por cosecha."
   },
 
@@ -2622,7 +2701,7 @@ const crops = [
     regrow:2,
     harvests:2,
     emoji:"🥒",
-    source:"Contenido de Stardew Valley Expanded",
+    source:"${getCropSVEExtra(crop.name)}",
     note:"Puede producir varias unidades por cosecha."
   },
 
@@ -2638,7 +2717,7 @@ const crops = [
     regrow:4,
     harvests:1,
     emoji:"🫐",
-    source:"Contenido de Stardew Valley Expanded",
+    source:"${getCropSVEExtra(crop.name)}",
     note:"Es un cultivo exclusivo de SVE y está relacionado con la ruta Joja."
   },
 
@@ -2795,7 +2874,7 @@ const crops = [
     regrow:0,
     harvests:2,
     emoji:"🌿",
-    source:"Contenido de Stardew Valley Expanded",
+    source:"${getCropSVEExtra(crop.name)}",
     note:"SVE define 12 días de crecimiento y una producción que puede variar."
   },
 
@@ -2810,7 +2889,7 @@ const crops = [
     growth:12,
     regrow:0,
     emoji:"🎃",
-    source:"Contenido de Stardew Valley Expanded"
+    source:"${getCropSVEExtra(crop.name)}"
   },
 
   {
@@ -2824,7 +2903,7 @@ const crops = [
     growth:13,
     regrow:0,
     emoji:"🥬",
-    source:"Contenido de Stardew Valley Expanded",
+    source:"${getCropSVEExtra(crop.name)}",
     note:"Cultivo exclusivo de SVE. La ruta Joja determina su disponibilidad."
   },
 
@@ -2839,7 +2918,7 @@ const crops = [
     growth:25,
     regrow:0,
     emoji:"👹",
-    source:"Contenido de Stardew Valley Expanded"
+    source:"${getCropSVEExtra(crop.name)}"
   },
 
 
@@ -2994,7 +3073,7 @@ const crops = [
     growth:13,
     regrow:0,
     emoji:"🍄",
-    source:"Contenido de Stardew Valley Expanded"
+    source:"${getCropSVEExtra(crop.name)}"
   },
 
   {
@@ -3008,7 +3087,7 @@ const crops = [
     growth:12,
     regrow:0,
     emoji:"🍠",
-    source:"Contenido de Stardew Valley Expanded"
+    source:"${getCropSVEExtra(crop.name)}"
   },
 
 
@@ -3027,7 +3106,7 @@ const crops = [
     growth:8,
     regrow:0,
     emoji:"🟣",
-    source:"Contenido de Stardew Valley Expanded"
+    source:"${getCropSVEExtra(crop.name)}"
   }
 
 ];
@@ -6058,6 +6137,23 @@ document
 ========================================================= */
 
 updateProgress();
+
+
+function getCropSVEExtra(cropName){
+  const d = cropSVEInfo[cropName];
+  if(!d) return "";
+
+  return `
+    <div class="crop-source-box">
+      <b>🌱 Semilla:</b> ${d.seed}<br>
+      <b>🛒 Cómo conseguirla:</b> ${d.source}<br>
+      <b>📅 Temporada:</b> ${d.season}<br>
+      <b>⏱️ Crecimiento:</b> ${d.growth}<br>
+      <b>📦 Centro Cívico:</b> ${d.notes}
+      <div class="crop-sve-badge">Stardew Valley Expanded</div>
+    </div>
+  `;
+}
 
 </script>
 
