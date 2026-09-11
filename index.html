@@ -152,6 +152,43 @@ header h1{
 
 
 /* =========================
+   NAVEGACIÓN PRINCIPAL
+========================= */
+
+.main-tabs{
+  display:flex;
+  gap:10px;
+  margin-bottom:15px;
+}
+
+.main-tab{
+  flex:1;
+  padding:14px 16px;
+  border:0;
+  border-radius:14px;
+  background:#e9e5dc;
+  color:#40382f;
+  cursor:pointer;
+  font-size:16px;
+  font-weight:bold;
+  transition:.15s;
+}
+
+.main-tab:hover{
+  filter:brightness(.98);
+}
+
+.main-tab.active{
+  background:#6c5137;
+  color:white;
+}
+
+.main-tab.crop-tab.active{
+  background:#668f53;
+}
+
+
+/* =========================
    PROGRESO
 ========================= */
 
@@ -516,6 +553,8 @@ header h1{
   display:flex;
   align-items:center;
   gap:10px;
+
+  flex-wrap:wrap;
 }
 
 .search-result.completed{
@@ -528,6 +567,206 @@ header h1{
 
 .search-result small{
   color:#777;
+}
+
+
+/* =========================
+   CULTIVOS
+========================= */
+
+.crop-section{
+  margin-bottom:22px;
+}
+
+.crop-season-title{
+  padding:15px 16px;
+  border-radius:15px;
+  color:white;
+  font-size:20px;
+  font-weight:bold;
+  margin-bottom:10px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.crop-season-title.spring{
+  background:#6e9b5c;
+}
+
+.crop-season-title.summer{
+  background:#c18d3c;
+}
+
+.crop-season-title.fall{
+  background:#a65e3b;
+}
+
+.crop-season-title.winter{
+  background:#668ba7;
+}
+
+.crop-season-title.all{
+  background:#765f91;
+}
+
+.crop-count{
+  font-size:12px;
+  font-weight:normal;
+  background:rgba(255,255,255,.18);
+  padding:6px 10px;
+  border-radius:20px;
+}
+
+.crop-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.crop-card{
+  background:white;
+  border:1px solid #ddd;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.04);
+}
+
+.crop-main{
+  padding:13px;
+  display:flex;
+  align-items:center;
+  gap:11px;
+  cursor:pointer;
+}
+
+.crop-icon{
+  width:38px;
+  text-align:center;
+  font-size:27px;
+  flex:none;
+}
+
+.crop-info{
+  flex:1;
+  min-width:0;
+}
+
+.crop-name{
+  font-weight:bold;
+  font-size:16px;
+}
+
+.crop-seed-name{
+  color:#777;
+  font-size:12px;
+  margin-top:3px;
+}
+
+.crop-profit{
+  text-align:right;
+  flex:none;
+}
+
+.profit-value{
+  font-weight:bold;
+  font-size:14px;
+}
+
+.profit-label{
+  color:#777;
+  font-size:11px;
+  margin-top:2px;
+}
+
+.crop-details{
+  display:none;
+  padding:0 13px 13px;
+}
+
+.crop-details.open{
+  display:block;
+}
+
+.crop-stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:7px;
+}
+
+.crop-stat{
+  background:#f7f5f0;
+  border-radius:10px;
+  padding:9px;
+  text-align:center;
+}
+
+.crop-stat-icon{
+  font-size:16px;
+}
+
+.crop-stat-label{
+  color:#777;
+  font-size:10px;
+  margin-top:3px;
+}
+
+.crop-stat-value{
+  font-weight:bold;
+  font-size:13px;
+  margin-top:2px;
+}
+
+.crop-extra{
+  margin-top:9px;
+  background:#f7f5f0;
+  border-radius:10px;
+  padding:10px;
+  font-size:12px;
+  color:#555;
+}
+
+.crop-best{
+  display:inline-block;
+  background:#fff2c7;
+  color:#805f14;
+  border-radius:20px;
+  padding:4px 8px;
+  font-size:11px;
+  font-weight:bold;
+  margin-top:6px;
+}
+
+.crop-ranking-note{
+  background:#f7f5f0;
+  border-radius:12px;
+  padding:12px;
+  margin-bottom:12px;
+  font-size:13px;
+  color:#666;
+}
+
+.crop-filter-buttons{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:12px;
+}
+
+.crop-filter-buttons button{
+  border:0;
+  border-radius:11px;
+  padding:10px 13px;
+  background:#e9e5dc;
+  cursor:pointer;
+  font-size:13px;
+}
+
+.crop-filter-buttons button.active{
+  background:#668f53;
+  color:white;
 }
 
 
@@ -573,6 +812,40 @@ header h1{
   .room-progress{
     font-size:11px;
     padding:5px 8px;
+  }
+
+  .main-tabs{
+    gap:7px;
+  }
+
+  .main-tab{
+    padding:12px 8px;
+    font-size:14px;
+  }
+
+  .crop-main{
+    padding:11px;
+  }
+
+  .crop-stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .crop-profit{
+    max-width:80px;
+  }
+
+}
+
+
+/* =========================
+   ESCRITORIO
+========================= */
+
+@media(min-width:601px){
+
+  .crop-main{
+    min-height:72px;
   }
 
 }
@@ -635,7 +908,7 @@ header h1{
 
       <div>
 
-        <h1>
+        <h1 id="tituloPrincipal">
           🏛️ Centro Cívico SVE
         </h1>
 
@@ -660,99 +933,205 @@ header h1{
 
 
   <!-- ===================================================
-       PROGRESO
+       PESTAÑAS PRINCIPALES
   =================================================== -->
 
-  <div class="card">
+  <div class="main-tabs">
 
-    <h3>
-      📊 Progreso del Centro Cívico
-    </h3>
-
-    <div
-      id="progressMain"
-      class="progress-main"
+    <button
+      id="btnCentro"
+      class="main-tab active"
     >
-      0 / 30 lotes
-    </div>
+      🏛️ Centro Cívico
+    </button>
 
-    <div
-      id="progressSecondary"
-      class="progress-secondary"
+    <button
+      id="btnCultivos"
+      class="main-tab crop-tab"
     >
-      0 / 148 objetos conseguidos
-    </div>
-
-
-    <div class="progress-bar">
-
-      <div id="progressFill"></div>
-
-    </div>
-
-
-    <div id="progressText">
-      0%
-    </div>
+      🌱 Cultivos
+    </button>
 
   </div>
 
 
 
   <!-- ===================================================
-       BUSCADOR
+       CONTENIDO CENTRO CÍVICO
   =================================================== -->
 
-  <div class="card">
+  <div id="centroContainer">
 
-    <h3>
-      🔎 Buscar objeto
-    </h3>
 
-    <div class="search-box">
+    <!-- ===================================================
+         PROGRESO
+    =================================================== -->
 
-      <input
-        id="buscador"
-        type="text"
-        placeholder="Busca un objeto..."
+    <div class="card">
+
+      <h3>
+        📊 Progreso del Centro Cívico
+      </h3>
+
+      <div
+        id="progressMain"
+        class="progress-main"
       >
+        0 / 30 lotes
+      </div>
+
+      <div
+        id="progressSecondary"
+        class="progress-secondary"
+      >
+        0 / 148 objetos conseguidos
+      </div>
+
+
+      <div class="progress-bar">
+
+        <div id="progressFill"></div>
+
+      </div>
+
+
+      <div id="progressText">
+        0%
+      </div>
 
     </div>
 
-    <div id="searchResults"></div>
+
+
+    <!-- ===================================================
+         BUSCADOR
+    =================================================== -->
+
+    <div class="card">
+
+      <h3>
+        🔎 Buscar objeto
+      </h3>
+
+      <div class="search-box">
+
+        <input
+          id="buscador"
+          type="text"
+          placeholder="Busca un objeto..."
+        >
+
+      </div>
+
+      <div id="searchResults"></div>
+
+    </div>
+
+
+
+    <!-- ===================================================
+         MODOS
+    =================================================== -->
+
+    <div class="card">
+
+      <div class="mode-buttons">
+
+        <button
+          id="btnLotes"
+          class="active"
+        >
+          📦 Por lotes
+        </button>
+
+        <button
+          id="btnEstaciones"
+        >
+          🌱 Por estación
+        </button>
+
+      </div>
+
+    </div>
+
+
+
+    <div id="contenido"></div>
 
   </div>
 
 
 
   <!-- ===================================================
-       MODOS
+       CONTENIDO CULTIVOS
   =================================================== -->
 
-  <div class="card">
+  <div
+    id="cultivosContainer"
+    class="hidden"
+  >
 
-    <div class="mode-buttons">
+    <div class="card">
 
-      <button
-        id="btnLotes"
-        class="active"
-      >
-        📦 Por lotes
-      </button>
+      <h3>
+        🌱 Economía de cultivos
+      </h3>
 
-      <button
-        id="btnEstaciones"
-      >
-        🌱 Por estación
-      </button>
+      <div class="crop-ranking-note">
+        📈 Los cultivos están ordenados por su
+        <strong>ganancia estimada por día</strong>.
+        En cultivos que vuelven a producir se tiene en cuenta
+        la regeneración.
+        <br><br>
+        💡 El cálculo es orientativo y no incluye calidad,
+        fertilizante, profesión, aspersores ni procesamiento
+        en barriles/tarros.
+      </div>
+
+      <div class="crop-filter-buttons">
+
+        <button
+          class="crop-filter active"
+          data-filter="all"
+        >
+          🌿 Todos
+        </button>
+
+        <button
+          class="crop-filter"
+          data-filter="spring"
+        >
+          🌸 Primavera
+        </button>
+
+        <button
+          class="crop-filter"
+          data-filter="summer"
+        >
+          ☀️ Verano
+        </button>
+
+        <button
+          class="crop-filter"
+          data-filter="fall"
+        >
+          🍂 Otoño
+        </button>
+
+        <button
+          class="crop-filter"
+          data-filter="winter"
+        >
+          ❄️ Invierno
+        </button>
+
+      </div>
 
     </div>
 
+    <div id="cropContent"></div>
+
   </div>
-
-
-
-  <div id="contenido"></div>
 
 
 </div>
@@ -791,9 +1170,13 @@ let modoActual = "bundles";
 
 let realtimeChannel = null;
 
+let seccionActual = "centro";
+
+let filtroCultivos = "all";
+
 
 /* =========================================================
-   DATOS
+   DATOS DEL CENTRO CÍVICO
 ========================================================= */
 
 const rooms = [
@@ -1572,7 +1955,7 @@ const infoExtra = {
     "Se pesca en los ríos durante primavera y verano. Aparece de 6:00 a 19:00 cuando hace sol.",
 
   "Goldfish":
-    "Se encuentra en los ríos durante primavera. Horario aproximado: 10:00 a 17:00 con clima soleado.",
+    "Se encuentra en los ríos durante primavera. Horario aproximado: 10:00 a 17:00 cuando hace sol.",
 
   "King Salmon":
     "Pez de SVE. Requiere nivel 8 de pesca y aparece de 6:00 a 20:00.",
@@ -1599,6 +1982,634 @@ const infoExtra = {
     "Pez de SVE asociado a zonas como Shearwater Bridge y Forest West."
 
 };
+
+
+/* =========================================================
+   DATOS DE CULTIVOS
+=========================================================
+
+   profitPerDay:
+   Se calcula automáticamente con:
+
+   ganancia = valor de las cosechas - coste de semillas
+
+   Para cultivos que vuelven a producir se estima
+   cuántas cosechas caben dentro de una estación de 28 días.
+
+   NOTA:
+   Los cultivos de SVE cuya semilla no tiene una compra
+   directa normal muestran el método de adquisición.
+========================================================= */
+
+const crops = [
+
+  /* =========================
+     PRIMAVERA VANILLA
+  ========================= */
+
+  {
+    id:"parsnip",
+    name:"Chirivía",
+    seed:"Semillas de chirivía",
+    season:["Primavera"],
+    seedCost:20,
+    sellPrice:35,
+    growth:4,
+    regrow:0,
+    emoji:"🥕",
+    source:"Tienda de Pierre"
+  },
+
+  {
+    id:"green_bean",
+    name:"Judía verde",
+    seed:"Semillas de judía verde",
+    season:["Primavera"],
+    seedCost:60,
+    sellPrice:40,
+    growth:10,
+    regrow:3,
+    emoji:"🫛",
+    source:"Tienda de Pierre"
+  },
+
+  {
+    id:"cauliflower",
+    name:"Coliflor",
+    seed:"Semillas de coliflor",
+    season:["Primavera"],
+    seedCost:80,
+    sellPrice:175,
+    growth:12,
+    regrow:0,
+    emoji:"🥦",
+    source:"Tienda de Pierre"
+  },
+
+  {
+    id:"potato",
+    name:"Patata",
+    seed:"Semillas de patata",
+    season:["Primavera"],
+    seedCost:50,
+    sellPrice:80,
+    growth:6,
+    regrow:0,
+    emoji:"🥔",
+    source:"Tienda de Pierre"
+  },
+
+  {
+    id:"strawberry",
+    name:"Fresa",
+    seed:"Semillas de fresa",
+    season:["Primavera"],
+    seedCost:100,
+    sellPrice:120,
+    growth:8,
+    regrow:4,
+    emoji:"🍓",
+    source:"Festival del Huevo"
+  },
+
+  {
+    id:"blue_jazz",
+    name:"Jazmín azul",
+    seed:"Semillas de jazmín azul",
+    season:["Primavera"],
+    seedCost:30,
+    sellPrice:50,
+    growth:7,
+    regrow:0,
+    emoji:"🌸",
+    source:"Tienda de Pierre"
+  },
+
+  {
+    id:"tulip",
+    name:"Tulipán",
+    seed:"Bulbos de tulipán",
+    season:["Primavera"],
+    seedCost:20,
+    sellPrice:30,
+    growth:6,
+    regrow:0,
+    emoji:"🌷",
+    source:"Tienda de Pierre"
+  },
+
+  {
+    id:"kale",
+    name:"Col rizada",
+    seed:"Semillas de col rizada",
+    season:["Primavera"],
+    seedCost:70,
+    sellPrice:110,
+    growth:6,
+    regrow:0,
+    emoji:"🥬",
+    source:"Tienda de Pierre"
+  },
+
+  {
+    id:"garlic",
+    name:"Ajo",
+    seed:"Semillas de ajo",
+    season:["Primavera"],
+    seedCost:40,
+    sellPrice:60,
+    growth:4,
+    regrow:0,
+    emoji:"🧄",
+    source:"Tienda de Pierre"
+  },
+
+  {
+    id:"rice",
+    name:"Arroz",
+    seed:"Brotes de arroz",
+    season:["Primavera"],
+    seedCost:40,
+    sellPrice:100,
+    growth:8,
+    regrow:0,
+    emoji:"🌾",
+    source:"Tienda de Pierre / Joja"
+  },
+
+
+  /* =========================
+     PRIMAVERA SVE
+  ========================= */
+
+  {
+    id:"sve_gold_carrot",
+    name:"Zanahoria dorada",
+    seed:"Semilla de zanahoria dorada",
+    season:["Primavera","Verano","Otoño"],
+    seedCost:null,
+    seedCostText:"3 lingotes de oro",
+    sellPrice:1000,
+    growth:6,
+    regrow:0,
+    emoji:"🥕",
+    source:"Comerciante del Desierto",
+    note:"La semilla no se compra por oro. Se obtiene mediante un intercambio de 3 lingotes de oro."
+  },
+
+  {
+    id:"sve_shrub_seed",
+    name:"Baya salal",
+    seed:"Semilla de arbusto",
+    season:["Primavera","Verano"],
+    seedCost:null,
+    seedCostText:"Compra/adquisición especial SVE",
+    sellPrice:75,
+    growth:13,
+    regrow:4,
+    harvests:2,
+    emoji:"🫐",
+    source:"Contenido de Stardew Valley Expanded",
+    note:"La planta produce varias bayas por cosecha. El número puede variar."
+  },
+
+  {
+    id:"sve_slime_seed",
+    name:"Baya de limo",
+    seed:"Semilla de limo",
+    season:["Primavera"],
+    seedCost:null,
+    seedCostText:"Compra/adquisición especial SVE",
+    sellPrice:85,
+    growth:13,
+    regrow:4,
+    harvests:1,
+    emoji:"🟢",
+    source:"Contenido de Stardew Valley Expanded",
+    note:"Puede producir entre 1 y 3 frutos por cosecha."
+  },
+
+  {
+    id:"sve_cucumber",
+    name:"Pepino",
+    seed:"Semilla de pepino",
+    season:["Primavera"],
+    seedCost:null,
+    seedCostText:"Semilla de SVE",
+    sellPrice:100,
+    growth:12,
+    regrow:2,
+    harvests:2,
+    emoji:"🥒",
+    source:"Contenido de Stardew Valley Expanded",
+    note:"Puede producir varias unidades por cosecha."
+  },
+
+  {
+    id:"sve_joja_berry",
+    name:"Baya Joja",
+    seed:"Iniciador de baya Joja",
+    season:["Primavera","Verano","Otoño"],
+    seedCost:null,
+    seedCostText:"Adquisición especial SVE / ruta Joja",
+    sellPrice:650,
+    growth:25,
+    regrow:4,
+    harvests:1,
+    emoji:"🫐",
+    source:"Contenido de Stardew Valley Expanded",
+    note:"Es un cultivo exclusivo de SVE y está relacionado con la ruta Joja."
+  },
+
+
+  /* =========================
+     VERANO VANILLA
+  ========================= */
+
+  {
+    id:"tomato",
+    name:"Tomate",
+    seed:"Semillas de tomate",
+    season:["Verano"],
+    seedCost:50,
+    sellPrice:60,
+    growth:11,
+    regrow:4,
+    emoji:"🍅",
+    source:"Tienda de Pierre"
+  },
+
+  {
+    id:"hot_pepper",
+    name:"Pimiento picante",
+    seed:"Semillas de pimiento picante",
+    season:["Verano"],
+    seedCost:40,
+    sellPrice:40,
+    growth:5,
+    regrow:3,
+    emoji:"🌶️",
+    source:"Tienda de Pierre"
+  },
+
+  {
+    id:"blueberry",
+    name:"Arándano",
+    seed:"Semillas de arándano",
+    season:["Verano"],
+    seedCost:80,
+    sellPrice:50,
+    growth:13,
+    regrow:4,
+    harvests:3,
+    emoji:"🫐",
+    source:"Tienda de Pierre"
+  },
+
+  {
+    id:"melon",
+    name:"Melón",
+    seed:"Semillas de melón",
+    season:["Verano"],
+    seedCost:80,
+    sellPrice:250,
+    growth:12,
+    regrow:0,
+    emoji:"🍈",
+    source:"Tienda de Pierre"
+  },
+
+  {
+    id:"corn",
+    name:"Maíz",
+    seed:"Semillas de maíz",
+    season:["Verano","Otoño"],
+    seedCost:150,
+    sellPrice:50,
+    growth:14,
+    regrow:4,
+    emoji:"🌽",
+    source:"Tienda de Pierre"
+  },
+
+  {
+    id:"hops",
+    name:"Lúpulo",
+    seed:"Entradas de lúpulo",
+    season:["Verano"],
+    seedCost:60,
+    sellPrice:25,
+    growth:11,
+    regrow:1,
+    emoji:"🌿",
+    source:"Tienda de Pierre"
+  },
+
+  {
+    id:"radish",
+    name:"Rábano",
+    seed:"Semillas de rábano",
+    season:["Verano"],
+    seedCost:40,
+    sellPrice:90,
+    growth:6,
+    regrow:0,
+    emoji:"🥕",
+    source:"Tienda de Pierre"
+  },
+
+  {
+    id:"wheat",
+    name:"Trigo",
+    seed:"Semillas de trigo",
+    season:["Verano","Otoño"],
+    seedCost:10,
+    sellPrice:25,
+    growth:4,
+    regrow:0,
+    emoji:"🌾",
+    source:"Tienda de Pierre / Joja"
+  },
+
+  {
+    id:"starfruit",
+    name:"Fruta estelar",
+    seed:"Semillas de fruta estelar",
+    season:["Verano"],
+    seedCost:400,
+    sellPrice:750,
+    growth:13,
+    regrow:0,
+    emoji:"⭐",
+    source:"Oasis"
+  },
+
+  {
+    id:"summer_spangle",
+    name:"Espina de verano",
+    seed:"Semillas de espina de verano",
+    season:["Verano"],
+    seedCost:50,
+    sellPrice:90,
+    growth:8,
+    regrow:0,
+    emoji:"🌺",
+    source:"Tienda de Pierre"
+  },
+
+
+  /* =========================
+     VERANO SVE
+  ========================= */
+
+  {
+    id:"sve_ancient_ferns",
+    name:"Helechos antiguos",
+    seed:"Semillas de helecho antiguo",
+    season:["Verano"],
+    seedCost:null,
+    seedCostText:"Semilla de SVE",
+    sellPrice:145,
+    growth:12,
+    regrow:0,
+    harvests:2,
+    emoji:"🌿",
+    source:"Contenido de Stardew Valley Expanded",
+    note:"SVE define 12 días de crecimiento y una producción que puede variar."
+  },
+
+  {
+    id:"sve_butternut_squash",
+    name:"Calabaza moscada",
+    seed:"Semilla de calabaza moscada",
+    season:["Verano"],
+    seedCost:null,
+    seedCostText:"Semilla de SVE",
+    sellPrice:250,
+    growth:12,
+    regrow:0,
+    emoji:"🎃",
+    source:"Contenido de Stardew Valley Expanded"
+  },
+
+  {
+    id:"sve_joja_veggie",
+    name:"Verdura Joja",
+    seed:"Semillas de verdura Joja",
+    season:["Primavera","Verano","Otoño"],
+    seedCost:null,
+    seedCostText:"Adquisición especial SVE / ruta Joja",
+    sellPrice:1140,
+    growth:13,
+    regrow:0,
+    emoji:"🥬",
+    source:"Contenido de Stardew Valley Expanded",
+    note:"Cultivo exclusivo de SVE. La ruta Joja determina su disponibilidad."
+  },
+
+  {
+    id:"sve_monster_fruit",
+    name:"Fruta monstruosa",
+    seed:"Semilla de tallo",
+    season:["Verano"],
+    seedCost:null,
+    seedCostText:"Semilla de SVE",
+    sellPrice:350,
+    growth:25,
+    regrow:0,
+    emoji:"👹",
+    source:"Contenido de Stardew Valley Expanded"
+  },
+
+
+  /* =========================
+     OTOÑO VANILLA
+  ========================= */
+
+  {
+    id:"eggplant",
+    name:"Berenjena",
+    seed:"Semillas de berenjena",
+    season:["Otoño"],
+    seedCost:20,
+    sellPrice:60,
+    growth:5,
+    regrow:5,
+    emoji:"🍆",
+    source:"Tienda de Pierre"
+  },
+
+  {
+    id:"pumpkin",
+    name:"Calabaza",
+    seed:"Semillas de calabaza",
+    season:["Otoño"],
+    seedCost:100,
+    sellPrice:320,
+    growth:13,
+    regrow:0,
+    emoji:"🎃",
+    source:"Tienda de Pierre"
+  },
+
+  {
+    id:"yam",
+    name:"Ñame",
+    seed:"Semillas de ñame",
+    season:["Otoño"],
+    seedCost:60,
+    sellPrice:160,
+    growth:10,
+    regrow:0,
+    emoji:"🍠",
+    source:"Tienda de Pierre"
+  },
+
+  {
+    id:"cranberry",
+    name:"Arándano rojo",
+    seed:"Semillas de arándano rojo",
+    season:["Otoño"],
+    seedCost:240,
+    sellPrice:75,
+    growth:7,
+    regrow:5,
+    harvests:2,
+    emoji:"🔴",
+    source:"Tienda de Pierre"
+  },
+
+  {
+    id:"sunflower",
+    name:"Girasol",
+    seed:"Semillas de girasol",
+    season:["Verano","Otoño"],
+    seedCost:200,
+    sellPrice:80,
+    growth:8,
+    regrow:0,
+    emoji:"🌻",
+    source:"Tienda de Pierre"
+  },
+
+  {
+    id:"bok_choy",
+    name:"Bok Choy",
+    seed:"Semillas de bok choy",
+    season:["Otoño"],
+    seedCost:50,
+    sellPrice:80,
+    growth:4,
+    regrow:0,
+    emoji:"🥬",
+    source:"Tienda de Pierre"
+  },
+
+  {
+    id:"beet",
+    name:"Remolacha",
+    seed:"Semillas de remolacha",
+    season:["Otoño"],
+    seedCost:20,
+    sellPrice:100,
+    growth:6,
+    regrow:0,
+    emoji:"🟣",
+    source:"Oasis"
+  },
+
+  {
+    id:"amaranth",
+    name:"Amaranto",
+    seed:"Semillas de amaranto",
+    season:["Otoño"],
+    seedCost:70,
+    sellPrice:150,
+    growth:7,
+    regrow:0,
+    emoji:"🌿",
+    source:"Tienda de Pierre"
+  },
+
+  {
+    id:"artichoke",
+    name:"Alcachofa",
+    seed:"Semillas de alcachofa",
+    season:["Otoño"],
+    seedCost:30,
+    sellPrice:160,
+    growth:8,
+    regrow:0,
+    emoji:"🥦",
+    source:"Tienda de Pierre"
+  },
+
+  {
+    id:"fairy_rose",
+    name:"Rosa hada",
+    seed:"Semillas de rosa hada",
+    season:["Otoño"],
+    seedCost:200,
+    sellPrice:290,
+    growth:12,
+    regrow:0,
+    emoji:"🌹",
+    source:"Tienda de Pierre"
+  },
+
+
+  /* =========================
+     OTOÑO SVE
+  ========================= */
+
+  {
+    id:"sve_fungus",
+    name:"Hongo",
+    seed:"Semilla de hongo",
+    season:["Otoño"],
+    seedCost:null,
+    seedCostText:"Semilla de SVE",
+    sellPrice:200,
+    growth:13,
+    regrow:0,
+    emoji:"🍄",
+    source:"Contenido de Stardew Valley Expanded"
+  },
+
+  {
+    id:"sve_sweet_potato",
+    name:"Batata",
+    seed:"Semilla de batata",
+    season:["Otoño"],
+    seedCost:null,
+    seedCostText:"Semilla de SVE",
+    sellPrice:110,
+    growth:12,
+    regrow:0,
+    emoji:"🍠",
+    source:"Contenido de Stardew Valley Expanded"
+  },
+
+
+  /* =========================
+     INVIERNO SVE
+  ========================= */
+
+  {
+    id:"sve_void_root",
+    name:"Raíz sombría",
+    seed:"Semilla sombría",
+    season:["Invierno"],
+    seedCost:null,
+    seedCostText:"Semilla de SVE",
+    sellPrice:250,
+    growth:8,
+    regrow:0,
+    emoji:"🟣",
+    source:"Contenido de Stardew Valley Expanded"
+  }
+
+];
 
 
 /* =========================================================
@@ -1672,8 +2683,8 @@ function obtenerId(room,bundle,item){
 
   /*
      IMPORTANTE:
-     Se conserva el mismo formato del código actual
-     para que no se pierdan los progresos existentes.
+     NO CAMBIAR.
+     Conserva los progresos existentes.
   */
 
   return "sve_" +
@@ -2006,11 +3017,6 @@ async function cambiarItem(id,checkbox){
 
   actualizarTodosLosContadores();
 
-
-  /*
-     En estación:
-     los objetos conseguidos bajan al final.
-  */
 
   if(
     modoActual === "season" &&
@@ -3170,6 +4176,13 @@ function buscar(texto){
       );
 
 
+    const infoId =
+      "searchInfo_" +
+      Math.random()
+        .toString(36)
+        .substring(2,10);
+
+
     row.innerHTML = `
 
       <input
@@ -3184,7 +4197,10 @@ function buscar(texto){
       </div>
 
 
-      <div style="flex:1">
+      <div
+        style="flex:1;cursor:pointer"
+        onclick="toggleInfo('${infoId}')"
+      >
 
         <strong>
           ${item.name}
@@ -3195,6 +4211,53 @@ function buscar(texto){
         <small>
           ${room.name} · ${bundle.name}
         </small>
+
+      </div>
+
+
+      <button
+        class="info-button"
+        onclick="toggleInfo('${infoId}')"
+      >
+        ℹ️
+      </button>
+
+
+      <div
+        id="${infoId}"
+        class="info-panel"
+      >
+
+        <strong>
+          📍 Fuente / ubicación
+        </strong>
+
+        ${item.source}
+
+
+        <br><br>
+
+
+        <strong>
+          🌱 Temporada
+        </strong>
+
+        ${item.season}
+
+
+        ${
+          infoExtra[item.id]
+          ?
+          `<br><br>
+
+          <strong>
+            💡 Información
+          </strong>
+
+          ${infoExtra[item.id]}`
+          :
+          ""
+        }
 
       </div>
 
@@ -3223,6 +4286,810 @@ function buscar(texto){
     );
 
   });
+
+}
+
+
+/* =========================================================
+   CÁLCULO DE CULTIVOS
+========================================================= */
+
+function calcularCultivo(crop){
+
+  const seasonDays = 28;
+
+  const seedCost =
+    typeof crop.seedCost === "number"
+      ? crop.seedCost
+      : 0;
+
+  /*
+     Primera cosecha.
+  */
+
+  let harvestCount = 1;
+
+
+  /*
+     Si regenera, calculamos las cosechas
+     posibles durante los 28 días.
+
+     La fórmula considera:
+
+     crecimiento inicial
+     + intervalos de regeneración
+  */
+
+  if(crop.regrow > 0){
+
+    if(crop.growth <= seasonDays){
+
+      harvestCount =
+        1 +
+        Math.floor(
+          (
+            seasonDays -
+            crop.growth
+          ) /
+          crop.regrow
+        );
+
+    }
+
+  }
+
+
+  /*
+     Algunos cultivos producen varias unidades
+     por cosecha.
+
+     Si no se especifica:
+     1 unidad por cosecha.
+  */
+
+  let unitsPerHarvest =
+    crop.harvests || 1;
+
+
+  /*
+     Para cultivos SVE con rango conocido
+     usamos un valor medio razonable cuando
+     se especifica una producción variable.
+  */
+
+  if(crop.id === "sve_shrub_seed"){
+    unitsPerHarvest = 3;
+  }
+
+  if(crop.id === "sve_slime_seed"){
+    unitsPerHarvest = 2;
+  }
+
+  if(crop.id === "sve_cucumber"){
+    unitsPerHarvest = 2.5;
+  }
+
+
+  const totalRevenue =
+    crop.sellPrice *
+    unitsPerHarvest *
+    harvestCount;
+
+
+  const totalSeedCost =
+    seedCost;
+
+
+  const profit =
+    totalRevenue -
+    totalSeedCost;
+
+
+  const profitPerDay =
+    profit /
+    seasonDays;
+
+
+  return {
+
+    ...crop,
+
+    harvestCount,
+
+    unitsPerHarvest,
+
+    totalRevenue,
+
+    totalSeedCost,
+
+    profit,
+
+    profitPerDay
+
+  };
+
+}
+
+
+/* =========================================================
+   TEMPORADA DE CULTIVO
+========================================================= */
+
+function obtenerClaseTemporada(season){
+
+  if(season === "Primavera"){
+    return "spring";
+  }
+
+  if(season === "Verano"){
+    return "summer";
+  }
+
+  if(season === "Otoño"){
+    return "fall";
+  }
+
+  if(season === "Invierno"){
+    return "winter";
+  }
+
+  return "all";
+
+}
+
+
+/* =========================================================
+   FORMATO DINERO
+========================================================= */
+
+function dinero(valor){
+
+  if(
+    typeof valor !== "number" ||
+    !isFinite(valor)
+  ){
+
+    return "—";
+
+  }
+
+
+  return Math.round(valor)
+    .toLocaleString("es-ES") +
+    "g";
+
+}
+
+
+/* =========================================================
+   CREAR TARJETA DE CULTIVO
+========================================================= */
+
+function crearCropCard(crop,index,bestId){
+
+  const calculo =
+    calcularCultivo(crop);
+
+
+  const card =
+    document.createElement("div");
+
+
+  card.className =
+    "crop-card";
+
+
+  const infoId =
+    "cropInfo_" +
+    Math.random()
+      .toString(36)
+      .substring(2,10);
+
+
+  const esMejor =
+    crop.id === bestId;
+
+
+  const semilla =
+    crop.seedCost !== null &&
+    typeof crop.seedCost === "number"
+      ? dinero(crop.seedCost)
+      : (
+          crop.seedCostText ||
+          "—"
+        );
+
+
+  const regeneracion =
+    crop.regrow > 0
+      ? `${crop.regrow} días`
+      : "No regenera";
+
+
+  card.innerHTML = `
+
+    <div
+      class="crop-main"
+      onclick="toggleInfo('${infoId}')"
+    >
+
+      <div class="crop-icon">
+        ${crop.emoji}
+      </div>
+
+
+      <div class="crop-info">
+
+        <div class="crop-name">
+          ${crop.name}
+        </div>
+
+        <div class="crop-seed-name">
+          ${crop.seed}
+        </div>
+
+        ${
+          esMejor
+          ?
+          `<span class="crop-best">
+            ⭐ Más rentable
+          </span>`
+          :
+          ""
+        }
+
+      </div>
+
+
+      <div class="crop-profit">
+
+        <div class="profit-value">
+          ${dinero(calculo.profitPerDay)}
+        </div>
+
+        <div class="profit-label">
+          ganancia/día
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      id="${infoId}"
+      class="crop-details"
+    >
+
+      <div class="crop-stats">
+
+        <div class="crop-stat">
+
+          <div class="crop-stat-icon">
+            🌱
+          </div>
+
+          <div class="crop-stat-label">
+            Semilla
+          </div>
+
+          <div class="crop-stat-value">
+            ${semilla}
+          </div>
+
+        </div>
+
+
+        <div class="crop-stat">
+
+          <div class="crop-stat-icon">
+            🪙
+          </div>
+
+          <div class="crop-stat-label">
+            Venta
+          </div>
+
+          <div class="crop-stat-value">
+            ${dinero(crop.sellPrice)}
+          </div>
+
+        </div>
+
+
+        <div class="crop-stat">
+
+          <div class="crop-stat-icon">
+            ⏱️
+          </div>
+
+          <div class="crop-stat-label">
+            Crecimiento
+          </div>
+
+          <div class="crop-stat-value">
+            ${crop.growth} días
+          </div>
+
+        </div>
+
+
+        <div class="crop-stat">
+
+          <div class="crop-stat-icon">
+            🔄
+          </div>
+
+          <div class="crop-stat-label">
+            Regeneración
+          </div>
+
+          <div class="crop-stat-value">
+            ${regeneracion}
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="crop-extra">
+
+        📅 <strong>Temporada:</strong>
+        ${crop.season.join(" / ")}
+
+        <br><br>
+
+        🌾 <strong>Cosechas estimadas:</strong>
+        ${calculo.harvestCount}
+
+        <br><br>
+
+        📦 <strong>Producción por cosecha:</strong>
+        ${calculo.unitsPerHarvest}
+
+        <br><br>
+
+        💰 <strong>Ingresos estimados de la temporada:</strong>
+        ${dinero(calculo.totalRevenue)}
+
+        <br><br>
+
+        📈 <strong>Ganancia estimada:</strong>
+        ${dinero(calculo.profit)}
+
+        <br><br>
+
+        📊 <strong>Ganancia por día:</strong>
+        ${dinero(calculo.profitPerDay)}
+
+        <br><br>
+
+        📍 <strong>Obtención:</strong>
+        ${crop.source}
+
+        ${
+          crop.note
+          ?
+          `<br><br>
+           💡 <strong>Nota:</strong>
+           ${crop.note}`
+          :
+          ""
+        }
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  return card;
+
+}
+
+
+/* =========================================================
+   MOSTRAR CULTIVOS
+========================================================= */
+
+function mostrarCultivos(){
+
+  const contenido =
+    document.getElementById(
+      "cropContent"
+    );
+
+
+  contenido.innerHTML = "";
+
+
+  let datos =
+    crops.map(
+      crop=>calcularCultivo(crop)
+    );
+
+
+  if(
+    filtroCultivos !== "all"
+  ){
+
+    const nombreFiltro = {
+
+      spring:"Primavera",
+      summer:"Verano",
+      fall:"Otoño",
+      winter:"Invierno"
+
+    }[filtroCultivos];
+
+
+    datos =
+      datos.filter(
+        crop=>
+          crop.season.includes(
+            nombreFiltro
+          )
+      );
+
+  }
+
+
+  /*
+     Mejor cultivo según ganancia/día.
+  */
+
+  let bestId = null;
+
+
+  const disponibles =
+    datos.filter(
+      crop=>
+        typeof crop.profitPerDay === "number"
+    );
+
+
+  if(disponibles.length){
+
+    const mejor =
+      [...disponibles]
+        .sort(
+          (a,b)=>
+            b.profitPerDay -
+            a.profitPerDay
+        )[0];
+
+
+    bestId =
+      mejor.id;
+
+  }
+
+
+  /*
+     Orden general:
+     rentabilidad ↓
+  */
+
+  datos.sort(
+    (a,b)=>
+      b.profitPerDay -
+      a.profitPerDay
+  );
+
+
+  /*
+     Si filtramos por una estación,
+     mostramos una sola sección.
+  */
+
+  if(
+    filtroCultivos !== "all"
+  ){
+
+    const seasonName = {
+
+      spring:"Primavera",
+      summer:"Verano",
+      fall:"Otoño",
+      winter:"Invierno"
+
+    }[filtroCultivos];
+
+
+    const icon = {
+
+      spring:"🌸",
+      summer:"☀️",
+      fall:"🍂",
+      winter:"❄️"
+
+    }[filtroCultivos];
+
+
+    const section =
+      document.createElement(
+        "div"
+      );
+
+
+    section.className =
+      "crop-section";
+
+
+    section.innerHTML = `
+
+      <div class="crop-season-title ${filtroCultivos}">
+
+        <span>
+          ${icon} ${seasonName}
+        </span>
+
+        <span class="crop-count">
+          ${datos.length} cultivos
+        </span>
+
+      </div>
+
+      <div class="crop-list"></div>
+
+    `;
+
+
+    const list =
+      section.querySelector(
+        ".crop-list"
+      );
+
+
+    datos.forEach(
+      (crop,index)=>{
+
+        list.appendChild(
+          crearCropCard(
+            crop,
+            index,
+            bestId
+          )
+        );
+
+      }
+    );
+
+
+    contenido.appendChild(
+      section
+    );
+
+
+    return;
+
+  }
+
+
+  /*
+     Vista completa:
+     separamos por estación.
+  */
+
+  const orden = [
+
+    {
+      name:"Primavera",
+      icon:"🌸",
+      className:"spring"
+    },
+
+    {
+      name:"Verano",
+      icon:"☀️",
+      className:"summer"
+    },
+
+    {
+      name:"Otoño",
+      icon:"🍂",
+      className:"fall"
+    },
+
+    {
+      name:"Invierno",
+      icon:"❄️",
+      className:"winter"
+    }
+
+  ];
+
+
+  orden.forEach(seasonData=>{
+
+    const seasonCrops =
+      datos.filter(
+        crop=>
+          crop.season.includes(
+            seasonData.name
+          )
+      );
+
+
+    if(
+      seasonCrops.length === 0
+    ){
+
+      return;
+
+    }
+
+
+    /*
+       El mejor de esa estación.
+    */
+
+    const bestSeason =
+      [...seasonCrops]
+        .sort(
+          (a,b)=>
+            b.profitPerDay -
+            a.profitPerDay
+        )[0];
+
+
+    const section =
+      document.createElement(
+        "div"
+      );
+
+
+    section.className =
+      "crop-section";
+
+
+    section.innerHTML = `
+
+      <div
+        class="crop-season-title ${seasonData.className}"
+      >
+
+        <span>
+          ${seasonData.icon}
+          ${seasonData.name}
+        </span>
+
+        <span class="crop-count">
+          ${seasonCrops.length} cultivos
+        </span>
+
+      </div>
+
+      <div class="crop-list"></div>
+
+    `;
+
+
+    const list =
+      section.querySelector(
+        ".crop-list"
+      );
+
+
+    seasonCrops.forEach(
+      (crop,index)=>{
+
+        list.appendChild(
+          crearCropCard(
+            crop,
+            index,
+            bestSeason.id
+          )
+        );
+
+      }
+    );
+
+
+    contenido.appendChild(
+      section
+    );
+
+  });
+
+}
+
+
+/* =========================================================
+   CAMBIAR SECCIÓN PRINCIPAL
+========================================================= */
+
+function mostrarSeccion(nombre){
+
+  seccionActual =
+    nombre;
+
+
+  const centro =
+    document.getElementById(
+      "centroContainer"
+    );
+
+
+  const cultivos =
+    document.getElementById(
+      "cultivosContainer"
+    );
+
+
+  const btnCentro =
+    document.getElementById(
+      "btnCentro"
+    );
+
+
+  const btnCultivos =
+    document.getElementById(
+      "btnCultivos"
+    );
+
+
+  if(nombre === "centro"){
+
+    centro.classList.remove(
+      "hidden"
+    );
+
+    cultivos.classList.add(
+      "hidden"
+    );
+
+    btnCentro.classList.add(
+      "active"
+    );
+
+    btnCultivos.classList.remove(
+      "active"
+    );
+
+
+    document
+      .getElementById(
+        "tituloPrincipal"
+      )
+      .textContent =
+        "🏛️ Centro Cívico SVE";
+
+
+    return;
+
+  }
+
+
+  centro.classList.add(
+    "hidden"
+  );
+
+  cultivos.classList.remove(
+    "hidden"
+  );
+
+
+  btnCentro.classList.remove(
+    "active"
+  );
+
+  btnCultivos.classList.add(
+    "active"
+  );
+
+
+  document
+    .getElementById(
+      "tituloPrincipal"
+    )
+    .textContent =
+      "🌱 Cultivos SVE";
+
+
+  mostrarCultivos();
 
 }
 
@@ -3295,21 +5162,22 @@ async function refrescarProgreso(){
 
 
   /*
-     NO usamos showBundles()
-     ni showSeasons() aquí.
+     No cambiamos de sección.
 
-     Por eso:
-     - no volvemos al login
-     - no cambiamos de vista
-     - no cerramos los lotes
-     - no perdemos la posición
+     Tampoco reconstruimos el Centro Cívico.
   */
 
-  actualizarTodosLosCheckboxes();
+  if(
+    seccionActual === "centro"
+  ){
 
-  actualizarTodosLosContadores();
+    actualizarTodosLosCheckboxes();
 
-  updateProgress();
+    actualizarTodosLosContadores();
+
+    updateProgress();
+
+  }
 
 
   refreshStatus.textContent =
@@ -3527,6 +5395,11 @@ async function conectar(){
     .remove("hidden");
 
 
+  mostrarSeccion(
+    "centro"
+  );
+
+
   showBundles();
 
 
@@ -3584,6 +5457,46 @@ document
   .addEventListener(
     "click",
     refrescarProgreso
+  );
+
+
+/* =========================================================
+   BOTÓN CENTRO CÍVICO
+========================================================= */
+
+document
+  .getElementById(
+    "btnCentro"
+  )
+  .addEventListener(
+    "click",
+    ()=>{
+
+      mostrarSeccion(
+        "centro"
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   BOTÓN CULTIVOS
+========================================================= */
+
+document
+  .getElementById(
+    "btnCultivos"
+  )
+  .addEventListener(
+    "click",
+    ()=>{
+
+      mostrarSeccion(
+        "cultivos"
+      );
+
+    }
   );
 
 
@@ -3673,6 +5586,50 @@ document
 
     }
   );
+
+
+/* =========================================================
+   FILTROS DE CULTIVOS
+========================================================= */
+
+document
+  .querySelectorAll(
+    ".crop-filter"
+  )
+  .forEach(button=>{
+
+    button.addEventListener(
+      "click",
+      ()=>{
+
+        document
+          .querySelectorAll(
+            ".crop-filter"
+          )
+          .forEach(btn=>{
+
+            btn.classList.remove(
+              "active"
+            );
+
+          });
+
+
+        button.classList.add(
+          "active"
+        );
+
+
+        filtroCultivos =
+          button.dataset.filter;
+
+
+        mostrarCultivos();
+
+      }
+    );
+
+  });
 
 
 /* =========================================================
