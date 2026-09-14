@@ -1029,6 +1029,30 @@ const cropSVEInfo = {
   font-weight:bold;
 }
 
+
+
+/* =========================================================
+   MOON VILLAGE
+========================================================= */
+.main-tab.moon-tab.active{background:#70557f}
+#moonContainer .moon-progress-card{border-top:5px solid #70557f}
+.moon-progress-main{font-size:21px;font-weight:bold;margin-bottom:4px}
+.moon-progress-secondary{color:#777;font-size:13px}
+#moonProgressFill{width:0%;height:100%;background:#70557f;transition:width .25s}
+.moon-note{background:#f4eef7;border-left:4px solid #70557f;padding:12px 14px;border-radius:10px;font-size:12px;line-height:1.5;margin-bottom:15px}
+.moon-bundle{margin-bottom:14px;border-radius:15px;overflow:hidden;background:white;box-shadow:0 4px 15px rgba(0,0,0,.07)}
+.moon-bundle-title{padding:15px 16px;color:white;display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;font-weight:bold;font-size:17px}
+.moon-bundle-title small{font-size:12px;font-weight:normal;background:rgba(255,255,255,.18);padding:5px 8px;border-radius:10px;white-space:nowrap}
+.moon-bundle-desc{padding:10px 15px;background:#faf8f5;color:#777;font-size:12px;line-height:1.45;border-bottom:1px solid #eee8df}
+.moon-items{display:none}.moon-items.open{display:block}
+.moon-item{padding:12px 14px;border-bottom:1px solid #eee8df}.moon-item:last-child{border-bottom:0}
+.moon-item-main{display:flex;align-items:center;gap:10px}.moon-item-main input{width:20px;height:20px;flex:none}
+.moon-item-name{flex:1;font-weight:bold;cursor:pointer}.moon-item-qty{font-weight:bold;color:#70557f;white-space:nowrap}
+.moon-item.done .moon-item-name{text-decoration:line-through;opacity:.55}
+.moon-item-info{display:none;margin:10px 0 2px 30px;padding:10px 12px;background:#f7f5f0;border-left:4px solid #70557f;border-radius:9px;font-size:12px;line-height:1.55}.moon-item-info.open{display:block}.moon-item-info b{color:#40382f}
+.moon-season-title{padding:13px 15px;border-radius:14px;background:#70557f;color:white;font-weight:bold;margin:18px 0 10px}.moon-season-group{margin-bottom:12px}
+@media(max-width:700px){.main-tabs{flex-wrap:wrap}.main-tab{min-width:calc(50% - 5px)}}
+
 </style>
 </head>
 
@@ -1136,6 +1160,13 @@ const cropSVEInfo = {
       class="main-tab calculator-tab"
     >
       🧮 Calculadora
+    </button>
+
+    <button
+      id="btnMoon"
+      class="main-tab moon-tab"
+    >
+      🌙 Moon Village
     </button>
 
   </div>
@@ -1248,6 +1279,40 @@ const cropSVEInfo = {
 
   </div>
 
+
+
+  <!-- ===================================================
+       CONTENIDO MOON VILLAGE
+  =================================================== -->
+
+  <div id="moonContainer" class="hidden">
+
+    <div class="card moon-progress-card">
+      <h3>🌙 Progreso de Moon Village</h3>
+      <div id="moonProgressMain" class="moon-progress-main">0 / 8 lotes</div>
+      <div id="moonProgressSecondary" class="moon-progress-secondary">0 / 38 objetos conseguidos</div>
+      <div class="progress-bar"><div id="moonProgressFill"></div></div>
+      <div id="moonProgressText">0% completado</div>
+    </div>
+
+    <div class="card">
+      <h3>🔎 Buscar en Moon Village</h3>
+      <div class="search-box">
+        <input id="moonBuscador" type="text" placeholder="Busca madera, musgo, cerveza...">
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="mode-buttons">
+        <button id="btnMoonLotes" class="active">📦 Por lotes</button>
+        <button id="btnMoonEstaciones">🌱 Por estación</button>
+      </div>
+    </div>
+
+    <div class="moon-note">🌙 <strong>Moon Village · Restauración</strong><br>Completa los materiales de cada lote para llevar de vuelta la vida a Moon Village. Toca el nombre de un objeto para ver dónde conseguirlo, su estación y cómo obtenerlo.</div>
+    <div id="moonContenido"></div>
+
+  </div>
 
 
   <!-- ===================================================
@@ -4690,6 +4755,14 @@ function showSeasons(){
 
 
 /* =========================================================
+   BOTONES MOON VILLAGE
+========================================================= */
+document.getElementById("btnMoonLotes").addEventListener("click",()=>{moonModoActual="bundles";document.getElementById("btnMoonLotes").classList.add("active");document.getElementById("btnMoonEstaciones").classList.remove("active");renderMoonVillage()});
+document.getElementById("btnMoonEstaciones").addEventListener("click",()=>{moonModoActual="season";document.getElementById("btnMoonEstaciones").classList.add("active");document.getElementById("btnMoonLotes").classList.remove("active");renderMoonVillage()});
+document.getElementById("moonBuscador").addEventListener("input",renderMoonVillage);
+
+
+/* =========================================================
    BUSCADOR
 ========================================================= */
 
@@ -5736,32 +5809,64 @@ function inicializarCalculadora(){
   renderizarPlanCultivos();
 }
 
+
+/* =========================================================
+   MOON VILLAGE · DATOS Y RENDER
+========================================================= */
+const moonBundles=[
+ {id:"townhall",name:"Townhall / Casa de Annette",icon:"🏠",color:"#80644a",description:"Restauración inicial del ayuntamiento y la casa de Annette.",items:[["Wood","Madera","Todo el año","Árboles / Bosque","Talar árboles y recoger madera.",500],["Stone","Piedra","Todo el año","Minas / Cantera","Romper rocas con el pico.",250]]},
+ {id:"celestial_remedies",name:"Celestial Remedies",icon:"🌿",color:"#668b55",description:"Materiales naturales y remedios para restaurar esta zona.",items:[["Fiber","Fibra","Todo el año","Maleza / zonas silvestres","Cortar maleza con la guadaña o herramientas.",200],["Moss","Musgo","Todo el año","Árboles","Recolectar musgo de los árboles.",50],["Wild Horseradish","Rábano picante silvestre","Primavera","Recolección","Buscarlo como forraje de primavera.",5],["Daffodil","Narciso","Primavera","Recolección","Buscarlo como forraje de primavera.",5],["Leek","Puerro","Primavera","Recolección","Buscarlo como forraje de primavera.",5],["Dandelion","Diente de león","Primavera","Recolección","Buscarlo como forraje de primavera.",5],["Healing Tea","Té curativo","Todo el año","Moon Village","Objeto utilizado por el mod para este lote.",2]]},
+ {id:"moon_glow_grocery",name:"Moon Glow Grocery Store",icon:"🛒",color:"#597c9b",description:"Materiales de construcción y productos procesados para restaurar la tienda.",items:[["Wood","Madera","Todo el año","Árboles / Bosque","Talar árboles y recoger madera.",300],["Cloth","Tela","Todo el año","Telar / varias fuentes","Procesar lana en un telar.",10],["Iron Bar","Lingote de hierro","Todo el año","Horno","Fundir mineral de hierro en un horno.",5],["Oil","Aceite","Todo el año","Prensa de aceite / tienda","Producirlo mediante una prensa de aceite.",5],["Wheat Flour","Harina de trigo","Todo el año","Molino","Procesar trigo en un molino.",5],["Truffle Oil","Aceite de trufa","Todo el año","Prensa de aceite","Procesar una trufa en la prensa de aceite.",5]]},
+ {id:"venessa_tower",name:"Venessa's Tower",icon:"🗼",color:"#78639a",description:"Esencias y minerales para restaurar la torre de Venessa.",items:[["Void Essence","Esencia del vacío","Todo el año","Monstruos","Derrotar monstruos que la sueltan.",10],["Solar Essence","Esencia solar","Todo el año","Monstruos","Derrotar monstruos que la sueltan.",10],["Quartz","Cuarzo","Todo el año","Minas","Recolectar cuarzo en las minas.",10],["Amethyst","Amatista","Todo el año","Minas / geodas","Romper nodos o abrir geodas.",5]]},
+ {id:"hidden_hearth",name:"The Hidden Hearth Inn and Saloon",icon:"🍺",color:"#9a704d",description:"Materiales y bebidas para devolver la vida a la posada y el salón.",items:[["Hardwood","Madera noble","Todo el año","Bosque Secreto / tocones","Romper tocones y troncos grandes.",100],["Beer","Cerveza","Todo el año","Barril","Procesar trigo en un barril.",12],["Cloth","Tela","Todo el año","Telar / varias fuentes","Procesar lana en un telar.",8],["Coffee","Café","Todo el año","Cafetera / barril / tienda","Conseguir granos y procesarlos.",10]]},
+ {id:"cosmic_corral",name:"Cosmic Corral",icon:"🐄",color:"#638b72",description:"Recursos agrícolas para restaurar el corral cósmico.",items:[["Hay","Heno","Todo el año","Silo","Cortar hierba teniendo un silo.",100],["Wheat","Trigo","Verano / Otoño","Cultivo","Cultivar trigo.",60],["Amaranth","Amaranto","Otoño","Cultivo","Cultivar amaranto.",40],["Taro Root","Raíz de taro","Verano","Cultivo / Isla Jengibre","Cultivar raíz de taro.",30],["Fiber","Fibra","Todo el año","Maleza / zonas silvestres","Cortar maleza.",100]]},
+ {id:"western_moon_road",name:"Western Moon-Road",icon:"🛣️",color:"#6d748f",description:"Materiales para despejar y restaurar la carretera occidental.",items:[["Stone","Piedra","Todo el año","Minas / Cantera","Romper rocas con el pico.",500],["Wood","Madera","Todo el año","Árboles / Bosque","Talar árboles y recoger madera.",300],["Hardwood","Madera noble","Todo el año","Bosque Secreto / tocones","Romper tocones y troncos grandes.",50],["Fiber","Fibra","Todo el año","Maleza / zonas silvestres","Cortar maleza.",100],["Moss","Musgo","Todo el año","Árboles","Recolectar musgo de los árboles.",40]]},
+ {id:"moonroot_archive",name:"Moonroot Archive",icon:"📚",color:"#7d5f82",description:"Materiales para restaurar el archivo de Moon Village.",items:[["Stone","Piedra","Todo el año","Minas / Cantera","Romper rocas con el pico.",500],["Hardwood","Madera noble","Todo el año","Bosque Secreto / tocones","Romper tocones y troncos grandes.",50],["Cloth","Tela","Todo el año","Telar / varias fuentes","Procesar lana en un telar.",5],["Quartz","Cuarzo","Todo el año","Minas","Recolectar cuarzo en las minas.",20],["Amethyst","Amatista","Todo el año","Minas / geodas","Romper nodos o abrir geodas.",5]]}
+];
+
+function moonItemId(bundle,item){return "moon_"+bundle.id+"_"+item[0].toLowerCase().replace(/[^a-z0-9]+/g,"_");}
+function moonBundleStats(bundle){let done=0;bundle.items.forEach(item=>{if(checked[moonItemId(bundle,item)])done++});return{done,total:bundle.items.length,complete:done===bundle.items.length}}
+function updateMoonProgress(){let cb=0,ci=0,ti=0;moonBundles.forEach(b=>{const s=moonBundleStats(b);if(s.complete)cb++;ci+=s.done;ti+=s.total});const pct=ti?Math.round(ci/ti*100):0;document.getElementById("moonProgressMain").textContent=`${cb} / ${moonBundles.length} lotes`;document.getElementById("moonProgressSecondary").textContent=`${ci} / ${ti} objetos conseguidos`;document.getElementById("moonProgressFill").style.width=pct+"%";document.getElementById("moonProgressText").textContent=pct+"% completado"}
+function renderMoonItem(bundle,item){const id=moonItemId(bundle,item),done=!!checked[id],qty=item[5];const row=document.createElement("div");row.className="moon-item"+(done?" done":"");const main=document.createElement("div");main.className="moon-item-main";const cb=document.createElement("input");cb.type="checkbox";cb.checked=done;cb.dataset.itemId=id;cb.addEventListener("change",()=>{checked[id]=cb.checked;guardarItem(id);row.classList.toggle("done",cb.checked);updateMoonProgress()});const name=document.createElement("span");name.className="moon-item-name";name.textContent=item[1];const q=document.createElement("span");q.className="moon-item-qty";q.textContent="×"+qty;const info=document.createElement("div");info.className="moon-item-info";info.innerHTML=`<b>📍 Dónde conseguirlo:</b> ${item[3]}<br><b>🌱 Estación:</b> ${item[2]}<br><b>🧰 Cómo:</b> ${item[4]}`;name.addEventListener("click",()=>info.classList.toggle("open"));main.append(cb,name,q);row.append(main,info);return row}
+function renderMoonBundles(){const content=document.getElementById("moonContenido");content.innerHTML="";const query=document.getElementById("moonBuscador").value.trim().toLowerCase();moonBundles.forEach(bundle=>{const matches=bundle.items.filter(item=>!query||bundle.name.toLowerCase().includes(query)||item[1].toLowerCase().includes(query));if(!matches.length)return;const s=moonBundleStats(bundle);const box=document.createElement("div");box.className="moon-bundle";const title=document.createElement("div");title.className="moon-bundle-title";title.style.background=bundle.color;title.innerHTML=`<span>${bundle.icon} ${bundle.name}</span><small>${s.done}/${s.total}${s.complete?" ✓":""}</small>`;const desc=document.createElement("div");desc.className="moon-bundle-desc";desc.textContent=bundle.description;const items=document.createElement("div");items.className="moon-items";matches.forEach(item=>items.appendChild(renderMoonItem(bundle,item)));title.addEventListener("click",()=>items.classList.toggle("open"));box.append(title,desc,items);content.appendChild(box)});if(!content.children.length)content.innerHTML='<div class="card">🔎 No se encontró ese objeto o lote en Moon Village.</div>'}
+function renderMoonSeasons(){const content=document.getElementById("moonContenido");content.innerHTML="";const query=document.getElementById("moonBuscador").value.trim().toLowerCase();const seasons=["Primavera","Verano","Otoño","Invierno","Todo el año"],icons={Primavera:"🌸",Verano:"☀️",Otoño:"🍂",Invierno:"❄️","Todo el año":"📅"};seasons.forEach(season=>{const entries=[];moonBundles.forEach(bundle=>bundle.items.forEach(item=>{if(query&&!item[1].toLowerCase().includes(query)&&!bundle.name.toLowerCase().includes(query))return;if(item[2].includes(season))entries.push({bundle,item})}));if(!entries.length)return;const title=document.createElement("div");title.className="moon-season-title";title.textContent=icons[season]+" "+season;content.appendChild(title);entries.forEach(({bundle,item})=>{const box=document.createElement("div");box.className="moon-bundle";const head=document.createElement("div");head.className="moon-bundle-title";head.style.background=bundle.color;const done=!!checked[moonItemId(bundle,item)];head.innerHTML=`<span>${done?"✅":"🌱"} ${item[1]} <small>×${item[5]}</small></span><small>${bundle.name}</small>`;const items=document.createElement("div");items.className="moon-items open";items.appendChild(renderMoonItem(bundle,item));head.addEventListener("click",()=>items.classList.toggle("open"));box.append(head,items);content.appendChild(box)})});if(!content.children.length)content.innerHTML='<div class="card">🔎 No se encontró ese objeto o lote.</div>'}
+function renderMoonVillage(){updateMoonProgress();if(moonModoActual==="season")renderMoonSeasons();else renderMoonBundles()}
+let moonModoActual="bundles";
+
 /* =========================================================
    CAMBIAR SECCIÓN PRINCIPAL
 ========================================================= */
 
 function mostrarSeccion(nombre){
   seccionActual=nombre;
+
   const centro=document.getElementById("centroContainer");
   const cultivos=document.getElementById("cultivosContainer");
   const calculadora=document.getElementById("calculadoraContainer");
+  const moon=document.getElementById("moonContainer");
+
   const btnCentro=document.getElementById("btnCentro");
   const btnCultivos=document.getElementById("btnCultivos");
   const btnCalculadora=document.getElementById("btnCalculadora");
+  const btnMoon=document.getElementById("btnMoon");
 
   centro.classList.toggle("hidden",nombre!=="centro");
   cultivos.classList.toggle("hidden",nombre!=="cultivos");
   calculadora.classList.toggle("hidden",nombre!=="calculadora");
+  moon.classList.toggle("hidden",nombre!=="moon");
+
   btnCentro.classList.toggle("active",nombre==="centro");
   btnCultivos.classList.toggle("active",nombre==="cultivos");
   btnCalculadora.classList.toggle("active",nombre==="calculadora");
+  btnMoon.classList.toggle("active",nombre==="moon");
 
   const titulo=document.getElementById("tituloPrincipal");
-  titulo.textContent=nombre==="centro"?"🏛️ Centro Cívico SVE":nombre==="cultivos"?"🌱 Cultivos SVE":"🧮 Calculadora de Cultivos";
+  titulo.textContent=nombre==="centro"?"🏛️ Centro Cívico SVE":nombre==="cultivos"?"🌱 Cultivos SVE":nombre==="calculadora"?"🧮 Calculadora de Cultivos":"🌙 Moon Village";
+
   if(nombre==="cultivos") mostrarCultivos();
   if(nombre==="calculadora") renderizarPlanCultivos();
+  if(nombre==="moon") renderMoonVillage();
 }
-
 
 /* =========================================================
    REFRESCAR PROGRESO
@@ -5836,16 +5941,14 @@ async function refrescarProgreso(){
      Tampoco reconstruimos el Centro Cívico.
   */
 
-  if(
-    seccionActual === "centro"
-  ){
-
+    if(seccionActual === "centro"){
     actualizarTodosLosCheckboxes();
-
     actualizarTodosLosContadores();
-
     updateProgress();
+  }
 
+  if(seccionActual === "moon"){
+    renderMoonVillage();
   }
 
 
@@ -6175,6 +6278,8 @@ document
    BOTÓN CALCULADORA
 ========================================================= */
 document.getElementById("btnCalculadora").addEventListener("click",()=>mostrarSeccion("calculadora"));
+
+document.getElementById("btnMoon").addEventListener("click",()=>mostrarSeccion("moon"));
 
 
 /* =========================================================
